@@ -6,11 +6,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
+
 
 class Pagamento extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'data'];
+    protected $fillable = ['user_id', 'aluno_id', 'data_pagamento'];
     protected $table = "pagamento";
+
+
+
+    public function getDataPagamentoattribute($value)
+    {
+        return date('d/m/Y', strtotime($value));
+    }
 }

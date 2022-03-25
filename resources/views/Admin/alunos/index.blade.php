@@ -7,11 +7,16 @@
        Alunos
        <a href="{{route('alunos.create')}}" class="btn btn-sm btn-success">Novo Aluno</a>
     </h1>
-        @include('Admin.includes.alert')
+    
 @endsection
 
 @section('content')
+
+
+@include('Admin.includes.alert')
+
 <div class="row">
+ 
     @foreach($alunos as $aluno)
     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
         <div class="card bg-light d-flex flex-fill">
@@ -45,10 +50,10 @@
                     <a href="{{route('alunos.show',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-primary">
                     <i class="fas fa-user"></i> Ver Perfil
                     </a>
-
-                    <a href="{{route('alunos.edit',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-dark">
+   <a href="{{route('alunos.edit',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-dark">
                         <i class="fas fa-edit"></i> Editar
                         </a>
+                 
                 </div>
             </div>
 

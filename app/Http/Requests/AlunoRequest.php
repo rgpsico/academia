@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleRequest extends FormRequest
+class AlunoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,12 @@ class ArticleRequest extends FormRequest
     {
         $id = $this->segment(3);
         $nome = $this->nome;
+        $whatssap = $this->whatssap;
+
 
         $rules = [
             'nome' => "required|string|max:100|unique:alunos,nome,{$nome}",
+            'whatssap' => "required|unique:alunos,whatssap,{$whatssap}",
 
         ];
 

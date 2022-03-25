@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-interface ArticleRepositoryInterface
+interface AlunosRepositoryInterface
 {
    public function paginate(int $qtd);
    public function findById(int $id);

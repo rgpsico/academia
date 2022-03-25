@@ -6,9 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\article;
 use Illuminate\Http\Request;
-use App\Models\Visitor;
-use App\Models\page;
-use App\Models\User;
+
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -26,58 +24,6 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-
-        $visitsCount = 0;
-        $onlineCount = 0;
-        $pageCount = 0;
-        $userCount = 0;
-
-
-        $interval = intval($request->input('interval', 30));
-        if ($interval > 120) {
-            $interval = 120;
-        }
-        $dateInterval = date('Y-m-d H:i:s', strtotime('-' . $interval . 'days'));
-        $visitisCount =   Visitor::where('date_access', '>=', $dateInterval)->count();
-
-
-        $dateLimit   = date('Y-m-d H:i:s', strtotime('-5 minutes'));
-        $onlineList  = Visitor::select('ip')->where('date_access', '>=', $dateLimit)->groupBy('ip')->get();
-        $onlineCount = count($onlineList);
-
-        //contar paginas
-        $pageCount    =    Page::count();
-
-        //contar usuarios
-        $userCount    =    User::count();
-
-        $users = User::all();
-
-
-        //contage para o pagepie
-
-        $visitsAll = Visitor::selectRaw('page, count(page) as c')
-            ->where('date_access', '>=', $dateInterval)
-            ->groupBy('page')
-            ->get();
-
-
-        foreach ($visitsAll as $visit) {
-            $pagePie[$visit['page']] = intval($visit['c']);
-        }
-
-        // Coontagem de Paginas
-
-        return view('Admin.home', [
-            'visitisCount' => $visitisCount,
-            'onlineCount' => $onlineCount,
-            'pageCount' => $pageCount,
-            'userCount' => $userCount,
-            //  'pageLabels'=>$pageLabels,
-            // 'pageValues'=> $pageValues,
-            'dateInterval' => $interval,
-            'users' => $users
-        ]);
     }
 
     public function home()
@@ -157,43 +103,6 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $page = article::find($id);
-
-        if ($page) {
-            $data = $request->only([
-                'title',
-                'body',
-            ]);
-            if ($page['title'] !== $data['title']) {
-
-
-                $validator = Validator::make($data, [
-                    'title' => ['required', 'string', 'max:100'],
-                    'body' => ['string']
-
-                ]);
-            } else {
-                $validator = Validator::make($data, [
-                    'title' => ['required', 'string', 'max:100'],
-                    'body' => ['string']
-                ]);
-            }
-            if ($validator->fails()) {
-                return redirect()->route('pages.edit', [
-                    'page' => $id
-                ])
-                    ->withErrors($validator)
-                    ->withInput();
-            }
-            $page->title  = $data['title'];
-            $page->body  = $data['body'];
-
-
-
-
-            $page->save();
-        }
-        return redirect()->route('alunos.index');
     }
 
 
@@ -201,12 +110,11 @@ class HomeController extends Controller
     {
         $page = article::find($id);
         $page->delete();
-        return redirect()->route('pages.index');
     }
 
     public function DirectionApi(string $origins, string $destinations)
     {
-        dd('aaaa');
+
         $tokenApi = 'AIzaSyA7qcQHcvwSSO496P_6cW0HNrnZut1Wu6Y';
         $url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 

@@ -11,15 +11,5 @@ class PageController extends Controller
 {
     public function index($slug)
     {
-        $page = Page::where('slug', $slug)->first();
-
-        if ($page) {
-          return view('site.page',[
-              'page'=>$page
-          ]);
-        } else {
-            abort(404);
-        }
-        
     }
 }

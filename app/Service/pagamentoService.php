@@ -18,4 +18,13 @@ class pagamentoService
     {
         return $this->repository::where('aluno_id', $id)->get();
     }
+
+    public function create($data)
+    {
+        $result = $this->repository->create($data);
+
+        if ($result) {
+            return $result;
+        }
+    }
 }

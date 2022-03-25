@@ -7,46 +7,38 @@
         Novo Aluno
     
     </h1>
+    <br>
 @endsection
 
 @section('content')
 
-    @include('Admin.includes.alert')
 <div class="card">
-  
+   
+       
     <div class="card-body">
 <form class="form-horizontal" method="POST" action="{{route('alunos.store')}}"  enctype="multipart/form-data">
     @csrf
    
-            <div class="form-group row">       
-                <label for="nome" class="col-sm-2 col-form-label">Nome</label>
-                    <div class="col-sm-10">
-                        <input type="text"  name="nome" class="form-control @error('nome') is-invalid @enderror id="nome"  value="{{old('nome')}}">
-                    </div>
+    <div class="form-group row">       
+        <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+            <div class="col-sm-10">
+                <input type="text"  name="nome" class="form-control @error('nome') is-invalid @enderror id="nome"  value="{{$aluno->nome ?? false}}">
             </div>
+</div>
 
-            <div class="form-group row">       
-                <label for="nome" class="col-sm-2 col-form-label">Whatssap</label>
-                    <div class="col-sm-10">
-                        <input type="text"  name="whatssap" class="form-control @error('whatssap') is-invalid @enderror id="name"  value="{{old('whatssap')}}">
-                    </div>
-            </div>
+<div class="form-group row">       
+    <label for="Whatssap" class="col-sm-2 col-form-label">Whatssap</label>
+        <div class="col-sm-10">
+            <input type="text"  name="whatssap" class="form-control @error('whatssap') is-invalid @enderror id="whatssap"  value="{{$aluno->whatssap ?? false}}">
+        </div> 
+ </div>
 
-            <div class="form-group row">       
-                <label for="nome" class="col-sm-2 col-form-label">Status</label>
-                    <div class="col-sm-10">
-                        <input type="text"  name="status" class="form-control @error('status') is-invalid @enderror   value="{{old('status')}}">
-                    </div>
-            </div>    
-            
-            <div class="form-group row">       
-                <label for="nome" class="col-sm-2 col-form-label">Instagran</label>
-                    <div class="col-sm-10">
-                        <input type="text"  name="instagran" class="form-control @error('instagran') is-invalid @enderror   value="{{old('instagran')}}">
-                    </div>
-            </div>    
-   
-
+ <div class="form-group row">       
+    <label for="instagran" class="col-sm-2 col-form-label">instagran</label>
+        <div class="col-sm-10">
+            <input type="text"  name="instagran" class="form-control @error('instagran') is-invalid @enderror id="instagran"  value="{{$aluno->instagran ?? false}}">
+        </div>
+ </div>     
 
     <div class="form-group row">  
         <label class="col-sm-2 col-form-label"></label>

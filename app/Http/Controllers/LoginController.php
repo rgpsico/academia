@@ -6,12 +6,14 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
+
     public function index()
     {
-        return view('Admin.login');
+        return view('alunos.index');
     }
 
     public function authenticate(Request $request)
@@ -22,24 +24,22 @@ class LoginController extends Controller
             'remember'
         ]);
 
-   
-  
+
+
         $validator = $this->validator($data);
-       
-        if($validator->fails()){
+
+        if ($validator->fails()) {
             return redirect()->route('login')
-            ->withErrors($validator)
-            ->withInput();
-        }
-      
-        
-        if(Auth::attempt($data)){
-          echo "aaa";
-        }else{
-            echo "bbbb";
+                ->withErrors($validator)
+                ->withInput();
         }
 
-        
+
+        if (Auth::attempt($data)) {
+            echo "aaa";
+        } else {
+            echo "bbbb";
+        }
     }
 
     public function logout()

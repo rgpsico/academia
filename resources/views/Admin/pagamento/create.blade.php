@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1>
-        Nova Pagina
+       Realizar Pagamento
     
     </h1>
 @endsection
@@ -24,34 +24,31 @@
 <div class="card">
   
     <div class="card-body">
-<form class="form-horizontal" method="POST" action="{{route('pages.store')}}">
+<form class="form-horizontal" method="POST" action="{{route('pagamento.store')}}">
     @csrf
-    <div class="form-group row">       
-        <label for="nome" class="col-sm-2 col-form-label">Cidade</label>
-            <div class="col-sm-10">
-                <select  name="cidade"  class="form-control selectjs"> 
-                    <option value=""></option>               
-                </select>
-            </div>
-    </div>
+ 
+
             <div class="form-group row">       
-                <label for="nome" class="col-sm-2 col-form-label">Titulo da Pagina</label>
+                <label for="nome" class="col-sm-2 col-form-label">Nome do Aluno que esta realizando o pagamento</label>
                     <div class="col-sm-10">
-                        <input type="text"  name="title" class="form-control @error('title') is-invalid @enderror id="name"  value="{{old('title')}}">
+                        <input type="text"  name="nome" class="form-control @error('nome') is-invalid @enderror id="name"  value="{{$aluno->nome}}">
+                        <input type="hidden"  name="aluno_id" class="form-control @error('aluno_id') is-invalid @enderror id="name"  value="{{$aluno->id}}">
                     </div>
-            </div>
-   
-            <div class="form-group row">            
-                <label for="nome" class="col-sm-2 col-form-label">Corpo</label>
-                    <div class="col-sm-10">                         
-                        <textarea name="body" class="form-control bodyfield">{{old('body')}} </textarea>                      
+            </div> 
+            
+            <div class="form-group row">       
+                <label for="nome" class="col-sm-2 col-form-label">Quem está recebendo:</label>
+                    <div class="col-sm-10">
+                        <input type="text"    name="user_name" class="form-control @error('user_name') is-invalid @enderror id="name"  value="{{auth()->user()->name}}">
+                        <input type="hidden"  name="user_id" class="form-control @error('user_id') is-invalid @enderror id="name"  value="{{auth()->user()->id}}">
                     </div>
-            </div>
+            </div>   
+          
 
     <div class="form-group row">  
         <label class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <button type="submit" class="btn btn-success">Pagar</button>
         </div>
     </div>
     <!-- /.box-footer -->

@@ -10,10 +10,20 @@ class pagamento extends Migration
     {
         Schema::create('pagamento', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ip');
-            $table->date('date_access');
-            $table->date('page');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('aluno_id');
+            $table->date('data_pagamento');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('aluno_id')
+                ->references('id')
+                ->on('alunos')
+                ->onDelete('cascade');
         });
     }
 

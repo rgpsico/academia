@@ -3,8 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Alunos;
-use App\Repositories\Contracts\AlunosRepositoryInterface;
-use App\Repositories\BaseRepository;
 
 class AlunosRepository
 {

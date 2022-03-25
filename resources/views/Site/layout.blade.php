@@ -364,7 +364,7 @@
 							</div>            
 					</div>
 				</div>
-				<!--	@ include('Site.pages.depoimentos')-->
+				<!--	@ include('Site.pagesa.depoimentos')-->
 
 			<!-- Resume Section -->
           	<div class="page pt-resume" data-simplebar>

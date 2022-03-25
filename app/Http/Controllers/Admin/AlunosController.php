@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AlunoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\categoria;
@@ -20,6 +21,7 @@ class AlunosController extends Controller
     {
         $this->pagamentoService = $pagamento;
         $this->service = $alunoservice;
+        $this->middleware('auth');
     }
 
     public function index()
@@ -29,8 +31,8 @@ class AlunosController extends Controller
 
 
         return view('Admin.alunos.index', [
-            'alunos' => $alunos,
-            'inadiplentes' => false
+            'alunos' => $alunos
+
 
         ]);
     }
@@ -38,14 +40,14 @@ class AlunosController extends Controller
     public function show($id)
     {
         $alunos = $this->service->findById($id);
-        $pagamento = $this->pagamentoService->getById($id);
+        $pagamentos = $this->pagamentoService->getById($id);
 
 
         $loggedId = intval(Auth::id());
 
         return view('Admin.alunos.show', [
             'alunos' => $alunos,
-            'pagamento' => $pagamento
+            'pagamentos' => $pagamentos
 
         ]);
     }
@@ -72,19 +74,17 @@ class AlunosController extends Controller
      */
     public function create()
     {
-        $categorias =  categoria::all();
-        return view('Admin.alunos.create', [
-            'categorias' => $categorias
-        ]);
+
+        return view('Admin.alunos.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param   AlunoRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlunoRequest $request)
     {
         $dataAtual = Carbon::now();
         $dataNow = $dataAtual->toDateTimeString();
@@ -152,6 +152,7 @@ class AlunosController extends Controller
      */
     public function destroy($id)
     {
+
         $alunos = $this->service->findById($id);
         $alunos->delete();
         return redirect()->route('alunos.index')->withSuccess("Excluido Com Successo");

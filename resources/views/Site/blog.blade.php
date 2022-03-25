@@ -88,7 +88,7 @@
 				  </div>
 		
 				</div>
-				  @include('Site.pages.comentarios')
+				  @include('Site.pagesa.comentarios')
 		
 		
 		
