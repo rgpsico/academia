@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Exceptions\ArticleException;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleRequest;
+use App\Http\Resources\ArticleResource;
+use App\Models\article;
+use App\Service\alunoservice;
+use Carbon\Carbon;
+
+class AlunosControllerApi extends Controller
+{
+    private $service;
+
+    public function __construct(alunoservice $alunoservice)
+    {
+        $this->service = $alunoservice;
+    }
+
+
+    public function index()
+    {
+        try {
+            $alunos = $this->service->listAll();
+            return ArticleResource::collection($alunos);
+        } catch (ArticleException $e) {
+            return response()->error("Article não encontrado", 404);
+        }
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ArticleRequest $request)
+    {
+        $data = $request->all();
+        $data = $data['date'] = Carbon::now();
+        return $this->service->create($data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        if ($result = $this->service->findById($id)) {
+            return new ArticleResource($result);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ArticleRequest $request, $id)
+    {
+        $data = $request->all();
+        dd($data);
+        if (!$article = article::find($id)) {
+            return redirect()->back();
+        }
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $upload = $request->file('image')->store('portifolio');
+            $article->cover  = $upload;
+        }
+
+        $result = $this->service->update($data);
+        dd($result);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminatse\Http\Response
+     */
+    public function destroy($id)
+    {
+        return $this->service->delete($id);
+    }
+}
