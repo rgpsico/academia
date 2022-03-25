@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\alunosRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use App\Models\alunos;
 use App\Models\categoria;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
@@ -128,7 +125,7 @@ class AlunosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(alunosRequest $request, $id)
+    public function update(Request $request, $id)
     {
         if (!$alunos = $this->service->findById($id)) {
             return redirect()->back();
