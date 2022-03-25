@@ -29,7 +29,8 @@ class AlunosController extends Controller
 
 
         return view('Admin.alunos.index', [
-            'alunos' => $alunos
+            'alunos' => $alunos,
+            'inadiplentes' => false
 
         ]);
     }
@@ -58,7 +59,8 @@ class AlunosController extends Controller
 
 
         return view('Admin.alunos.index', [
-            'alunos' => $alunos
+            'alunos' => $alunos,
+            'inadiplentes' => true
 
         ]);
     }

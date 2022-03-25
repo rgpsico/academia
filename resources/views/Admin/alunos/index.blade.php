@@ -12,58 +12,51 @@
 
 @section('content')
 <div class="row">
-    
-  
-    <div class="input-group col-3">
-        <input type="search" class="form-control rounded" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" />
-        <button type="button" class="btn btn-outline-primary">Buscar Aluno</button>
-    </div>
-   
-</div>
-<div class="card">   
-
-<table class="table table-hover">
-    <thead>
-            <tr>
-                <th width="50">ID</th>
-                <th width="50">Imagem</th>
-                <th>Nome</th>
-                <th>Whatssap</th>
-                <th>Data de Inicio</th>
-                <th>Ultimo pagamento</th>
-                <th>Status</th>
-                <th width="200">Ações</th>
-            </tr>
-    </thead>
-    <tbody>
     @foreach($alunos as $aluno)
-    <tr>
-        <td>{{$aluno->id}}</td>
-        <td><img src="https://cdn.pixabay.com/photo/2019/08/11/16/31/fitness-4399322_960_720.jpg" alt="" width="100px" height="100px"></td>
-        <td>{{ $aluno->nome}}</td>
-        <td>{{ $aluno->whatssap}}</td>
-        <td>{{ $aluno->created_at}}</td>
-        <td>{{ $aluno->created_at}}</td>
-        <td><a href="" class="btn btn-success">Pago</a></td>
+    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+        <div class="card bg-light d-flex flex-fill">
+            <div class="card-header text-muted border-bottom-0">
+                <b class=" btn btn-success">Pago</b>
+            </div>
+            
+            <div class="card-body pt-0">
+            
+                <div class="row">
+                    <div class="col-7">
+                        <h2 class="lead"><b>{{$aluno->nome}}</b></h2>
+                        <p class="text-muted text-sm"><b>Sobre: </b> Eletricista/Pedreito</p>
+                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Endereço: Rua sant roman 200</li>
+                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefone: {{$aluno->whatssap}}</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-5 text-center">
+                        <img src="https://adminlte.io/themes/v3/dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">
+                    </div>
+                </div>
+            </div>
 
-            <td>
-         
-            <a href="{{route('alunos.show',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-success">ver</a>
-            <a href="{{route('alunos.edit',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-info">Editar</a>
-        
-            <form method="POST" action="" class="d-inline" onsubmit="return confirm('Tem certeza que deseja Excluir?')">
-            @method('DELETE')
-            @csrf
-                <button class="btn btn-sm btn-danger"> Excluir</button>
-            </form>
-            <a href="" class="btn btn-sm btn-dark my-1">Todos os Pagamentos</a>
-     
-          
-        </td>
-    </tr>
-    @endforeach
-    </tbody>
-</table>
+            <div class="card-footer">
+                <div class="text-right">
+                    <a href="#" class="btn btn-sm bg-teal">
+                    <i class="fas fa-comments"></i>
+                    </a>
+                    <a href="{{route('alunos.show',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-user"></i> Ver Perfil
+                    </a>
+
+                    <a href="{{route('alunos.edit',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-dark">
+                        <i class="fas fa-edit"></i> Editar
+                        </a>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+@endforeach
+
 </div>
 
 {{ $alunos->links('pagination::bootstrap-4') }}
