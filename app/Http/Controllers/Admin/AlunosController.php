@@ -85,7 +85,7 @@ class AlunosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(alunosRequest $request)
+    public function store(Request $request)
     {
         $dataAtual = Carbon::now();
         $dataNow = $dataAtual->toDateTimeString();
