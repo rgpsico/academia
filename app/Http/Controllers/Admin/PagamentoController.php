@@ -39,7 +39,7 @@ class PagamentoController extends Controller
         $id = $request->get('aluno');
         $aluno = $this->alunoService->findById($id);
 
-        return view('admin.pagamento.create', [
+        return view('Admin.pagamento.create', [
             'aluno' => $aluno
         ]);
     }
