@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
+use DateInterval;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,9 +53,8 @@ class PagamentoController extends Controller
     public function store(Request $request)
     {
         $data = $request->only('user_id', 'aluno_id');
-
         $data['data_pagamento'] = date('Y-m-d');
-
+        $data['data_fim']  = date('Y-m-d', strtotime($data['data_pagamento'] . '+ 30 days'));
         $result = $this->pagamentoService->create($data);
 
         return redirect()

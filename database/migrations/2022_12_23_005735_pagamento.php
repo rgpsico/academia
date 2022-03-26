@@ -13,6 +13,7 @@ class pagamento extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('aluno_id');
             $table->date('data_pagamento');
+            $table->date('data_fim');
             $table->timestamps();
 
             $table->foreign('user_id')

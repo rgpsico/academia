@@ -76,6 +76,7 @@
                             <th>ID</th>
                             <th>Usuario que Recebeu</th>
                             <th>Dia do pagamento</th>
+                            <th>data do vencimento</th>
                             <th>Forma de pagamento</th>
                             <th>Ações</th>
                         </tr>
@@ -86,7 +87,8 @@
                                 <td>183</td>
                                 <td>{{$pagamento->id}}</td>
                                 <td>{{$pagamento->data_pagamento}}</td>
-                                <td><span class="tag tag-success">{{$pagamento->data_pagamento}}</span></td>
+                                <td>{{$pagamento->data_fim}}</td>
+                                <td><span class="tag tag-success">Dinheiro</span></td>
                                 <td>
                                    <button class="btb btn-info">Editar</button>
                                     <button class="btb btn-danger">Exluir</button>

@@ -11,12 +11,17 @@ use Illuminate\Database\Eloquent\Model;
 class Pagamento extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'aluno_id', 'data_pagamento'];
+    protected $fillable = ['user_id', 'aluno_id', 'data_pagamento', 'data_fim'];
     protected $table = "pagamento";
 
 
 
     public function getDataPagamentoattribute($value)
+    {
+        return date('d/m/Y', strtotime($value));
+    }
+
+    public function getDataFimattribute($value)
     {
         return date('d/m/Y', strtotime($value));
     }
