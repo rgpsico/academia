@@ -16,26 +16,42 @@ class pagamentoService
         $this->repository = $repository;
     }
 
-    public function getById($id)
+    public function getByAlunoId($id)
     {
         return $this->repository::where('aluno_id', $id)->get();
     }
 
-    public function getFinalDate($id)
+    public function getById($id)
     {
-        return  $this->repository::where('aluno_id', $id)->orderBy('data_fim', 'desc')->first();
+        return  $this->repository->find($id);
     }
 
 
-    public function pagamentoStatus()
+    public function getFinalDate($id)
     {
-        $hoje    = '2022-03-27';
-        $dataFim = '2022-03-27';
-
-        if ($this->repository->where($dataFim, '=', $hoje . ' 00:00:00')) {
-            return "maior";
+        //Carbon::parse($dataFim->data_fim)->format('Y-m-d');
+        if ($dataFim = $this->repository::where('aluno_id', $id)->orderBy('data_fim', 'desc')->first()) {
+            return $dataFim->data_fim;
         }
-        return "menor";
+    }
+
+    public function getStartDate($id)
+    {
+        if ($dataPagamento = $this->repository::where('aluno_id', $id)->orderBy('data_pagamento', 'desc')->first()) {
+            return $dataPagamento->data_pagamento;
+        }
+    }
+
+
+    public function pagamentoStatus($id)
+    {
+
+        $dataStart    = $this->getStartDate($id);
+        $dataFim = $this->getFinalDate($id);
+
+        if ($this->repository->whereBetween('data_fim', [$dataStart, $dataFim])->count()) {
+            return true;
+        }
     }
 
     public function create($data)

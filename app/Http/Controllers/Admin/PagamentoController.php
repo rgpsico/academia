@@ -78,6 +78,16 @@ class PagamentoController extends Controller
      */
     public function edit($id)
     {
+
+        $pagamento = $this->pagamentoService->getById($id);
+
+        if ($pagamento) {
+            return view('Admin.pagamento.edit', [
+                'pagamento' => $pagamento
+            ]);
+        }
+
+        return redirect()->route('pagamento.index');
     }
 
     /**
@@ -90,8 +100,15 @@ class PagamentoController extends Controller
     public function update(Request $request, $id)
     {
 
+        $pagamento = $this->pagamentoService->getById($id);
+        $data = $request->all();
+        if ($pagamento) {
+            $pagamento->update($data);
+        }
 
-        return redirect()->route('pagamento.index');
+        return redirect()
+            ->back()
+            ->withSuccess("Pagamento atualizado com success");
     }
 
     /**

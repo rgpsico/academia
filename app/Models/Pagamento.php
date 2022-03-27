@@ -16,18 +16,18 @@ class Pagamento extends Model
 
 
 
-    public function getDataPagamentoattribute($value)
-    {
-        return date('d/m/Y', strtotime($value));
-    }
+    // public function getDataPagamentoattribute($value)
+    // {
+    //     return date('d/m/Y', strtotime($value));
+    // }
 
-    public function getDataFimattribute($value)
-    {
-        return date('d/m/Y', strtotime($value));
-    }
+    // public function getDataFimattribute($value)
+    // {
+    //     return date('d/m/Y', strtotime($value));
+    // }
 
-    public function user()
+    public function alunos()
     {
-        return $this->hasOne(User::class, 'user_id');
+        return $this->hasOne(alunos::class);
     }
 }

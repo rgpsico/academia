@@ -28,6 +28,7 @@ class AlunosController extends Controller
     public function index()
     {
         $alunos = $this->service->getAll(90);
+
         $loggedId = intval(Auth::id());
 
 
@@ -40,21 +41,16 @@ class AlunosController extends Controller
 
     public function show($id)
     {
-        $alunos = $this->service->findById($id);
-        $pagamentos = $this->pagamentoService->getById($id);
-
-        $dataFim = $this->pagamentoService->getFinalDate($id);
-
-
-        $pagamentoStatus = $this->pagamentoService->pagamentoStatus();
-
-
         $loggedId = intval(Auth::id());
+        $alunos = $this->service->findById($id);
+        $pagamentos = $this->pagamentoService->getByAlunoId($id);
+
+        $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
 
         return view('Admin.alunos.show', [
             'alunos' => $alunos,
             'pagamentos' => $pagamentos,
-            'dataFim' =>  $dataFim
+            'pagamentoStatus' =>  $pagamentoStatus
 
         ]);
     }
@@ -165,18 +161,23 @@ class AlunosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!$alunos = $this->service->findById($id)) {
+
+        if (!$aluno = $this->service->findById($id)) {
             return redirect()->back();
         }
 
         $data = $request->all();
 
+
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $upload = $request->file('image')->store('portifolio');
-            $alunos->cover  = $upload;
+            $data['avatar'] = $request->file('image')->store('alunos');
+            $aluno->cover  = $data;
         }
 
-        $alunos->update($data);
+        $aluno->update($data);
+
+
+
         return redirect()->back();
     }
 
@@ -188,7 +189,6 @@ class AlunosController extends Controller
      */
     public function destroy($id)
     {
-
         $alunos = $this->service->findById($id);
         $alunos->delete();
         return redirect()->route('alunos.index')->withSuccess("Excluido Com Successo");

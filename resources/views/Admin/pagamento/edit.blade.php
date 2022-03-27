@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+@include('Admin.includes.alert')
 
 @if($errors->any())
 <div class="alert alert-danger">
@@ -22,26 +23,34 @@
   </div>
 @endif
 <div class="card">
-  
+
     <div class="card-body">
-<form class="form-horizontal" action="{{route('pages.update', ['page'=>$page->id])}}" method="POST" >
+<form class="form-horizontal" action="{{route('pagamento.update', ['pagamento'=>$pagamento->id])}}" method="POST" >
     @csrf
     @method("PUT")
         <div class="form-group row">       
-                <label for="nome" class="col-sm-2 col-form-label">Titulo</label>
+                <label for="nome" class="col-sm-2 col-form-label">Admin que Recebeu:</label>
                     <div class="col-sm-10">
-                        <input type="text"  name="title" class="form-control @error('title') is-invalid @enderror id="title"  value="{{$page->title}}">
-                    </div>
-            </div>
-   
-            <div class="form-group row">            
-                <label for="nome" class="col-sm-2 col-form-label">Corpo</label>
-                    <div class="col-sm-10">
-                        <textarea name="body" id="body" class="form-control bodyfield" >{{$page->body}}</textarea>  
+                        <input type="text"  name="user_id" class="form-control @error('user_id') is-invalid @enderror id="user_id"  value="{{$pagamento->user_id}}">
                     </div>
             </div>
 
-      
+
+            <div class="form-group row">       
+                <label for="nome" class="col-sm-2 col-form-label">Aluno que fez o pagamento:</label>
+                    <div class="col-sm-10">
+                        <input type="text"  name="aluno_id" class="form-control @error('aluno_id') is-invalid @enderror id="aluno_id"  value="{{$pagamento->aluno_id}}">
+                    </div>
+            </div>
+
+
+            <div class="form-group row">       
+                <label for="nome" class="col-sm-2 col-form-label">Data do Pagamento:</label>
+                    <div class="col-sm-10">
+                        <input type="date"  name="data_pagamento" class="form-control @error('data_pagamento') is-invalid @enderror id="data_pagamento"  value="{{$pagamento->data_pagamento}}">
+                    </div>
+            </div>
+
 
     <div class="form-group row">  
       <button type="submit" class="btn btn-success">Salvar</button>

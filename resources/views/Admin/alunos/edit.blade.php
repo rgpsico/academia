@@ -30,7 +30,7 @@
         <div class="form-group row">       
                 <label for="nome" class="col-sm-2 col-form-label">Nome</label>
                     <div class="col-sm-10">
-                        <input type="text"  name="title" class="form-control @error('nome') is-invalid @enderror id="nome"  value="{{$aluno->nome}}">
+                        <input type="text"  name="nome" class="form-control @error('nome') is-invalid @enderror id="nome"  value="{{$aluno->nome}}">
                     </div>
         </div>
 
