@@ -37,7 +37,7 @@
                     </div>
                     
                     <div class="col-5 text-center">
-                        <img src="https://adminlte.io/themes/v3/dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">
+                        <img src="{{Storage::url('alunos/'.$aluno['avatar'])}}" alt="user-avatar" class="img-circle img-fluid">
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     <a href="{{route('alunos.show',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-primary">
                     <i class="fas fa-user"></i> Ver Perfil
                     </a>
-   <a href="{{route('alunos.edit',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-dark">
+                    <a href="{{route('alunos.edit',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-dark">
                         <i class="fas fa-edit"></i> Editar
                         </a>
                  

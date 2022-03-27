@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Alunos extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome', 'whatssap', 'status', 'instagran'];
+    protected $fillable = ['nome', 'whatssap', 'status', 'instagran', 'avatar'];
     public $timestamps = false;
+
+
+    public function pagamento()
+    {
+        return $this->hasMany(Pagamento::class, 'aluno_id');
+    }
 }

@@ -30,8 +30,8 @@ class AlunoRequest extends FormRequest
 
 
         $rules = [
-            'nome' => "required|string|max:100|unique:alunos,nome,{$nome}",
-            'whatssap' => "required|unique:alunos,whatssap,{$whatssap}",
+            'nome' => "required|string|max:100|"
+
 
         ];
 

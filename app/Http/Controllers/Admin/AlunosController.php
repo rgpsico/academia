@@ -10,6 +10,7 @@ use App\Models\categoria;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AlunosController extends Controller
 {
@@ -42,12 +43,19 @@ class AlunosController extends Controller
         $alunos = $this->service->findById($id);
         $pagamentos = $this->pagamentoService->getById($id);
 
+        $dataFim = $this->pagamentoService->getFinalDate($id);
+
+
+        $pagamentoStatus = $this->pagamentoService->pagamentoStatus();
+
+        dd($pagamentoStatus);
 
         $loggedId = intval(Auth::id());
 
         return view('Admin.alunos.show', [
             'alunos' => $alunos,
-            'pagamentos' => $pagamentos
+            'pagamentos' => $pagamentos,
+            'dataFim' =>  $dataFim
 
         ]);
     }
@@ -91,13 +99,42 @@ class AlunosController extends Controller
 
         $data = $request->all();
 
-        $criarArtigo = $this->service->create($data);
+        // Define o valor default para a variável que contém o nome da imagem 
+        $nameFile = null;
 
-        return redirect()
-            ->route('alunos.index')
-            ->withSuccess("Cadastrado com Successo");
+        // Verifica se informou o arquivo e se é válido
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = uniqid(date('HisYmd'));
+
+            // Recupera a extensão do arquivo
+            $extension = $request->image->extension();
+
+            // Define finalmente o nome
+            $nameFile = "{$name}.{$extension}";
+
+            // Faz o upload:
+            $upload = $request->image->storeAs('alunos', $nameFile);
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/categories/nomedinamicoarquivo.extensao
+
+            // Verifica se NÃO deu certo o upload (Redireciona de volta)
+
+            $data['avatar'] = $nameFile;
+            $criarArtigo = $this->service->create($data);
+
+            return redirect()
+                ->route('alunos.index')
+                ->withSuccess("Cadastrado com Successo");
+        }
     }
 
+
+    public function ValidarPagamento()
+    {
+        //pegar a  ultima data  final
+        //verificar se a data final é maior que o dia que estamos
+    }
 
 
 

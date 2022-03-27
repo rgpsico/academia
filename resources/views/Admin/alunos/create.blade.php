@@ -38,7 +38,14 @@
         <div class="col-sm-10">
             <input type="text"  name="instagran" class="form-control @error('instagran') is-invalid @enderror id="instagran"  value="{{$aluno->instagran ?? false}}">
         </div>
- </div>     
+ </div>
+ 
+ <div class="form-group row">       
+    <label for="instagran" class="col-sm-2 col-form-label">Imagem</label>
+        <div class="col-sm-10">
+            <input type="file"  name="image" class="form-control @error('image') is-invalid @enderror id="image">
+        </div>
+ </div>  
 
     <div class="form-group row">  
         <label class="col-sm-2 col-form-label"></label>

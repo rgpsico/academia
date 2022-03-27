@@ -25,4 +25,9 @@ class Pagamento extends Model
     {
         return date('d/m/Y', strtotime($value));
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'user_id');
+    }
 }

@@ -25,11 +25,12 @@
                         <ul class="ml-4 mb-0 fa-ul text-muted">
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Endereço: Rua sant roman 200</li>
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefone: {{$alunos->whatssap}}</li>
+                             <li>Última data: {{$dataFim->data_fim}}</li>
                         </ul>
                     </div>
                     
                     <div class="col-5 text-center">
-                        <img src="https://adminlte.io/themes/v3/dist/img/user1-128x128.jpg" 
+                        <img src="{{Storage::url('alunos/'.$alunos['avatar'])}}" 
                              alt="user-avatar" 
                              class="img-circle img-fluid">
                     </div>
