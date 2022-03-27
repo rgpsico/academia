@@ -25,7 +25,7 @@
                         <ul class="ml-4 mb-0 fa-ul text-muted">
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Endereço: Rua sant roman 200</li>
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefone: {{$alunos->whatssap}}</li>
-                             <li>Última data: {{$dataFim->data_fim}}</li>
+                             <li>Última data: {{$dataFim->data_fim ?? false}}</li>
                         </ul>
                     </div>
                     
