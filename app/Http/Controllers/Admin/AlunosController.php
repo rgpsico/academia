@@ -48,7 +48,6 @@ class AlunosController extends Controller
 
         $pagamentoStatus = $this->pagamentoService->pagamentoStatus();
 
-        dd($pagamentoStatus);
 
         $loggedId = intval(Auth::id());
 
