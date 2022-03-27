@@ -92,7 +92,11 @@
                                 <td><span class="tag tag-success">Dinheiro</span></td>
                                 <td>
                                    <a href="{{route('pagamento.edit',['pagamento'=> $pagamento->id])}}"><button class="btb btn-info">Editar</button></a>
-                                   <a href="{{route('pagamento.destroy',['pagamento'=> $pagamento->id])}}"><button class="btb btn-danger">Exluir</button></a>
+                                   <form action="{{ route('pagamento.destroy', $pagamento->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> DELETAR o Pagamento {{ $pagamento->id }}</button>
+                                </form>
                                 </td>
                             </tr> 
                         @endforeach  

@@ -53,12 +53,13 @@ class PagamentoController extends Controller
     public function store(Request $request)
     {
         $data = $request->only('user_id', 'aluno_id');
+        $alunoId = $data['aluno_id'];
         $data['data_pagamento'] = date('Y-m-d');
         $data['data_fim']  = date('Y-m-d', strtotime($data['data_pagamento'] . '+ 30 days'));
         $result = $this->pagamentoService->create($data);
 
         return redirect()
-            ->route('alunos.index')
+            ->route("alunos.show", $alunoId)
             ->withSuccess("Pagamento realizado com Successo");
     }
 
@@ -119,5 +120,13 @@ class PagamentoController extends Controller
      */
     public function destroy($id)
     {
+        if ($pagamento = $this->pagamentoService->getById($id)) {
+            $pagamento->delete();
+            return redirect()->back()
+                ->withSuccess("O pagamento foi Excluido Com Successo");
+        };
+
+        return redirect()->route('alunos.index')
+            ->withErrors("Nao foi possivel excluir Aluno pagamento selecionado");
     }
 }
