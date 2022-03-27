@@ -26,6 +26,13 @@ class pagamentoService
         return  $this->repository->find($id);
     }
 
+    public function update($data)
+    {
+        $result = $this->repository->update($data);
+        return response()->json(['message' => 'Update Not Found'], 404);
+    }
+
+
 
     public function getFinalDate($id)
     {
@@ -45,11 +52,11 @@ class pagamentoService
 
     public function pagamentoStatus($id)
     {
-
         $dataStart    = $this->getStartDate($id);
         $dataFim = $this->getFinalDate($id);
 
         if ($this->repository->whereBetween('data_fim', [$dataStart, $dataFim])->count()) {
+
             return true;
         }
     }
@@ -59,6 +66,7 @@ class pagamentoService
         $result = $this->repository->create($data);
 
         if ($result) {
+
             return $result;
         }
     }

@@ -29,8 +29,9 @@ class AlunosController extends Controller
     {
         $alunos = $this->service->getAll(90);
 
-        $loggedId = intval(Auth::id());
 
+
+        $loggedId = intval(Auth::id());
 
         return view('Admin.alunos.index', [
             'alunos' => $alunos
@@ -43,13 +44,13 @@ class AlunosController extends Controller
     {
         $loggedId = intval(Auth::id());
         $alunos = $this->service->findById($id);
+
         $pagamentos = $this->pagamentoService->getByAlunoId($id);
 
         $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
 
         return view('Admin.alunos.show', [
             'alunos' => $alunos,
-            'pagamentos' => $pagamentos,
             'pagamentoStatus' =>  $pagamentoStatus
 
         ]);

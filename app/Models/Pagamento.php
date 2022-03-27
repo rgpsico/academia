@@ -30,4 +30,9 @@ class Pagamento extends Model
     {
         return $this->hasOne(alunos::class);
     }
+
+    public function admin()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

@@ -83,10 +83,11 @@
                         </tr>
                     </thead>
                         <tbody>
-                        @foreach ($pagamentos as $pagamento)                            
+                         @foreach ($alunos->pagamento as $pagamento )
+                    
                             <tr>
                                 <td>183</td>
-                                <td>{{$pagamento->id}}</td>
+                                <td>{{$pagamento->admin->name}}</td>
                                 <td>{{date('d/m/Y', strtotime($pagamento->data_pagamento))}}</td>
                                 <td>{{date('d/m/Y', strtotime($pagamento->data_fim))}}</td>
                                 <td><span class="tag tag-success">Dinheiro</span></td>
@@ -99,7 +100,7 @@
                                 </form>
                                 </td>
                             </tr> 
-                        @endforeach  
+                         @endforeach
                         </tbody>
                 </table>
             </div>
