@@ -112,13 +112,6 @@ class PagamentoController extends Controller
      */
     public function destroy($id)
     {
-        if ($pagamento = $this->pagamentoService->getById($id)) {
-            $pagamento->delete();
-            return redirect()->back()
-                ->withSuccess("O pagamento foi Excluido Com Successo");
-        };
-
-        return redirect()->route('alunos.index')
-            ->withErrors("Nao foi possivel excluir Aluno pagamento selecionado");
+        return  $this->pagamentoService->delete($id);
     }
 }

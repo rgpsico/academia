@@ -24,7 +24,6 @@ class PagamentoRepository
     }
 
 
-
     public function create(array $data)
     {
         return $this->model::create($data);
@@ -48,6 +47,32 @@ class PagamentoRepository
     public function update($data)
     {
         return $this->model::update($data);
+    }
+
+    public function getFinalDate($id)
+    {
+        //Carbon::parse($dataFim->data_fim)->format('Y-m-d');
+        if ($dataFim = $this->model::where('aluno_id', $id)->orderBy('data_fim', 'desc')->first()) {
+            return $dataFim->data_fim;
+        }
+    }
+
+    public function getStartDate($id)
+    {
+        if ($dataPagamento = $this->model::where('aluno_id', $id)->orderBy('data_pagamento', 'desc')->first()) {
+            return $dataPagamento->data_pagamento;
+        }
+    }
+
+
+    public function pagamentoStatus($id)
+    {
+        $dataStart    = $this->getStartDate($id);
+        $dataFim = $this->getFinalDate($id);
+
+        if ($this->repository->whereBetween('data_fim', [$dataStart, $dataFim])->count()) {
+            return true;
+        }
     }
 
     public function search($request)

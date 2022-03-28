@@ -6,6 +6,7 @@ use App\Models\Alunos;
 use App\Models\Pagamento;
 use App\Repositories\AlunosRepository;
 use Carbon\Carbon;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
 
 class pagamentoService
@@ -34,13 +35,8 @@ class pagamentoService
         return  $this->repository->find($id);
     }
 
-
-
-
-
     public function getFinalDate($id)
     {
-        //Carbon::parse($dataFim->data_fim)->format('Y-m-d');
         if ($dataFim = $this->repository::where('aluno_id', $id)->orderBy('data_fim', 'desc')->first()) {
             return $dataFim->data_fim;
         }
@@ -60,6 +56,7 @@ class pagamentoService
         $dataFim = $this->getFinalDate($id);
 
         if ($this->repository->whereBetween('data_fim', [$dataStart, $dataFim])->count()) {
+
             return true;
         }
     }
@@ -68,7 +65,7 @@ class pagamentoService
     {
         $aluno_id = $data['aluno_id'];
         $result = $this->repository->create($data);
-        $this->alunoRepository->updateStatusAluno($aluno_id);
+        $this->alunoRepository->updateStatusAluno($aluno_id, 'true');
         if ($result) {
             return $result;
         }
@@ -80,5 +77,21 @@ class pagamentoService
             return redirect()->back();
         }
         return $this->repository->update($data);
+    }
+
+    public function delete($id)
+    {
+
+        if ($pagamento = $this->repository::find($id)) {
+
+            $aluno_id = $pagamento->aluno_id;
+            $this->alunoRepository->updateStatusAluno($aluno_id, 'false');
+            $pagamento->delete();
+            return redirect()->route('alunos.show', $aluno_id)
+                ->withSuccess("Pagamento Excluido com successo");
+        };
+
+        return redirect()->back()
+            ->withErrors("Nao foi possivel excluir Aluno pagamento selecionado");
     }
 }

@@ -8,6 +8,7 @@ class AlunosRepository
 {
     private $model;
 
+
     public function __construct(Alunos $model)
     {
         $this->model = $model;
@@ -37,11 +38,12 @@ class AlunosRepository
 
     public function inadiplentes()
     {
-        return $this->model::where('status', '=', '')->paginate(10);
+        return $this->model::where('status', '<>', 'true')->paginate(10);
     }
 
     public function delete($id)
     {
+
         return $this->model::delete($id);
     }
 
@@ -50,9 +52,9 @@ class AlunosRepository
         return $this->model->update($data);
     }
 
-    public function updateStatusAluno($aluno_id)
+    public function updateStatusAluno($aluno_id, $status)
     {
-        return $update = $this->model::where('id', $aluno_id)->update(['id' => $aluno_id, 'status' => 'Mês Pago']);
+        return $update = $this->model::where('id', $aluno_id)->update(['id' => $aluno_id, 'status' => $status]);
     }
 
     public function search($request)

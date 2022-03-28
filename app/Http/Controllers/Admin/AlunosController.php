@@ -28,15 +28,10 @@ class AlunosController extends Controller
     public function index()
     {
         $alunos = $this->service->getAll(90);
-
-
-
         $loggedId = intval(Auth::id());
 
         return view('Admin.alunos.index', [
             'alunos' => $alunos
-
-
         ]);
     }
 
@@ -55,8 +50,6 @@ class AlunosController extends Controller
 
         ]);
     }
-
-
 
     public function inadiplentes()
     {
@@ -126,14 +119,6 @@ class AlunosController extends Controller
     }
 
 
-    public function ValidarPagamento()
-    {
-        //pegar a  ultima data  final
-        //verificar se a data final é maior que o dia que estamos
-    }
-
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -143,13 +128,11 @@ class AlunosController extends Controller
     public function edit($id)
     {
         $aluno = $this->service->findById($id);
-
         if ($aluno) {
             return view('Admin.alunos.edit', [
                 'aluno' => $aluno
             ]);
         }
-
         return redirect()->route('alunos.index');
     }
 
@@ -169,16 +152,12 @@ class AlunosController extends Controller
 
         $data = $request->all();
 
-
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $data['avatar'] = $request->file('image')->store('alunos');
             $aluno->cover  = $data;
         }
 
         $aluno->update($data);
-
-
-
         return redirect()->back();
     }
 
@@ -193,14 +172,5 @@ class AlunosController extends Controller
         $alunos = $this->service->findById($id);
         $alunos->delete();
         return redirect()->route('alunos.index')->withSuccess("Excluido Com Successo");
-    }
-
-    public function search(Request $request)
-    {
-        //$filters = $request->only('filter');
-
-        //    $alunos = $this->service->search($filters);
-
-        //  return view('alunos.index', compact('alunos', 'filters'));
     }
 }
