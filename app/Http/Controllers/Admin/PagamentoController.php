@@ -56,20 +56,14 @@ class PagamentoController extends Controller
         $alunoId = $data['aluno_id'];
         $data['data_pagamento'] = date('Y-m-d');
         $data['data_fim']  = date('Y-m-d', strtotime($data['data_pagamento'] . '+ 30 days'));
+
+
         $result = $this->pagamentoService->create($data);
 
         return redirect()
             ->route("alunos.show", $alunoId)
             ->withSuccess("Pagamento realizado com Successo");
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
 
     /**
      * Show the form for editing the specified resource.
@@ -100,16 +94,14 @@ class PagamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $pagamento = $this->pagamentoService->getById($id);
         $data = $request->all();
-        if ($pagamento) {
-            $pagamento->update($data);
-        }
 
-        return redirect()
-            ->back()
-            ->withSuccess("Pagamento atualizado com success");
+        if ($pagamento = $this->pagamentoService->getById($id)) {
+            $pagamento->update($data);
+            return redirect()
+                ->back()
+                ->withSuccess("Pagamento atualizado com success");
+        }
     }
 
     /**

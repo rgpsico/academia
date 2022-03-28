@@ -37,7 +37,7 @@ class AlunosRepository
 
     public function inadiplentes()
     {
-        return $this->model::all();
+        return $this->model::where('status', '=', '')->paginate(10);
     }
 
     public function delete($id)
@@ -47,7 +47,12 @@ class AlunosRepository
 
     public function update($data)
     {
-        return $this->model::update($data);
+        return $this->model->update($data);
+    }
+
+    public function updateStatusAluno($aluno_id)
+    {
+        return $update = $this->model::where('id', $aluno_id)->update(['id' => $aluno_id, 'status' => 'Mês Pago']);
     }
 
     public function search($request)

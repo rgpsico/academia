@@ -2,18 +2,26 @@
 
 namespace App\Service;
 
+use App\Models\Alunos;
 use App\Models\Pagamento;
+use App\Repositories\AlunosRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class pagamentoService
 {
     private $repository;
+    private $alunoRepository;
+    private $modelAluno;
 
-    public function __construct(Pagamento $repository)
-    {
-
+    public function __construct(
+        Pagamento $repository,
+        AlunosRepository $alunoRepository,
+        Alunos $modelAluno
+    ) {
         $this->repository = $repository;
+        $this->alunoRepository = $alunoRepository;
+        $this->modelAluno = $modelAluno;
     }
 
     public function getByAlunoId($id)
@@ -26,11 +34,7 @@ class pagamentoService
         return  $this->repository->find($id);
     }
 
-    public function update($data)
-    {
-        $result = $this->repository->update($data);
-        return response()->json(['message' => 'Update Not Found'], 404);
-    }
+
 
 
 
@@ -56,18 +60,25 @@ class pagamentoService
         $dataFim = $this->getFinalDate($id);
 
         if ($this->repository->whereBetween('data_fim', [$dataStart, $dataFim])->count()) {
-
             return true;
         }
     }
 
     public function create($data)
     {
+        $aluno_id = $data['aluno_id'];
         $result = $this->repository->create($data);
-
+        $this->alunoRepository->updateStatusAluno($aluno_id);
         if ($result) {
-
             return $result;
         }
+    }
+
+    public function update($id, $data)
+    {
+        if (!$pagamento = $this->repository::find($id)) {
+            return redirect()->back();
+        }
+        return $this->repository->update($data);
     }
 }

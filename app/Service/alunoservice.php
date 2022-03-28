@@ -20,7 +20,7 @@ class alunoservice
 
     public function inadiplentes()
     {
-        return $this->repository->listAll();
+        return $this->repository->inadiplentes();
     }
 
     public function getAll($qtd, $paginate = false)

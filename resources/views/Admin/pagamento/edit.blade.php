@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title','Editar Paginas')
+@section('title','Editar Pagamento')
 
 @section('content_header')
     <h1>
-        Editar Paginas
+        Editar Pagamento
     
     </h1>
 @endsection
