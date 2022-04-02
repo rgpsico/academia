@@ -12,7 +12,18 @@
 
 @section('content')
 
+<form action="{{route('alunos.search')}}">
+<div class="input-group mb-3 col-4">
 
+        <input type="text" class="form-control" name="nome" placeholder="Nome do Aluno" aria-label="Nome do Aluno" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Buscar Aluno</button>
+            </div>
+ 
+  </div>
+</form>
+  <br>
+  <br>
 
 @include('Admin.includes.alert')
 

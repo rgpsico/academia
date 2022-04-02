@@ -47,7 +47,7 @@
             <div class="form-group row">       
                 <label for="nome" class="col-sm-2 col-form-label">Data do Pagamento:</label>
                     <div class="col-sm-10">
-                        <input type="date"   required name="data_pagamento" class="form-control @error('data_pagamento') is-invalid @enderror id="data_pagamento"  value="">
+                        <input type="date"   required name="data_inicio" class="form-control @error('data_inicio') is-invalid @enderror id="data_inicio"  value="">
                     </div>
             </div>
 

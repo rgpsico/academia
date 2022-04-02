@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pagamento extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'aluno_id', 'data_pagamento', 'data_fim'];
+    protected $fillable = ['user_id', 'aluno_id', 'data_pagamento', 'data_inicio', 'data_fim'];
     protected $table = "pagamento";
 
 

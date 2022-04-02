@@ -20,8 +20,9 @@ Route::prefix('painel')->group(function () {
     Route::post('logout', [loginController::class, 'logout'])->name('logout');
 
     Route::resource('users', UserController::class);
-
+    Route::get('alunos/search', [AlunosController::class, 'search'])->name('alunos.search');
     Route::resource('alunos', AlunosController::class);
+
     Route::resource('pagamento', PagamentoController::class);
     Route::get('inadiplentes', [AlunosController::class, 'inadiplentes']);
 });

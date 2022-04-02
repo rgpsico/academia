@@ -41,11 +41,11 @@ class AlunosController extends Controller
         $loggedId = intval(Auth::id());
         $alunos = $this->service->findById($id);
 
-        $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
+        $pagamentos = $this->pagamentoService->getByAlunoId($id);
 
         return view('Admin.alunos.show', [
             'alunos' => $alunos,
-            'pagamentoStatus' =>  $pagamentoStatus
+            'pagamentos' =>  $pagamentos
 
         ]);
     }
@@ -93,30 +93,22 @@ class AlunosController extends Controller
         // Verifica se informou o arquivo e se é válido
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
 
-            // Define um aleatório para o arquivo baseado no timestamps atual
+
             $name = uniqid(date('HisYmd'));
 
-            // Recupera a extensão do arquivo
             $extension = $request->image->extension();
 
-            // Define finalmente o nome
             $nameFile = "{$name}.{$extension}";
 
-            // Faz o upload:
-            //$upload = $request->image->storeAs('alunos', $nameFile);
+            $upload = $request->file('image')->store('alunos');
 
-            Storage::disk('ftp')->put($nameFile, fopen($request->file('image'), 'r+'));
+            $data['avatar'] = $upload;
 
-            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/categories/nomedinamicoarquivo.extensao
-
-            // Verifica se NÃO deu certo o upload (Redireciona de volta)
-
-            $data['avatar'] = $nameFile;
             $criarArtigo = $this->service->create($data);
 
             return redirect()
                 ->route('alunos.index')
-                ->withSuccess("Cadastrado com Successo");
+                ->withSuccess("O Aluno {$data['nome']} foi Cadastrado com Successo");
         }
     }
 
@@ -175,5 +167,23 @@ class AlunosController extends Controller
         $alunos = $this->service->findById($id);
         $alunos->delete();
         return redirect()->route('alunos.index')->withSuccess("Excluido Com Successo");
+    }
+
+    public function search(Request $request)
+    {
+        $nome = $request->nome;
+
+        if ($alunos = $this->service->ByField($nome)) {
+            $id = $alunos->id ?? false;
+            $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
+            return view('Admin.alunos.index', [
+                'alunos' => $alunos,
+                'pagamentoStatus' =>  $pagamentoStatus
+            ]);
+        }
+
+
+
+        return redirect()->route('alunos.index')->withErrors("O Aluno {$nome} não foi encontrado");
     }
 }

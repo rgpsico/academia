@@ -17,7 +17,7 @@ class AlunosRepository
 
     public function paginate()
     {
-        $alunos = DB::select("SELECT a.* , 
+        return $alunos = DB::select("SELECT a.* , 
         CASE
             WHEN data_pagamento = NULL THEN 'Nunca foi pago'
             WHEN data_fim > CURDATE() THEN 'Em dia'
@@ -27,12 +27,25 @@ class AlunosRepository
          AS statusPG, p.aluno_id, p.data_pagamento , p.data_fim   FROM alunos AS a 
         LEFT JOIN pagamento  AS p
         ON a.id = p.aluno_id");
-        return $alunos;
     }
 
-    public function findByID($id, $fail = true)
+    public function findByID($id)
     {
         return $this->model::find($id);
+    }
+
+    public function byField($field)
+    {
+        return $alunos = DB::select("SELECT a.* , 
+        CASE
+            WHEN data_pagamento = NULL THEN 'Nunca foi pago'
+            WHEN data_fim > CURDATE() THEN 'Em dia'
+            ELSE 'Está atrasado'
+        END
+        
+         AS statusPG, p.aluno_id, p.data_pagamento , p.data_fim   FROM alunos AS a 
+        LEFT JOIN pagamento  AS p
+        ON a.id = p.aluno_id WHERE  a.nome = '{$field}' ");
     }
 
 

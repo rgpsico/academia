@@ -34,8 +34,14 @@ class alunoservice
         if ($result) {
             return $result;
         }
+    }
 
-        return response()->json(['message' => 'Article Not Found'], 404);
+    public function ByField($field)
+    {
+        $result = $this->repository->byField($field);
+        if ($result) {
+            return $result;
+        }
     }
 
     public function create($data)
@@ -53,16 +59,16 @@ class alunoservice
         $result = $this->repository->findById($id);
         if ($result) {
             $result->delete($id);
-            return response()->json(['message' => 'Artigo excluido com sucesso'], 200);
+            return response()->json(['message' => 'Aluno excluido com sucesso'], 200);
         }
 
-        return response()->json(['message' => 'Article Not Found'], 404);
+        return response()->json(['message' => 'Aluno Não encontrado'], 404);
     }
 
     public function update($data)
     {
         $result = $this->repository->update($data);
-        return response()->json(['message' => 'Article Not Found'], 404);
+        return response()->json(['message' => 'Aluno Não encontrado'], 404);
     }
 
     public function search($request)

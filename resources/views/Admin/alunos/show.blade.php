@@ -3,7 +3,7 @@
 @section('title','Usuarios')
 
 @section('content_header')
-  
+    <h1></h1>
         @include('Admin.includes.alert')
 @endsection
 
@@ -14,7 +14,7 @@
     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
         <div class="card bg-light d-flex flex-fill">
             <div class="card-header text-muted border-bottom-0">
-                <b>Situação:</b>{!!$pagamentoStatus == true ?  '<b class="btn btn-success">Pago</b>' : '<b class="btn btn-dark">Está devendo</b>';!!}
+                {{-- <b>Situação:</b>{!!$pagamentoStatus == true ?  '<b class="btn btn-success">Pago</b>' : '<b class="btn btn-dark">Está devendo</b>';!!} --}}
             </div>
             
             <div class="card-body pt-0">            
@@ -77,6 +77,7 @@
                             <th>ID</th>
                             <th>Usuario que Recebeu</th>
                             <th>Dia do pagamento</th>
+                            <th>data de Inicio</th>
                             <th>data do vencimento</th>
                             <th>Forma de pagamento</th>
                             <th>Ações</th>
@@ -89,6 +90,7 @@
                                 <td>183</td>
                                 <td>{{$pagamento->admin->name}}</td>
                                 <td>{{date('d/m/Y', strtotime($pagamento->data_pagamento))}}</td>
+                                <td>{{date('d/m/Y', strtotime($pagamento->data_inicio))}}</td>
                                 <td>{{date('d/m/Y', strtotime($pagamento->data_fim))}}</td>
                                 <td><span class="tag tag-success">Dinheiro</span></td>
                                 <td>

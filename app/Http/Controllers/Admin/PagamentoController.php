@@ -54,7 +54,8 @@ class PagamentoController extends Controller
     {
         $data = $request->only('user_id', 'aluno_id');
         $alunoId = $data['aluno_id'];
-        $data['data_pagamento'] = $request->data_pagamento;
+        $data['data_pagamento'] =  date('Y-m-d');
+        $data['data_inicio'] =   date('Y-m-d', strtotime($request->data_inicio . ' + 1 days '));
         $data['data_fim']  = date('Y-m-d', strtotime($data['data_pagamento'] . '+ 30 days'));
 
         $result = $this->pagamentoService->create($data);
