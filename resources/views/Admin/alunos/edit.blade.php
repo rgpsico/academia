@@ -54,7 +54,11 @@
                     <input type="file"  name="image" class="form-control @error('image') is-invalid @enderror id="image">
                 </div>
          </div> 
-
+         <div class="form-group row">   
+            <div class="col-2 text-center">
+                <img src="{{Storage::url($aluno->avatar) ?? 'imagem'}}" max-width="200" max-height="200" alt="user-avatar" class="img-circle img-fluid rounded float-left">
+            </div>
+        </div> 
         
     <div class="form-group row">  
       <button type="submit" class="btn btn-success">Salvar</button>

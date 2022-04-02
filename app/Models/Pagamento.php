@@ -6,7 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 
 class Pagamento extends Model
 {
@@ -25,6 +25,15 @@ class Pagamento extends Model
     // {
     //     return date('d/m/Y', strtotime($value));
     // }
+
+    public function pagamentoStatus($id)
+    {
+        // $dataDeVencimento    = $this->getFinalDate($id);
+
+        // $res = $this->repository->where('data_fim', '>=', DB::raw('CURDATE()'))->count();
+        $res = 'teste';
+        return $res;
+    }
 
     public function alunos()
     {

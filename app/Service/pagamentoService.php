@@ -44,7 +44,7 @@ class pagamentoService
 
     public function getStartDate($id)
     {
-        if ($dataPagamento = $this->repository::where('aluno_id', $id)->orderBy('data_pagamento', 'desc')->first()) {
+        if ($dataPagamento = $this->repository::where('aluno_id', $id)->orderBy('data_inicio', 'desc')->first()) {
             return $dataPagamento->data_pagamento;
         }
     }
@@ -52,13 +52,10 @@ class pagamentoService
 
     public function pagamentoStatus($id)
     {
-        $dataStart    = $this->getStartDate($id);
-        $dataFim = $this->getFinalDate($id);
+        $dataDeVencimento    = $this->getFinalDate($id);
 
-        if ($this->repository->whereBetween('data_fim', [$dataStart, $dataFim])->count()) {
-
-            return true;
-        }
+        $res = $this->repository->where('data_fim', '>=', DB::raw('CURDATE()'))->count();
+        return $res;
     }
 
     public function create($data)

@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Alunos extends Model
 {
     use HasFactory;
     protected $fillable = ['nome', 'whatssap', 'status', 'instagran', 'avatar'];
     public $timestamps = false;
+
+
+
 
 
     public function pagamento()

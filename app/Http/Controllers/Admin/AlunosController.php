@@ -42,11 +42,15 @@ class AlunosController extends Controller
         $alunos = $this->service->findById($id);
 
         $pagamentos = $this->pagamentoService->getByAlunoId($id);
+        $ultimoPagamento = $this->pagamentoService->getFinalDate($id);
+        $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
+
 
         return view('Admin.alunos.show', [
             'alunos' => $alunos,
-            'pagamentos' =>  $pagamentos
-
+            'pagamentos' =>  $pagamentos,
+            'ultimoPagamento' => $ultimoPagamento,
+            'pagamentoStatus' => $pagamentoStatus
         ]);
     }
 
