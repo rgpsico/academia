@@ -4,13 +4,13 @@
 
 @section('content_header')
     <h1>
-        Editar Pagamento
+        Editar Aluno {{$aluno->nome}}
     
     </h1>
 @endsection
 
 @section('content')
-
+@include('Admin.includes.alert')
 @if($errors->any())
 <div class="alert alert-danger">
     <h5><i class="icon fas fa-ban"></i>Ocorreu um error</h5>
@@ -46,7 +46,14 @@
                 <div class="col-sm-10">
                     <input type="text"  name="instagran" class="form-control @error('instagran') is-invalid @enderror id="instagran"  value="{{$aluno->instagran}}">
                 </div>
-         </div>     
+         </div> 
+         
+         <div class="form-group row">       
+            <label for="instagran" class="col-sm-2 col-form-label">Imagem</label>
+                <div class="col-sm-10">
+                    <input type="file"  name="image" class="form-control @error('image') is-invalid @enderror id="image">
+                </div>
+         </div> 
 
         
     <div class="form-group row">  
@@ -59,19 +66,5 @@
 
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-<script>
-    tinymce.init({
-        selector:'textarea.bodyfield',
-        height:300,
-        menubar:false,
-        plugins:['link', 'table', 'image', 'autoresize', 'lists'],
-        toolbar:'undor redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | table | link image | bullist numlist',
-        content_css:[
-            '{{asset('assets/css/content.css')}}'
-        ],
-        images_upload_url:'{{route('imageupload')}}',
-        images_upload_credentials:true,
-        convert_urls:false
-    });
-    </script>
+
 @endsection

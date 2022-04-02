@@ -51,6 +51,13 @@
                     </div>
             </div>
 
+            <div class="form-group row">       
+                <label for="nome" class="col-sm-2 col-form-label">Data Fim:</label>
+                    <div class="col-sm-10">
+                        <input type="date"  disabled name="data_fim" class="form-control @error('data_fim') is-invalid @enderror id="data_fim"  value="{{$pagamento->data_fim}}">
+                    </div>
+            </div>
+
 
     <div class="form-group row">  
       <button type="submit" class="btn btn-success">Salvar</button>
@@ -72,7 +79,7 @@
         content_css:[
             '{{asset('assets/css/content.css')}}'
         ],
-        images_upload_url:'{{route('imageupload')}}',
+        images_upload_url:'',
         images_upload_credentials:true,
         convert_urls:false
     });

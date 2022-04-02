@@ -28,7 +28,7 @@ class Pagamento extends Model
 
     public function alunos()
     {
-        return $this->hasOne(alunos::class, 'id', 'aluno_id');
+        return $this->belongsTo(alunos::class, 'id', 'aluno_id');
     }
 
     public function admin()

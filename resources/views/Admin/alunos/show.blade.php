@@ -3,7 +3,7 @@
 @section('title','Usuarios')
 
 @section('content_header')
-    <h1>{{$alunos->nome}}</h1>
+  
         @include('Admin.includes.alert')
 @endsection
 
@@ -30,7 +30,7 @@
                     </div>
                     
                     <div class="col-5 text-center">
-                        <img src="{{Storage::url('alunos/'.$alunos['avatar'])}}" 
+                        <img src="{{Storage::url($alunos['avatar'])}}" 
                              alt="user-avatar" 
                              class="img-circle img-fluid">
                     </div>
@@ -39,7 +39,7 @@
 
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-teal">
+                    <a href="https://wa.me/{{$alunos['whatssap']}}?text=Mensagemn"    class="btn btn-sm bg-teal">
                     <i class="fas fa-comments"> Enviar Mensagem</i>
                     </a>
                     <a href="{{route('pagamento.create',['aluno'=> $alunos->id])}}" class="btn btn-sm btn-success">

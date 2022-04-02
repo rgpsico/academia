@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
+
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlunoRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\categoria;
+use App\Models\Alunos;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AlunosController extends Controller
+class AlunosControllerApi extends Controller
 {
     private $service;
     private $pagamentoService;
@@ -23,23 +22,40 @@ class AlunosController extends Controller
     {
         $this->pagamentoService = $pagamento;
         $this->service = $alunoservice;
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function index()
     {
-        $alunos = $this->service->getAll(90);
+
+        $alunos = Alunos::orderBy('nome')
+            ->where('status', 'false')
+            ->with('pagamento')
+            ->get()->map(function ($aluno) {
+                return $this->format($aluno);
+            });
+
         $loggedId = intval(Auth::id());
 
-        return view('Admin.alunos.index', [
-            'alunos' => $alunos
-        ]);
+        return response($alunos, 200);
+    }
+
+    public function format($aluno)
+    {
+        return [
+            'id' => $aluno->id,
+            'nome' => $aluno->nome,
+            'pagamento' => $aluno->pagamento
+
+        ];
     }
 
     public function show($id)
     {
         $loggedId = intval(Auth::id());
         $alunos = $this->service->findById($id);
+
+        $pagamentos = $this->pagamentoService->getByAlunoId($id);
 
         $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
 
@@ -148,7 +164,6 @@ class AlunosController extends Controller
     public function update(Request $request, $id)
     {
 
-
         if (!$aluno = $this->service->findById($id)) {
             return redirect()->back();
         }
@@ -157,7 +172,7 @@ class AlunosController extends Controller
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $data['avatar'] = $request->file('image')->store('alunos');
-            $aluno->avatar  = $data;
+            $aluno->cover  = $data;
         }
 
         $aluno->update($data);
