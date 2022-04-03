@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title','Nova Pagina')
+@section('title','Realizar Pagamento')
 
 @section('content_header')
     <h1>
@@ -47,14 +47,21 @@
             <div class="form-group row">       
                 <label for="nome" class="col-sm-2 col-form-label">Data do Pagamento:</label>
                     <div class="col-sm-10">
-                        <input type="date"   required name="data_inicio" class="form-control @error('data_inicio') is-invalid @enderror id="data_inicio"  value="">
+                        <input type="date"   disabled name="data_pagamento" class="form-control @error('data_pagamento') is-invalid @enderror id="data_pagamento"  value="<?= date('Y-m-d');?>">
+                    </div>
+            </div>
+
+            <div class="form-group row">       
+                <label for="nome" class="col-sm-2 col-form-label">Data de inicio:</label>
+                    <div class="col-sm-10">
+                        <input type="date"   required name="data_inicio" class="form-control @error('data_inicio') is-invalid @enderror" id="data_inicio"  value="">
                     </div>
             </div>
 
             <div class="form-group row">       
                 <label for="nome" class="col-sm-2 col-form-label">Data Fim:</label>
                     <div class="col-sm-10">
-                        <input type="date"  disabled name="data_fim" class="form-control @error('data_fim') is-invalid @enderror id="data_fim"  value="">
+                        <input type="date"  disabled name="data_fim" class="form-control @error('data_fim') is-invalid @enderror" id="data_fim"  value="">
                     </div>
             </div>
           
@@ -75,74 +82,22 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="{{asset('assets/js/select2.js')}}"></script>
 <script>
-    tinymce.init({
-        selector:'textarea.bodyfield',
-        height:300,
-        menubar:false,
-        plugins:['link', 'table', 'image', 'autoresize', 'lists'],
-        toolbar:'undor redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | table | link image | bullist numlist',
-        content_css:[
-            '{{asset('assets/css/content.css')}}'
-        ],
-        images_upload_url:'',
-        images_upload_credentials:true,
-        convert_urls:false
-    });
-
-
-$('.selectjs').select2({   
-    escapeMarkup: function (markup) {
-     return markup;
- }
-        
    
-});
 
+$('#data_inicio').change(function(){
+    var dateControl = document.querySelector('#data_fim');
+           data = new Date("2019-04-20T10:00:00-03:00");
+         
 
+       
+         
+        
+        
 
-$(document).on('click', '.inserir', function() {
-  alert(1);
-});
-
-ListarProfissionais();
-function ListarProfissionais(){ 
-    let token = localStorage.getItem('tk');
-    $.ajax({
-    url : "https://jsonplaceholder.typicode.com/users",
-    headers: {  
-            'Content-Type':'json',             
-            'x-access-token':token,
-    },
-    type : 'get',  
-    success : function(data){
-        $('#ProfissionalID').val();
-    try {    
-        qtd = data.length;
-        for(i=0; i<=qtd; i++){           
-            $('#mySelect2').append('<option  value="'+ data[i].id +'" data-sysuser="'+data[i].nome+'">'+data[i].nome +'</option>');
-        }
-    }   catch (error) {
-
-    }
-    }, "noResults": function(){
-        return "Que cadastrar Esse paciente <a href='#' class='btn btn-success cadastrar'>UCadastrar</a>";
-    },
-    escapeMarkup: function (markup) {
-     return markup;
- }
 })
-}
-    /*
-"language": {
-    "noResults": function(){
-        return "Que cadastrar Esse paciente <a href='#' class='btn btn-success cadastrar'>UCadastrar</a>";
-    }
-},
- escapeMarkup: function (markup) {
-     return markup;
- },
+  
 
-});
-*/
+
+
     </script>
 @endsection

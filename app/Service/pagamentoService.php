@@ -53,8 +53,10 @@ class pagamentoService
     public function pagamentoStatus($id)
     {
         $dataDeVencimento    = $this->getFinalDate($id);
-
         $res = $this->repository->where('data_fim', '>=', DB::raw('CURDATE()'))->count();
+
+
+
         return $res;
     }
 

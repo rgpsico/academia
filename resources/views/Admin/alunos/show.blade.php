@@ -14,8 +14,8 @@
     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
         <div class="card bg-light d-flex flex-fill">
             <div class="card-header text-muted border-bottom-0">
-                
-                {!!$pagamentoStatus > 0 ?  '<b class="btn btn-success">Pago</b>' : '<b class="btn btn-dark">Está devendo</b>'!!}
+             
+                {!!$ultimoPagamento  > date('Y-m-d') ?  '<b class="btn btn-success">Pago</b>' : '<b class="btn btn-danger">Está devendo</b>'!!}
             </div>
             
             <div class="card-body pt-0">            
@@ -26,7 +26,7 @@
                         <ul class="ml-4 mb-0 fa-ul text-muted">
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Endereço: Rua sant roman 200</li>
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefone: {{$alunos->whatssap}}</li>
-                             <li>Data Vencimento: {{date('d/m/Y', strtotime($ultimoPagamento)) ?? false}}</li>
+                            <li class="text-danger my-5 bg-danger ">Data Vencimento: {{date('d/m/Y', strtotime($ultimoPagamento)) === '31/12/1969' ? 'Não Pagou ainda' :  date('d/m/Y', strtotime($ultimoPagamento))}}</li>
                         </ul>
                     </div>
                     
@@ -106,6 +106,7 @@
                          @endforeach
                         </tbody>
                 </table>
+                
             </div>
         </div>        
     </div>

@@ -25,4 +25,5 @@ Route::prefix('painel')->group(function () {
 
     Route::resource('pagamento', PagamentoController::class);
     Route::get('inadiplentes', [AlunosController::class, 'inadiplentes']);
+    Route::get('emdia', [AlunosController::class, 'emdia']);
 });

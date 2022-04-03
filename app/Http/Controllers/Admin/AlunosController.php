@@ -28,11 +28,38 @@ class AlunosController extends Controller
 
     public function index()
     {
-        $alunos = $this->service->getAll(90);
+        $alunos = $this->service->getAll(10);
+
         $loggedId = intval(Auth::id());
 
-        return view('Admin.alunos.index', [
+        return view('admin.alunos.index', [
             'alunos' => $alunos
+        ]);
+    }
+
+    public function emdia()
+    {
+        $alunos = $this->service->emdia();
+        $loggedId = intval(Auth::id());
+
+
+        return view('admin.alunos.index', [
+            'alunos' => $alunos
+
+
+        ]);
+    }
+
+    public function inadiplentes()
+    {
+        $alunos = $this->service->inadiplentes();
+        $loggedId = intval(Auth::id());
+
+
+        return view('admin.alunos.index', [
+            'alunos' => $alunos
+
+
         ]);
     }
 
@@ -46,7 +73,7 @@ class AlunosController extends Controller
         $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
 
 
-        return view('Admin.alunos.show', [
+        return view('admin.alunos.show', [
             'alunos' => $alunos,
             'pagamentos' =>  $pagamentos,
             'ultimoPagamento' => $ultimoPagamento,
@@ -54,18 +81,7 @@ class AlunosController extends Controller
         ]);
     }
 
-    public function inadiplentes()
-    {
-        $alunos = $this->service->inadiplentes();
-        $loggedId = intval(Auth::id());
 
-
-        return view('Admin.alunos.index', [
-            'alunos' => $alunos,
-            'inadiplentes' => true
-
-        ]);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -75,7 +91,7 @@ class AlunosController extends Controller
     public function create()
     {
 
-        return view('Admin.alunos.create');
+        return view('admin.alunos.create');
     }
 
     /**
@@ -127,7 +143,7 @@ class AlunosController extends Controller
     {
         $aluno = $this->service->findById($id);
         if ($aluno) {
-            return view('Admin.alunos.edit', [
+            return view('admin.alunos.edit', [
                 'aluno' => $aluno
             ]);
         }
@@ -180,7 +196,7 @@ class AlunosController extends Controller
         if ($alunos = $this->service->ByField($nome)) {
             $id = $alunos->id ?? false;
             $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
-            return view('Admin.alunos.index', [
+            return view('admin.alunos.index', [
                 'alunos' => $alunos,
                 'pagamentoStatus' =>  $pagamentoStatus
             ]);

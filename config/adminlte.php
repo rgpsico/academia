@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'title' => 'Laravel CMS',
+    'title' => 'Academia Extreme',
     'title_prefix' => '',
-    'title_postfix' => '- Laravel CMS',
+    'title_postfix' => '- Academia Extreme',
 
     /*
     |--------------------------------------------------------------------------
@@ -237,9 +237,9 @@ return [
 
         // ],
 
-        ['header' => 'Sobre'],
+        ['header' => 'Alunos'],
         [
-            'text'        => 'Alunos',
+            'text'        => 'Todos os Alunos',
             'url'         => 'painel/alunos',
             'icon'        => 'far fa-fw fa-file'
 
@@ -253,10 +253,21 @@ return [
         ],
 
         [
-            'text'        => 'Admin',
-            'url'         => 'painel/users',
+            'text'        => 'Alunos Em Dia',
+            'url'         => 'painel/emdia',
             'icon'        => 'far fa-fw fa-file'
 
+        ],
+        ['header' => 'Admin'],
+        [
+            'text'        => 'Usuários do sistema',
+            'url'         => 'painel/users',
+            'icon'        => 'far fa-fw fa-file'
+        ],
+        [
+            'text'        => 'Configurações sistema',
+            'url'         => 'painel/users',
+            'icon'        => 'far fa-fw fa-file'
         ],
 
 

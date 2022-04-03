@@ -15,9 +15,29 @@ class AlunosRepository
         $this->model = $model;
     }
 
+    public function create(array $data)
+    {
+        return $this->model::create($data);
+    }
+
+    public function listAll()
+    {
+        return $this->model::paginate(10);
+    }
+
+
     public function paginate()
     {
-        return $this->model->with('pagamento')->get();
+        return DB::select("SELECT  DISTINCT  a.* , 
+        CASE
+            WHEN data_pagamento = NULL THEN 'Nunca foi pago'
+            WHEN data_fim > CURDATE() THEN 'Em dia'
+            ELSE 'Está devendo'
+        END  AS statusPG 
+            FROM alunos AS a 
+            LEFT JOIN pagamento  AS p 
+            ON a.id = p.aluno_id 
+        ");
     }
 
     public function findByID($id)
@@ -31,7 +51,7 @@ class AlunosRepository
         CASE
             WHEN data_pagamento = NULL THEN 'Nunca foi pago'
             WHEN data_fim > CURDATE() THEN 'Em dia'
-            ELSE 'Está atrasado'
+            ELSE 'Está devendo'
         END
         
          AS statusPG, p.aluno_id, p.data_pagamento , p.data_fim   FROM alunos AS a 
@@ -40,20 +60,33 @@ class AlunosRepository
     }
 
 
-
-    public function create(array $data)
-    {
-        return $this->model::create($data);
-    }
-
-    public function listAll()
-    {
-        return $this->model::paginate(10);
-    }
-
     public function inadiplentes()
     {
-        return $this->model::where('status', '<>', 'true')->paginate(10);
+        return DB::select("SELECT  DISTINCT  a.*,
+        CASE
+          WHEN data_pagamento = NULL THEN 'Nunca foi pago'
+          WHEN data_pagamento < data_fim THEN 'Em dia'
+          ELSE 'Está atrasado' 
+      END  AS statusPG     
+          FROM alunos AS a 
+          LEFT JOIN pagamento  AS p 
+          ON a.id = p.aluno_id  WHERE data_fim IS NULL OR  data_fim < CURDATE()
+        ");
+    }
+
+
+    public function emdia()
+    {
+        return DB::select("SELECT  DISTINCT  a.*,
+        CASE
+          WHEN data_pagamento IS NULL THEN 'Nunca foi pago'
+          WHEN data_pagamento < data_fim THEN 'Em dia'
+          ELSE 'Está atrasado' 
+      END  AS statusPG     
+          FROM alunos AS a 
+          LEFT JOIN pagamento  AS p 
+          ON a.id = p.aluno_id  WHERE data_fim > CURDATE()
+        ");
     }
 
     public function delete($id)

@@ -23,6 +23,12 @@ class alunoservice
         return $this->repository->inadiplentes();
     }
 
+
+    public function emdia()
+    {
+        return $this->repository->emdia();
+    }
+
     public function getAll($qtd, $paginate = false)
     {
         return $this->repository->paginate($qtd, $paginate);

@@ -39,7 +39,7 @@ class PagamentoController extends Controller
         $id = $request->get('aluno');
         $aluno = $this->alunoService->findById($id);
 
-        return view('Admin.pagamento.create', [
+        return view('admin.pagamento.create', [
             'aluno' => $aluno
         ]);
     }
@@ -56,7 +56,7 @@ class PagamentoController extends Controller
         $alunoId = $data['aluno_id'];
         $data['data_pagamento'] =  date('Y-m-d');
         $data['data_inicio'] =   date('Y-m-d', strtotime($request->data_inicio . ' + 1 days '));
-        $data['data_fim']  = date('Y-m-d', strtotime($data['data_pagamento'] . '+ 30 days'));
+        $data['data_fim']  = date('Y-m-d', strtotime($request->data_inicio . '+ 30 days'));
 
         $result = $this->pagamentoService->create($data);
 
@@ -77,7 +77,7 @@ class PagamentoController extends Controller
         $pagamento = $this->pagamentoService->getById($id);
 
         if ($pagamento) {
-            return view('Admin.pagamento.edit', [
+            return view('admin.pagamento.edit', [
                 'pagamento' => $pagamento
             ]);
         }
@@ -97,7 +97,7 @@ class PagamentoController extends Controller
         $data = $request->all();
 
         if ($pagamento = $this->pagamentoService->getById($id)) {
-            $data['data_fim']  = date('Y-m-d', strtotime($data['data_pagamento'] . '+ 30 days'));
+            $data['data_fim']  = date('Y-m-d', strtotime($data['data_inicio'] . '+ 30 days'));
 
             $pagamento->update($data);
             return redirect()

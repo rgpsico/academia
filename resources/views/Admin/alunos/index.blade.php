@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title','Usuarios')
+@section('title','Alunos')
 
 @section('content_header')
     <h1>
        Alunos
-       <a href="{{route('alunos.create')}}" class="btn btn-sm btn-success">Novo Aluno</a>
+       <a href="{{route('alunos.create')}}" class="btn btn-sm btn-success">Cadastrar Aluno</a>
     </h1>
     
 @endsection
@@ -13,7 +13,7 @@
 @section('content')
 
 <form action="{{route('alunos.search')}}">
-<div class="input-group mb-3 col-4">
+<div class="input-group mb-3 col-9">
 
         <input type="text" class="form-control" name="nome" placeholder="Nome do Aluno" aria-label="Nome do Aluno" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -32,7 +32,8 @@
     @foreach($alunos as $aluno)
     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
         <div class="card bg-light d-flex flex-fill">
-            <div class="card-header text-muted border-bottom-0">                 
+            <div class="card-header text-muted border-bottom-0">     
+                  
                {!!$aluno->statusPG === "Em dia" ? "<b class='btn btn-success'>Mês Pago</b>" : "<b class='btn btn-danger'>Está devendo</b>"!!}
             </div>
             

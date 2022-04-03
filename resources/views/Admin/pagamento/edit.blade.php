@@ -47,14 +47,21 @@
             <div class="form-group row">       
                 <label for="nome" class="col-sm-2 col-form-label">Data do Pagamento:</label>
                     <div class="col-sm-10">
-                        <input type="date"  name="data_pagamento" class="form-control @error('data_pagamento') is-invalid @enderror id="data_pagamento"  value="{{$pagamento->data_pagamento}}">
+                        <input type="date"   name="data_pagamento" class="form-control @error('data_pagamento') is-invalid @enderror" id="data_pagamento"  value="{{$pagamento->data_pagamento}}">
+                    </div>
+            </div>
+
+            <div class="form-group row">       
+                <label for="nome" class="col-sm-2 col-form-label">Data de Inicio:</label>
+                    <div class="col-sm-10">
+                        <input type="date"   name="data_inicio" class="form-control @error('data_inicio') is-invalid @enderror" id="data_inicio"  value="{{$pagamento->data_inicio}}">
                     </div>
             </div>
 
             <div class="form-group row">       
                 <label for="nome" class="col-sm-2 col-form-label">Data Fim:</label>
                     <div class="col-sm-10">
-                        <input type="date"  disabled name="data_fim" class="form-control @error('data_fim') is-invalid @enderror id="data_fim"  value="{{$pagamento->data_fim}}">
+                        <input type="date" disabled  name="data_fim" class="form-control @error('data_fim') is-invalid @enderror id="data_fim"  value="{{$pagamento->data_fim}}">
                     </div>
             </div>
 

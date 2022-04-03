@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function gmail(Request $request)
     {
         $maps = $this->DirectionApi('Barra da tijuca', 'copacabana');
-        return view('Admin.gmail', compact('maps'));
+        return view('admin.gmail', compact('maps'));
     }
 
     public function index(Request $request)
@@ -29,13 +29,13 @@ class HomeController extends Controller
     public function home()
     {
         $alunos = article::paginate(10);
-        return view('Admin.home.index', ['home' => $alunos]);
+        return view('admin.home.index', ['home' => $alunos]);
     }
 
     public function create()
     {
         $categorias = article::all();
-        return view('Admin.home.create', ['categorias' => $categorias]);
+        return view('admin.home.create', ['categorias' => $categorias]);
     }
 
 
