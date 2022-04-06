@@ -111,8 +111,8 @@ class AlunosRepository
     {
         $this->model->where(function ($query) use ($request) {
             if ($request->filter) {
-                $query->orWhere('body', 'LIKE', "%{$request->filter}%");
-                $query->orWhere('title', $request->filter);
+                $query->orWhere('nome', 'LIKE', "%{$request->filter}%");
+                $query->orWhere('whatssap', $request->filter);
             }
         })
             ->latest()

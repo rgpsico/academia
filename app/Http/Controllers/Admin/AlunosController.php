@@ -202,8 +202,6 @@ class AlunosController extends Controller
             ]);
         }
 
-
-
         return redirect()->route('alunos.index')->withErrors("O Aluno {$nome} não foi encontrado");
     }
 }

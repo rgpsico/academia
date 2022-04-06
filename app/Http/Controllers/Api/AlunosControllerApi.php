@@ -11,6 +11,7 @@ use App\Service\pagamentoService;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AlunosControllerApi extends Controller
 {
