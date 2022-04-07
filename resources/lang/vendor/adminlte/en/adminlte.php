@@ -15,7 +15,7 @@ return [
     'log_out'                     => 'Log Out',
     'toggle_navigation'           => 'Toggle navigation',
     'login_message'               => 'Faça login para iniciar sua sessão',
-    'register_message'            => 'Register a new membership',
+    'register_message'            => 'Registrar um novo usuário',
     'password_reset_message'      => 'Reset Password',
     'reset_password'              => 'Reset Password',
     'send_password_reset_link'    => 'Send Password Reset Link',
