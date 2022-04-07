@@ -36,7 +36,7 @@ class AlunosRepository
         END  AS statusPG 
             FROM alunos AS a 
             LEFT JOIN pagamento  AS p 
-            ON a.id = p.aluno_id 
+            ON a.id = p.aluno_id   WHERE a.deleted_at IS NULL
         ");
     }
 
@@ -56,7 +56,7 @@ class AlunosRepository
         
          AS statusPG, p.aluno_id, p.data_pagamento , p.data_fim   FROM alunos AS a 
         LEFT JOIN pagamento  AS p
-        ON a.id = p.aluno_id WHERE  a.nome = '{$field}' ");
+        ON a.id = p.aluno_id WHERE  a.nome LIKE '%{$field}%' ");
     }
 
 
@@ -70,7 +70,7 @@ class AlunosRepository
       END  AS statusPG     
           FROM alunos AS a 
           LEFT JOIN pagamento  AS p 
-          ON a.id = p.aluno_id  WHERE data_fim IS NULL OR  data_fim < CURDATE()
+          ON a.id = p.aluno_id  WHERE a.deleted_at IS NULL AND data_fim IS NULL OR  data_fim < CURDATE()
         ");
     }
 

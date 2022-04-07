@@ -7,6 +7,7 @@ use App\Http\Requests\AlunoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\categoria;
+use App\Repositories\ConfigRepository;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
 use Carbon\Carbon;
@@ -30,10 +31,15 @@ class AlunosController extends Controller
     {
         $alunos = $this->service->getAll(10);
 
+
+        $whatssapMessage = app(ConfigRepository::class)->config();
+
+
         $loggedId = intval(Auth::id());
 
         return view('admin.alunos.index', [
-            'alunos' => $alunos
+            'alunos' => $alunos,
+            'mensagem_whatssap' => $whatssapMessage
         ]);
     }
 
@@ -42,9 +48,10 @@ class AlunosController extends Controller
         $alunos = $this->service->emdia();
         $loggedId = intval(Auth::id());
 
-
+        $whatssapMessage = app(ConfigRepository::class)->config();
         return view('admin.alunos.index', [
-            'alunos' => $alunos
+            'alunos' => $alunos,
+
 
 
         ]);
@@ -54,10 +61,11 @@ class AlunosController extends Controller
     {
         $alunos = $this->service->inadiplentes();
         $loggedId = intval(Auth::id());
-
+        $whatssapMessage = app(ConfigRepository::class)->config();
 
         return view('admin.alunos.index', [
-            'alunos' => $alunos
+            'alunos' => $alunos,
+            'mensagem_whatssap' => $whatssapMessage
 
 
         ]);
@@ -106,6 +114,8 @@ class AlunosController extends Controller
         $dataNow = $dataAtual->toDateTimeString();
 
         $data = $request->all();
+
+        $data['whatssap'] = str_replace(' ', '', $data['whatssap']);
 
         // Define o valor default para a variável que contém o nome da imagem 
         $nameFile = null;
@@ -166,6 +176,7 @@ class AlunosController extends Controller
         }
 
         $data = $request->all();
+        $data['whatssap'] = str_replace(' ', '', $data['whatssap']);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $data['avatar'] = $request->file('image')->store('alunos');
@@ -184,6 +195,7 @@ class AlunosController extends Controller
      */
     public function destroy($id)
     {
+
         $alunos = $this->service->findById($id);
         $alunos->delete();
         return redirect()->route('alunos.index')->withSuccess("Excluido Com Successo");

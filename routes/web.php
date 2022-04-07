@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 
 use App\Http\Controllers\Admin\AlunosController;
 use App\Http\Controllers\Admin\PagamentoController;
+use App\Http\Controllers\Admin\ConfigController;
 
 Route::prefix('painel')->group(function () {
 
@@ -23,6 +24,8 @@ Route::prefix('painel')->group(function () {
     Route::get('alunos/search', [AlunosController::class, 'search'])->name('alunos.search');
     Route::resource('alunos', AlunosController::class);
 
+    Route::get('config/', [ConfigController::class, 'show'])->name('config.edit');
+    Route::put('config/update', [ConfigController::class, 'update'])->name('config.update');
     Route::resource('pagamento', PagamentoController::class);
     Route::get('inadiplentes', [AlunosController::class, 'inadiplentes']);
     Route::get('emdia', [AlunosController::class, 'emdia']);

@@ -15,6 +15,7 @@ class pagamento extends Migration
             $table->date('data_pagamento');
             $table->date('data_fim');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')

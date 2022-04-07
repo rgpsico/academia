@@ -266,7 +266,7 @@ return [
         ],
         [
             'text'        => 'Configurações sistema',
-            'url'         => 'painel/users',
+            'url'         => 'painel/config',
             'icon'        => 'far fa-fw fa-file'
         ],
 

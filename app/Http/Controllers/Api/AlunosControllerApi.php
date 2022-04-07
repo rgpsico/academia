@@ -129,6 +129,7 @@ class AlunosControllerApi extends Controller
             // Verifica se NÃO deu certo o upload (Redireciona de volta)
 
             $data['avatar'] = $nameFile;
+            $data['whatssap'] = str_replace($data['whatssap'], ' ', '');
             $criarArtigo = $this->service->create($data);
 
             return redirect()
@@ -170,6 +171,9 @@ class AlunosControllerApi extends Controller
         }
 
         $data = $request->all();
+        $data['whatssap'] = str_replace($data['whatssap'], ' ', '');
+
+
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $data['avatar'] = $request->file('image')->store('alunos');

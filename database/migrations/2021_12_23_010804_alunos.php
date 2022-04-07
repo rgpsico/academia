@@ -20,6 +20,7 @@ class alunos extends Migration
             $table->string('status', 10)->nullable();;
             $table->string('instagran', 200)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
