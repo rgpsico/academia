@@ -48,7 +48,7 @@
                                 <span class="fa-li">
                                     <i class="fas fa-lg fa-phone">
                                 </i>
-                                </span>   <a href="https://wa.me/55{{$aluno->whatssap}}?text=Ola {{$aluno->nome}}{{$mensagem_whatssap->mensagem}}"   target="_blank" class="btn btn-sm">{{$aluno->whatssap}}</a>
+                                </span>   <a href="https://wa.me/55{{$aluno->whatssap}}?text=Ola {{$aluno->nome}}{{dd($mensagem_whatssap->mensagem)}}"   target="_blank" class="btn btn-sm">{{$aluno->whatssap}}</a>
                             </li>
                         </ul>
                     </div>
