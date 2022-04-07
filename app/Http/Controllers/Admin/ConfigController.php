@@ -19,7 +19,7 @@ class ConfigController extends Controller
 
         $config = $this->configRepository->config();
 
-        return view('admin.config.edit', [
+        return view('Admin.config.edit', [
             'config' => $config
         ]);
     }
