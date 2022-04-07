@@ -48,7 +48,7 @@ class AlunosController extends Controller
         $alunos = $this->service->emdia();
         $loggedId = intval(Auth::id());
 
-        $whatssapMessage = app(ConfigRepository::class)->config();
+
         return view('admin.alunos.index', [
             'alunos' => $alunos,
 

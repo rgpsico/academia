@@ -48,7 +48,7 @@
                                 <span class="fa-li">
                                     <i class="fas fa-lg fa-phone">
                                 </i>
-                                </span>   <a href="https://wa.me/55{{$aluno->whatssap}}?text=Ola {{$aluno->nome}}{{$mensagem_whatssap->mensagem ?? false}}"   target="_blank" class="btn btn-sm">{{$aluno->whatssap}}</a>
+                                </span>   <a href="https://wa.me/55{{$aluno->whatssap}}?text=Ola {{$aluno->nome}}{{$mensagem_whatssap->mensagem}}"   target="_blank" class="btn btn-sm">{{$aluno->whatssap}}</a>
                             </li>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
 
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="https://wa.me/55{{$aluno->whatssap}}?text=Ola {{$aluno->nome}}{{$mensagem_whatssap->mensagem ?? false}}"  target="_blank"  class="btn btn-sm bg-teal">
+                    <a href="https://wa.me/55{{$aluno->whatssap}}?text=Ola {{$aluno->nome}}{{$mensagem_whatssap->mensagem}}"  target="_blank"  class="btn btn-sm bg-teal">
                     <i class="fas fa-comments"> Enviar mensagem</i>
                     </a>
                     <a href="{{route('alunos.show',['aluno'=> $aluno->id])}}" class="btn btn-sm btn-primary">
