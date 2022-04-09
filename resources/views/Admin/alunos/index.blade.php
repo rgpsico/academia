@@ -33,8 +33,7 @@
     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
         <div class="card bg-light d-flex flex-fill">
             <div class="card-header text-muted border-bottom-0">     
-                  
-               {!!$aluno->statusPG === "Em dia" ? "<b class='btn btn-success'>Mês Pago</b>" : "<b class='btn btn-danger'>Está devendo</b>"!!}
+                    {!!$aluno->statusPG === "Em dia" ? "<b class='btn btn-success'>Mês Pago</b>" : "<b class='btn btn-danger'>Está devendo</b>"!!}
             </div>
             
             <div class="card-body pt-0">
