@@ -26,7 +26,7 @@
                         <ul class="ml-4 mb-0 fa-ul text-muted">
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Endereço: </li>
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefone: {{CelAjuste($alunos->whatssap)}}</li>
-                            <li class="text-danger my-5 bg-danger ">Data Vencimentos: {{date('d/m/Y', strtotime($ultimoPagamento)) === '31/12/1969' ? 'Não Pagou ainda' :  date('d/m/Y', strtotime($ultimoPagamento))}}</li>
+                            <li class="text-danger my-5 bg-danger ">Data Vencimento: {{date('d/m/Y', strtotime($ultimoPagamento)) === '31/12/1969' ? 'Não Pagou ainda' :  date('d/m/Y', strtotime($ultimoPagamento))}}</li>
                         </ul>
                     </div>
                     
