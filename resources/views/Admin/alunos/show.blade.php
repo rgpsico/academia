@@ -24,8 +24,8 @@
                         <h2 class="lead"><b>{{$alunos->nome}}</b></h2>
                         <p class="text-muted text-sm"><b>Sobre: </b> </p>
                         <ul class="ml-4 mb-0 fa-ul text-muted">
-                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Endereço: Rua sant roman 200</li>
-                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefone: {{$alunos->whatssap}}</li>
+                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Endereço: </li>
+                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefone: {{CelAjuste($alunos->whatssap)}}</li>
                             <li class="text-danger my-5 bg-danger ">Data Vencimento: {{date('d/m/Y', strtotime($ultimoPagamento)) === '31/12/1969' ? 'Não Pagou ainda' :  date('d/m/Y', strtotime($ultimoPagamento))}}</li>
                         </ul>
                     </div>
@@ -40,7 +40,7 @@
 
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="https://wa.me/{{$alunos['whatssap']}}?text=Mensagemn"    class="btn btn-sm bg-teal">
+                    <a href="https://wa.me/{{CelAjuste($alunos['whatssap'])}}?text=Mensagemn"    class="btn btn-sm bg-teal">
                     <i class="fas fa-comments"> Enviar Mensagem</i>
                     </a>
                     <a href="{{route('pagamento.create',['aluno'=> $alunos->id])}}" class="btn btn-sm btn-success">
