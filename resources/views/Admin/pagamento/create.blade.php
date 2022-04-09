@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-group row">       
-                <label for="nome" class="col-sm-2 col-form-label">Data de inicios:</label>
+                <label for="nome" class="col-sm-2 col-form-label">Data de inicio:</label>
                     <div class="col-sm-10">
                         <input type="date"   required name="data_inicio" class="form-control @error('data_inicio') is-invalid @enderror" id="data_inicio"  value="">
                     </div>
