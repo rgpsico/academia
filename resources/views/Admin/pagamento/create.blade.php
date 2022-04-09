@@ -47,7 +47,7 @@
             <div class="form-group row">       
                 <label for="nome" class="col-sm-2 col-form-label">Data do Pagamento:</label>
                     <div class="col-sm-10">
-                        <input type="date"   disabled name="data_pagamento" class="form-control @error('data_pagamento') is-invalid @enderror id="data_pagamento"  value="<?= date('Y-m-d');?>">
+                        <input type="date"    name="data_pagamento" class="form-control @error('data_pagamento') is-invalid @enderror id="data_pagamento"  value="<?= date('Y-m-d');?>">
                     </div>
             </div>
 
