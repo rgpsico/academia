@@ -21,12 +21,14 @@ Route::prefix('painel')->group(function () {
     Route::post('logout', [loginController::class, 'logout'])->name('logout');
 
     Route::resource('users', UserController::class);
-    Route::get('alunos/search', [AlunosController::class, 'search'])->name('alunos.search');
-    Route::resource('alunos', AlunosController::class);
+
 
     Route::get('config/', [ConfigController::class, 'show'])->name('config.edit');
     Route::put('config/update', [ConfigController::class, 'update'])->name('config.update');
     Route::resource('pagamento', PagamentoController::class);
     Route::get('inadiplentes', [AlunosController::class, 'inadiplentes']);
     Route::get('emdia', [AlunosController::class, 'emdia']);
+
+    Route::get('alunos/search', [AlunosController::class, 'search'])->name('alunos.search');
+    Route::resource('alunos', AlunosController::class);
 });
