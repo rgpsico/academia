@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AlunosController;
 use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\ConfigController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::prefix('painel')->group(function () {
 
@@ -31,4 +32,10 @@ Route::prefix('painel')->group(function () {
 
     Route::get('alunos/search', [AlunosController::class, 'search'])->name('alunos.search');
     Route::resource('alunos', AlunosController::class);
+});
+
+
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
 });
