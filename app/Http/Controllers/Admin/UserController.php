@@ -28,7 +28,7 @@ class UserController extends Controller
         $loggedId = intval(Auth::id());
 
 
-        return view('admin.users.index', [
+        return view('Admin.users.index', [
             'users' => $users,
             'loggedId' => $loggedId
         ]);
