@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-7">
                         <h2 class="lead"><b>{{$aluno->nome}}</b></h2>
-                        <p class="text-muted text-sm"><b>Sobre:</b></p>
+                        <p class="text-muted text-sm"><b>Sobre2:</b></p>
                         <ul class="ml-4 mb-0 fa-ul text-muted">                  
                             <li class="small">
                                 <span class="fa-li">
