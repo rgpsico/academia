@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1></h1>
-        @include('admin.includes.alert')
+        @include('Admin.includes.alert')
 @endsection
 
 @section('content')
