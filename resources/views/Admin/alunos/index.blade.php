@@ -25,7 +25,7 @@
   <br>
   <br>
 
-@include('admin.includes.alert')
+@include('Admin.includes.alert')
 
 <div class="row">
  

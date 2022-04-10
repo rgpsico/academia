@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-@include('admin.includes.alert')
+@include('Admin.includes.alert')
 
 @if($errors->any())
 <div class="alert alert-danger">
