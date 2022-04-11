@@ -46,10 +46,12 @@
                     <a href="{{route('pagamento.create',['aluno'=> $alunos->id])}}" class="btn btn-sm btn-success">
                     <i class="fas fa-credit-card"></i> Realizar pagamentos
                     </a>
-
-                    <a href="{{route('alunos.destroy',['aluno'=> $alunos->id])}}" class="btn btn-sm btn-danger">
-                        <i class="fas fa-trash"></i> Excluir Alunos
-                        </a>
+                        <form action="{{ route('alunos.destroy', $alunos->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger my-2">
+                                <i class="fas fa-trash"></i> Excluir o Aluno {{ $alunos->nome }}</button>
+                        </form>
                 </div>
             </div>
 
