@@ -142,8 +142,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-    const urlApi =  'http://127.0.0.1:8000/api'
-    const url =  'http://127.0.0.1:8000/'
+    const urlApi =  'https://sistem.academiaextremeapocalipse.com.br/api'
+    const url =  'https://sistem.academiaextremeapocalipse.com.br/'
 
     function makeDELETErequest(id) {
         $.ajax({

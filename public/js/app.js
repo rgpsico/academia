@@ -2288,7 +2288,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var default_layout = "default";
 var variables = {
-  API_URL: "http://127.0.0.1:8000/api/",
+  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
   PHOTO_URL: "https://www.iconspng.com/images/"
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2384,7 +2384,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var variables = {
-  API_URL: "http://127.0.0.1:8000/api/",
+  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
   PHOTO_URL: "https://www.iconspng.com/images/"
 };
 var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
@@ -2406,7 +2406,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
 /***/ (() => {
 
 var variables = {
-  API_URL: "http://127.0.0.1:8000/api/",
+  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
   PHOTO_URL: "https://www.iconspng.com/images/"
 };
 
@@ -2921,7 +2921,7 @@ var render = function () {
                     _c("img", {
                       staticClass: "img-circle img-fluid",
                       attrs: {
-                        src: "http://127.0.0.1:8000/storage/" + item.avatar,
+                        src: "https://sistem.academiaextremeapocalipse.com.br/storage/" + item.avatar,
                         alt: "user-avatar",
                       },
                     }),
@@ -3122,7 +3122,7 @@ var render = function () {
                     _c("img", {
                       staticClass: "img-circle img-fluid",
                       attrs: {
-                        src: "http://127.0.0.1:8000/storage/" + item.avatar,
+                        src: "https://sistem.academiaextremeapocalipse.com.br/storage/" + item.avatar,
                         alt: "user-avatar",
                       },
                     }),

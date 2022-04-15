@@ -117,7 +117,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   
 <script>
-     const urlApi =  'http://127.0.0.1:8000/api'
+     const urlApi =  'https://sistem.academiaextremeapocalipse.com.br/api'
 
     $('.bt-habilitar').click(function(event){
         event.preventDefault();

@@ -8,7 +8,7 @@ import Devedores from './components/Devedores.vue'
 import config from './config/config.js'
 
 const variables = {    
-    API_URL:"http://127.0.0.1:8000/api/",
+    API_URL:"https://sistem.academiaextremeapocalipse.com.br/api/",
     PHOTO_URL:"https://www.iconspng.com/images/"
 }
 
