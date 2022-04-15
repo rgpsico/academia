@@ -28,7 +28,7 @@ class UserController extends Controller
         $loggedId = intval(Auth::id());
 
 
-        return view('Admin.users.index', [
+        return view('admin.users.index', [
             'users' => $users,
             'loggedId' => $loggedId
         ]);
@@ -84,7 +84,7 @@ class UserController extends Controller
         $users->email = $data['email'];
         $users->password = Hash::make($data['password']);
 
-        $users->cover =  $nameFile;
+        // $users->cover =  $nameFile;
         $users->save();
 
         return redirect()->route('users.index');

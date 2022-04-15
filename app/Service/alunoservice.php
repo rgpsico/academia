@@ -13,10 +13,6 @@ class alunoservice
         $this->repository = $AlunosRepository;
     }
 
-    public function listAll()
-    {
-        return $this->repository->listAll();
-    }
 
     public function inadiplentes()
     {
@@ -29,7 +25,7 @@ class alunoservice
         return $this->repository->emdia();
     }
 
-    public function getAll($qtd, $paginate = false)
+    public function paginate($qtd, $paginate = false)
     {
         return $this->repository->paginate($qtd, $paginate);
     }

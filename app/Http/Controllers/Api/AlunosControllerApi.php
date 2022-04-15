@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlunoRequest;
+use App\Http\Resources\AlunosResponse;
 use App\Models\Alunos;
+use App\Repositories\AlunosRepository;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AlunosControllerApi extends Controller
@@ -19,52 +22,34 @@ class AlunosControllerApi extends Controller
     private $pagamentoService;
     private $repository;
 
-    public function __construct(alunoservice $alunoservice, pagamentoService $pagamento)
+    public function __construct(AlunosRepository $AlunosRepository, pagamentoService $pagamento)
     {
         $this->pagamentoService = $pagamento;
-        $this->service = $alunoservice;
+        $this->AlunosRepository = $AlunosRepository;
         // $this->middleware('auth');
     }
 
     public function index()
     {
 
-        $alunos = Alunos::orderBy('nome')
-            ->where('status', 'false')
-            ->with('pagamento')
-            ->get()->map(function ($aluno) {
-                return $this->format($aluno);
-            });
+        $alunos = $this->AlunosRepository->paginate();
 
         $loggedId = intval(Auth::id());
 
-        return response($alunos, 200);
+        return AlunosResponse::collection($alunos);
     }
 
-    public function format($aluno)
-    {
-        return [
-            'id' => $aluno->id,
-            'nome' => $aluno->nome,
-            'pagamento' => $aluno->pagamento
 
-        ];
-    }
 
     public function show($id)
     {
         $loggedId = intval(Auth::id());
-        $alunos = $this->service->findById($id);
+        $alunos = $this->AlunosRepository->findById($id);
 
         $pagamentos = $this->pagamentoService->getByAlunoId($id);
 
         $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
-
-        return view('admin.alunos.show', [
-            'alunos' => $alunos,
-            'pagamentoStatus' =>  $pagamentoStatus
-
-        ]);
+        return  new AlunosResponse($alunos);
     }
 
     public function inadiplentes()
@@ -192,8 +177,25 @@ class AlunosControllerApi extends Controller
      */
     public function destroy($id)
     {
-        $alunos = $this->service->findById($id);
-        $alunos->delete();
-        return redirect()->route('alunos.index')->withSuccess("Excluido Com Successo");
+
+        if ($alunos = $this->AlunosRepository->findById($id)) {
+            $alunos->delete();
+            return response()->json(["data" => "Excluido Com successo"], 202);
+        }
+
+        return response()->json(["data" => "Aluno não encontrado"], 404);
+    }
+
+    public function search($name)
+    {
+        $alunos = DB::table('alunos')
+            ->whereExists(function ($query) use ($name) {
+                $query->select(DB::raw('*'))
+                    ->from('pagamento')
+                    ->whereColumn('pagamento.aluno_id', 'alunos.id')
+                    ->where('alunos.nome', 'LIKE', '%' . $name . '%');
+            })
+            ->get();
+        return   AlunosResponse::collection($alunos);
     }
 }

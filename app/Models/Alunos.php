@@ -13,12 +13,12 @@ class Alunos extends Model
     protected $fillable = ['nome', 'whatssap', 'status', 'instagran', 'avatar'];
     public $timestamps = false;
 
-
+    protected $dates = ['deleted_at'];
 
 
 
     public function pagamento()
     {
-        return $this->hasMany(Pagamento::class, 'aluno_id');
+        return $this->hasMany(Pagamento::class, 'aluno_id')->orderBy('data_fim', 'DESC');
     }
 }

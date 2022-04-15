@@ -94,7 +94,7 @@ class PagamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $data = $request->only('user_id', 'aluno_id', 'data_pagamento', 'data_inicio');
 
         if ($pagamento = $this->pagamentoService->getById($id)) {
             $data['data_fim']  = date('Y-m-d', strtotime($data['data_inicio'] . '+ 30 days'));

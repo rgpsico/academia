@@ -20,43 +20,30 @@ class AlunosRepository
         return $this->model::create($data);
     }
 
-    public function listAll()
-    {
-        return $this->model::paginate(10);
-    }
-
 
     public function paginate()
     {
-        return DB::select("SELECT  DISTINCT  a.* , 
-        CASE
-            WHEN data_pagamento = NULL THEN 'Nunca foi pago'
-            WHEN data_fim > CURDATE() THEN 'Em dia'
-            ELSE 'Está devendo'
-        END  AS statusPG 
-            FROM alunos AS a 
-            LEFT JOIN pagamento  AS p 
-            ON a.id = p.aluno_id   WHERE a.deleted_at IS NULL
-        ");
+        return $this->model::with('pagamento')->orderBy('id', 'DESC')->paginate();
     }
 
     public function findByID($id)
     {
-        return $this->model::find($id);
+
+        return $this->model::with('pagamento')->find($id);
     }
 
     public function byField($field)
     {
-        return $alunos = DB::select("SELECT a.* , 
+        $alunos = DB::select("SELECT DISTINCT a.* , 
         CASE
             WHEN data_pagamento = NULL THEN 'Nunca foi pago'
             WHEN data_fim > CURDATE() THEN 'Em dia'
             ELSE 'Está devendo'
-        END
-        
-         AS statusPG, p.aluno_id, p.data_pagamento , p.data_fim   FROM alunos AS a 
+        END AS statusPG, 
+            p.aluno_id, p.data_pagamento , p.data_fim FROM alunos AS a
         LEFT JOIN pagamento  AS p
-        ON a.id = p.aluno_id WHERE  a.nome LIKE '%{$field}%' ");
+        ON a.id = p.aluno_id WHERE a.nome LIKE '%{$field}%' AND a.deleted_at is null AND p.deleted_at is NULL");
+        return $alunos;
     }
 
 
@@ -77,16 +64,7 @@ class AlunosRepository
 
     public function emdia()
     {
-        return DB::select("SELECT  DISTINCT  a.*,
-        CASE
-          WHEN data_pagamento IS NULL THEN 'Nunca foi pago'
-          WHEN data_pagamento < data_fim THEN 'Em dia'
-          ELSE 'Está atrasado' 
-      END  AS statusPG     
-          FROM alunos AS a 
-          LEFT JOIN pagamento  AS p 
-          ON a.id = p.aluno_id  WHERE data_fim > CURDATE()
-        ");
+        return $this->model::with('pagamento')->where('status', 'false')->paginate();
     }
 
     public function delete($id)

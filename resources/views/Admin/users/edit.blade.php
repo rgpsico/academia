@@ -44,7 +44,7 @@
             <div class="form-group row">            
                     <label for="nome" class="col-sm-2 col-form-label">Nova Senha</label>
                         <div class="col-sm-10">
-                            <input type="text"  name="password" class="form-control @error('password') is-invalid @enderror" id="password" >
+                            <input type="password"  name="password" class="form-control @error('password') is-invalid @enderror" id="password" >
                     </div>
             </div>
 
@@ -52,7 +52,7 @@
         <div class="form-group row">         
                 <label for="nome" class="col-sm-2 col-form-label">Confirmação da nova senha</label>
                     <div class="col-sm-10">
-                        <input type="text"  name="password_confirmation" class="form-control" id="password_confirmation" >
+                        <input type="password"  name="password_confirmation" class="form-control" id="password_confirmation" >
                     </div>
          </div>
 

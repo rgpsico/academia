@@ -30,9 +30,20 @@ class pagamentoService
         return $this->repository::where('aluno_id', $id)->get();
     }
 
+    public function emdia()
+    {
+        return $this->repository::with('alunos')->where('data_fim', '<', 'CURDATE()')->paginate(10);
+    }
+
+
+    public function inadiplentes()
+    {
+        return $this->repository::with('alunos')->where('data_fim', '<', 'CURDATE()')->paginate();
+    }
+
     public function getById($id)
     {
-        return  $this->repository->find($id);
+        return  $this->repository::with('alunos')->find($id);
     }
 
     public function getFinalDate($id)

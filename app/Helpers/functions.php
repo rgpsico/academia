@@ -14,3 +14,12 @@ function CelAjuste($cel)
     $cel = str_replace("(", "", $cel);
     return  $cel;
 }
+
+
+
+if (!function_exists('cdn')) {
+    function cdn($asset)
+    {
+        return asset($asset);
+    }
+}

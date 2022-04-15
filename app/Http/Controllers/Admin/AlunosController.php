@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlunoRequest;
+use App\Http\Resources\AlunosResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\categoria;
+use App\Repositories\AlunosRepository;
 use App\Repositories\ConfigRepository;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
@@ -20,20 +22,19 @@ class AlunosController extends Controller
     private $pagamentoService;
     private $repository;
 
-    public function __construct(alunoservice $alunoservice, pagamentoService $pagamento)
+    public function __construct(AlunosRepository $AlunosRepository, pagamentoService $pagamento)
     {
         $this->pagamentoService = $pagamento;
-        $this->service = $alunoservice;
+        $this->service = $AlunosRepository;
         $this->middleware('auth');
     }
 
     public function index()
     {
-        $alunos = $this->service->getAll(10);
+        $alunos = $this->service->paginate();
 
 
         $whatssapMessage = app(ConfigRepository::class)->config();
-
 
         $loggedId = intval(Auth::id());
 
@@ -45,25 +46,23 @@ class AlunosController extends Controller
 
     public function emdia()
     {
-        $alunos = $this->service->emdia();
+        $alunos =  $this->pagamentoService->emdia();
+
         $loggedId = intval(Auth::id());
 
-
-        return view('admin.alunos.index', [
+        return view('admin.alunos.emdia', [
             'alunos' => $alunos,
-
-
-
         ]);
     }
 
     public function inadiplentes()
     {
-        $alunos = $this->service->inadiplentes();
+        $alunos = $this->pagamentoService->inadiplentes();
+
         $loggedId = intval(Auth::id());
         $whatssapMessage = app(ConfigRepository::class)->config();
 
-        return view('admin.alunos.index', [
+        return view('admin.alunos.inadiplentes', [
             'alunos' => $alunos,
             'mensagem_whatssap' => $whatssapMessage
 
@@ -203,10 +202,12 @@ class AlunosController extends Controller
 
     public function search(Request $request)
     {
+
         $nome = $request->nome;
 
         if ($alunos = $this->service->ByField($nome)) {
             $id = $alunos->id ?? false;
+
             $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
             return view('admin.alunos.index', [
                 'alunos' => $alunos,

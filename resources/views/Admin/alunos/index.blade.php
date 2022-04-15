@@ -30,10 +30,15 @@
 <div class="row">
  
     @foreach($alunos as $aluno)
+   
     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
         <div class="card bg-light d-flex flex-fill">
-            <div class="card-header text-muted border-bottom-0">     
-                    {!!$aluno->statusPG === "Em dia" ? "<b class='btn btn-success'>Mês Pago</b>" : "<b class='btn btn-danger'>Está devendo</b>"!!}
+            <div class="card-header text-muted border-bottom-0"> 
+                   @php $status = $aluno->pagamento[0]->status ?? false  @endphp
+                   @php if(isset($aluno->statusPG )){
+                       $status = $aluno->statusPG;
+                   }  @endphp
+                    {!! $status === "Em dia" ? "<b class='btn btn-success'>Mês Pago</b>" : "<b class='btn btn-danger'>Está devendo</b>"!!}
             </div>
             
             <div class="card-body pt-0">
@@ -41,7 +46,7 @@
                 <div class="row">
                     <div class="col-7">
                         <h2 class="lead"><b>{{$aluno->nome}}</b></h2>
-                        <p class="text-muted text-sm"><b>Sobre:</b></p>
+                        <p class="text-muted text-sm"><b>{{$aluno->pagamento[0]->status ?? false}}</b></p>
                         <ul class="ml-4 mb-0 fa-ul text-muted">                  
                             <li class="small">
                                 <span class="fa-li">

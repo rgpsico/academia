@@ -34,6 +34,11 @@ class PagamentoRepository
         return $this->model::paginate(10);
     }
 
+    public function emdia()
+    {
+        return $this->model::with('alunos')->where('data_fim', '<', 'CURDATE()')->paginate(10);
+    }
+
     public function inadiplentes()
     {
         return $this->model::all();

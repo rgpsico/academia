@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-
-
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Pagamento extends Model
 {
@@ -27,18 +27,19 @@ class Pagamento extends Model
     //     return date('d/m/Y', strtotime($value));
     // }
 
-    public function pagamentoStatus($id)
+    public function getStatusAttribute()
     {
-        // $dataDeVencimento    = $this->getFinalDate($id);
+        $value = $this->data_fim;
 
-        // $res = $this->repository->where('data_fim', '>=', DB::raw('CURDATE()'))->count();
-        $res = 'teste';
-        return $res;
+
+        $hoje = date('Y-m-d');
+        $data_fim = Carbon::createFromFormat('Y-m-d', $value ?? '2022-01-01');
+        return    $data_fim->gt($hoje) ? 'Em dia' : 'devendo';
     }
 
     public function alunos()
     {
-        return $this->belongsTo(alunos::class, 'id', 'aluno_id');
+        return $this->belongsTo(alunos::class, 'aluno_id', 'id')->orderBy('nome');
     }
 
     public function admin()
