@@ -35,7 +35,7 @@
 
               <div class="col-5 text-center">
                 <img
-                  :src="'https://sistem.academiaextremeapocalipse.com.br/storage/' + item.avatar"
+                  :src="$url_image + item.avatar"
                   alt="user-avatar"
                   class="img-circle img-fluid"
                 />
@@ -73,10 +73,7 @@
 <script>
 import axios from "axios";
 const default_layout = "default";
-const variables = {
-  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
-  PHOTO_URL: "https://www.iconspng.com/images/",
-};
+
 export default {
   computed: {},
   data() {
@@ -90,7 +87,7 @@ export default {
       return data.split(" ")[0];
     },
     refreshData() {
-      axios.get("https://sistem.academiaextremeapocalipse.com.br/api/alunos").then((response) => {        
+      axios.get(this.$url_api+"alunos").then((response) => {        
          let Emdia =  response.data.data.filter(item => item.statusPG !== 'Em dia')
        this.alunos = Emdia
      

@@ -5,14 +5,14 @@ import Vue from 'vue'
 import formsearch from './components/FormSearch.vue'
 import Emdia from './components/Emdia.vue'
 import Devedores from './components/Devedores.vue'
-import config from './config/config.js'
 
-const variables = {    
-    API_URL:"https://sistem.academiaextremeapocalipse.com.br/api/",
-    PHOTO_URL:"https://www.iconspng.com/images/"
-}
+
+Vue.prototype.$url_api = 'http://127.0.0.1:8000/api/'
+Vue.prototype.$url_base = 'http://127.0.0.1:8000/'
+Vue.prototype.$url_image = 'http://127.0.0.1:8000/storage/'
+
 
 const app = new Vue({
     el: '#app',
-    components:{ Emdia,Devedores, formsearch, config}
+    components:{ Emdia,Devedores, formsearch}
 });

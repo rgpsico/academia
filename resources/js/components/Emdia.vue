@@ -53,7 +53,7 @@
 
               <div class="col-5 text-center">
                 <img
-                  :src="'https://sistem.academiaextremeapocalipse.com.br/storage/' + item.avatar"
+                  :src="'http://127.0.0.1:8000/storage/' + item.avatar"
                   alt="user-avatar"
                   class="img-circle img-fluid"
                 />
@@ -92,15 +92,11 @@
 import axios from "axios";
 
 const default_layout = "default";
-const variables = {
-  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
-  PHOTO_URL: "https://www.iconspng.com/images/",
-};
+
 export default {
   computed: {},
   data() {
     return {
-      message: "hello word",
       alunos: this.refreshData(),
       alunoName:this.alunoName
     };
@@ -109,9 +105,8 @@ export default {
     convertDate(data) {
       return data.split(" ")[0];
     },
-    refreshData() {
-      console.log()
-      axios.get(variables.API_URL+"alunos").then((response) => {
+    refreshData() {    
+     axios.get(this.$url_api+"alunos").then((response) => {
         let Emdia = response.data.data.filter(
           (item) => item.statusPG === "Em dia"
         );
@@ -120,7 +115,7 @@ export default {
     },
     search($event) {
       if($event.currentTarget.value.length >= 3){
-    axios.get(variables.API_URL+"alunos").then((response) => {
+    axios.get(this.$url_api+"alunos").then((response) => {
         let alunos = response.data.data;
         let Emdia = alunos.find(alunos => alunos.startsWith( "r" )  );    
         this.alunos = Emdia;    

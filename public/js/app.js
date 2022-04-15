@@ -2141,10 +2141,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 var default_layout = "default";
-var variables = {
-  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
-  PHOTO_URL: "https://www.iconspng.com/images/"
-};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {},
   data: function data() {
@@ -2160,7 +2156,7 @@ var variables = {
     refreshData: function refreshData() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/alunos").then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos").then(function (response) {
         var Emdia = response.data.data.filter(function (item) {
           return item.statusPG !== 'Em dia';
         });
@@ -2287,15 +2283,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 var default_layout = "default";
-var variables = {
-  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
-  PHOTO_URL: "https://www.iconspng.com/images/"
-};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {},
   data: function data() {
     return {
-      message: "hello word",
       alunos: this.refreshData(),
       alunoName: this.alunoName
     };
@@ -2307,8 +2298,7 @@ var variables = {
     refreshData: function refreshData() {
       var _this = this;
 
-      console.log();
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get(variables.API_URL + "alunos").then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos").then(function (response) {
         var Emdia = response.data.data.filter(function (item) {
           return item.statusPG === "Em dia";
         });
@@ -2319,7 +2309,7 @@ var variables = {
       var _this2 = this;
 
       if ($event.currentTarget.value.length >= 3) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get(variables.API_URL + "alunos").then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos").then(function (response) {
           var alunos = response.data.data;
           var Emdia = alunos.find(function (alunos) {
             return alunos.startsWith("r");
@@ -2372,43 +2362,25 @@ var variables = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_FormSearch_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/FormSearch.vue */ "./resources/js/components/FormSearch.vue");
 /* harmony import */ var _components_Emdia_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Emdia.vue */ "./resources/js/components/Emdia.vue");
 /* harmony import */ var _components_Devedores_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Devedores.vue */ "./resources/js/components/Devedores.vue");
-/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./config/config.js */ "./resources/js/config/config.js");
-/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config_config_js__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
-
-var variables = {
-  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
-  PHOTO_URL: "https://www.iconspng.com/images/"
-};
-var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_api = 'http://127.0.0.1:8000/api/';
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_base = 'http://127.0.0.1:8000/';
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_image = 'http://127.0.0.1:8000/storage/';
+var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   el: '#app',
   components: {
     Emdia: _components_Emdia_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Devedores: _components_Devedores_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    formsearch: _components_FormSearch_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    config: (_config_config_js__WEBPACK_IMPORTED_MODULE_3___default())
+    formsearch: _components_FormSearch_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
-
-/***/ }),
-
-/***/ "./resources/js/config/config.js":
-/*!***************************************!*\
-  !*** ./resources/js/config/config.js ***!
-  \***************************************/
-/***/ (() => {
-
-var variables = {
-  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
-  PHOTO_URL: "https://www.iconspng.com/images/"
-};
 
 /***/ }),
 
@@ -2921,7 +2893,7 @@ var render = function () {
                     _c("img", {
                       staticClass: "img-circle img-fluid",
                       attrs: {
-                        src: "https://sistem.academiaextremeapocalipse.com.br/storage/" + item.avatar,
+                        src: _vm.$url_image + item.avatar,
                         alt: "user-avatar",
                       },
                     }),
@@ -3122,7 +3094,7 @@ var render = function () {
                     _c("img", {
                       staticClass: "img-circle img-fluid",
                       attrs: {
-                        src: "https://sistem.academiaextremeapocalipse.com.br/storage/" + item.avatar,
+                        src: "http://127.0.0.1:8000/storage/" + item.avatar,
                         alt: "user-avatar",
                       },
                     }),
