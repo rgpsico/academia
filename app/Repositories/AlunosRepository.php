@@ -23,7 +23,7 @@ class AlunosRepository
 
     public function paginate()
     {
-        return $this->model::with('pagamento')->orderBy('id', 'DESC')->paginate();
+        return $this->model::with('pagamento')->orderBy('id', 'DESC')->all();
     }
 
     public function findByID($id)
