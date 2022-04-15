@@ -28,7 +28,7 @@ class UserController extends Controller
         $loggedId = intval(Auth::id());
 
 
-        return view('admin.users.index', [
+        return view('Admin.users.index', [
             'users' => $users,
             'loggedId' => $loggedId
         ]);
@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('Admin.users.create');
     }
 
     /**
@@ -100,7 +100,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user) {
-            return view('admin.users.edit', [
+            return view('Admin.users.edit', [
                 'user' => $user
             ]);
         }
@@ -117,7 +117,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user) {
-            return view('admin.users.edit', [
+            return view('Admin.users.edit', [
                 'user' => $user
             ]);
         }
