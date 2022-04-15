@@ -53,7 +53,7 @@
 
               <div class="col-5 text-center">
                 <img
-                  :src="url_image+ item.avatar"
+                  :src="$url_image+ item.avatar"
                   alt="user-avatar"
                   class="img-circle img-fluid"
                 />
