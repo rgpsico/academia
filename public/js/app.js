@@ -2142,7 +2142,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var default_layout = "default";
 var variables = {
-  API_URL: "http://127.0.0.1:8000/api/",
+  API_URL: "https://sistem.academiaextremeapocalipse.com.br/api/",
   PHOTO_URL: "https://www.iconspng.com/images/"
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({

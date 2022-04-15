@@ -62,7 +62,7 @@ class AlunosController extends Controller
         $loggedId = intval(Auth::id());
         $whatssapMessage = app(ConfigRepository::class)->config();
 
-        return view('Admin.alunos.inadiplentes', [
+        return view('admin.alunos.inadiplentes', [
             'alunos' => $alunos,
             'mensagem_whatssap' => $whatssapMessage
 
@@ -80,7 +80,7 @@ class AlunosController extends Controller
         $pagamentoStatus = $this->pagamentoService->pagamentoStatus($id);
 
 
-        return view('Admin.alunos.show', [
+        return view('admin.alunos.show', [
             'alunos' => $alunos,
             'pagamentos' =>  $pagamentos,
             'ultimoPagamento' => $ultimoPagamento,
@@ -98,7 +98,7 @@ class AlunosController extends Controller
     public function create()
     {
 
-        return view('Admin.alunos.create');
+        return view('admin.alunos.create');
     }
 
     /**
@@ -152,7 +152,7 @@ class AlunosController extends Controller
     {
         $aluno = $this->service->findById($id);
         if ($aluno) {
-            return view('Admin.alunos.edit', [
+            return view('admin.alunos.edit', [
                 'aluno' => $aluno
             ]);
         }
