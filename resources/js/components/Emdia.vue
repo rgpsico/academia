@@ -53,7 +53,7 @@
 
               <div class="col-5 text-center">
                 <img
-                  :src="'http://127.0.0.1:8000/storage/' + item.avatar"
+                  :src="url_image+ item.avatar"
                   alt="user-avatar"
                   class="img-circle img-fluid"
                 />
