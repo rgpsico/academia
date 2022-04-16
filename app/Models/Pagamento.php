@@ -30,11 +30,9 @@ class Pagamento extends Model
     public function getStatusAttribute()
     {
         $value = $this->data_fim;
-
-
-        $hoje = date('Y-m-d');
+        $hoje =  Carbon::now();
         $data_fim = Carbon::createFromFormat('Y-m-d', $value ?? '2022-01-01');
-        return    $data_fim->gt($hoje) ? 'Em dia' : 'devendo';
+        return $data_fim->gt($hoje) ? 'Em dia' : 'devendo';
     }
 
     public function alunos()
