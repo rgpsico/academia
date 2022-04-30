@@ -98,7 +98,12 @@ class AlunosController extends Controller
     public function create()
     {
 
-        return view('admin.alunos.create');
+        return view(
+            'admin.alunos.create',
+            [
+                'submit_bottom' => 'Cadastrar'
+            ]
+        );
     }
 
     /**
