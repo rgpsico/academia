@@ -1,0 +1,1 @@
+const urlApi = 'https://sistem.academiaextremeapocalipse.com.br/api'

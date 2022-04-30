@@ -26,7 +26,7 @@ class AlunosControllerApi extends Controller
     {
         $this->pagamentoService = $pagamento;
         $this->AlunosRepository = $AlunosRepository;
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()

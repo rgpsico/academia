@@ -2370,9 +2370,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_api = 'https://sistem.academiaextremeapocalipse.com.br/api/';
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_base = 'https://sistem.academiaextremeapocalipse.com.br/';
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_image = 'https://sistem.academiaextremeapocalipse.com.br/storage/';
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_api = 'http://127.0.0.1:8000/api/';
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_base = 'http://127.0.0.1:8000/painel/';
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].prototype.$url_image = 'http://127.0.0.1:8000/painel/storage/';
 var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   el: '#app',
   components: {
@@ -3094,7 +3094,7 @@ var render = function () {
                     _c("img", {
                       staticClass: "img-circle img-fluid",
                       attrs: {
-                        src: "http://127.0.0.1:8000/storage/" + item.avatar,
+                        src: _vm.$url_image + item.avatar,
                         alt: "user-avatar",
                       },
                     }),

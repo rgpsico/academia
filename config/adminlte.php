@@ -224,52 +224,69 @@ return [
     */
 
     'menu' => [
-        // [
-        //     'text'        => 'Relatorios',
-        //     'icon'        => 'area-chart',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Meses',
-        //             'url' => 'painel/relatorio/mensal',
-        //             'icon' => 'line-chart'
-        //         ],
-        //     ]
-
-        // ],
-
-        ['header' => 'Alunos'],
         [
-            'text'        => 'Todos os Alunos',
-            'url'         => 'painel/alunos',
-            'icon'        => 'far fa-fw fa-file'
+            'text'        => 'Dashboard',
+            'icon'        => 'nav-icon fas fa-th',
+            'submenu' => [
+                [
+                    'text'        => 'Todos os relatórios',
+                    'url'         => 'painel/dashboard',
+                    'icon'        => 'fa-solid fa-chart-line'
+
+                ]
+
+            ]
+
+        ],
+        [
+            'text'        => 'Alunos',
+            'icon'        => 'fa-solid fa-person-running',
+            'submenu' => [
+                [
+                    'text'        => 'Todos os Alunos',
+                    'url'         => 'painel/alunos',
+                    'icon'        => 'far fa-fw fa-file'
+
+                ],
+
+                [
+                    'text'        => 'Alunos inadiplentes',
+                    'url'         => 'painel/inadiplentes',
+                    'icon'        => 'far fa-fw fa-file'
+
+                ],
+
+                [
+                    'text'        => 'Alunos Em Dia',
+                    'url'         => 'painel/emdia',
+                    'icon'        => 'far fa-fw fa-file'
+
+                ],
+            ]
 
         ],
 
-        [
-            'text'        => 'Alunos inadiplentes',
-            'url'         => 'painel/inadiplentes',
-            'icon'        => 'far fa-fw fa-file'
 
-        ],
+
+
 
         [
-            'text'        => 'Alunos Em Dia',
-            'url'         => 'painel/emdia',
-            'icon'        => 'far fa-fw fa-file'
+            'text'        => 'Admin',
+            'icon'        => 'fa-solid fa-users',
+            'submenu' => [
+                [
+                    'text'        => 'Usuários do sistema',
+                    'url'         => 'painel/users',
+                    'icon'        => 'far fa-fw fa-file'
+                ],
+                [
+                    'text'        => 'Configurações sistema',
+                    'url'         => 'painel/config',
+                    'icon'        => 'far fa-fw fa-file'
+                ],
+            ]
 
         ],
-        ['header' => 'Admin'],
-        [
-            'text'        => 'Usuários do sistema',
-            'url'         => 'painel/users',
-            'icon'        => 'far fa-fw fa-file'
-        ],
-        [
-            'text'        => 'Configurações sistema',
-            'url'         => 'painel/config',
-            'icon'        => 'far fa-fw fa-file'
-        ],
-
 
 
         // ['header' => 'Conteudo'],
@@ -427,6 +444,21 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'Pace' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js',
                 ],
             ],
         ],
