@@ -24,8 +24,8 @@
 </form>
   <br>
   <br>
-
-@include('Admin.includes.alert')
+ 
+  <x-alert type="error" class="mt-4"/>
 
 <div class="row">
  

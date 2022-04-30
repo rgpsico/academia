@@ -97,7 +97,6 @@ class AlunosController extends Controller
      */
     public function create()
     {
-
         return view(
             'admin.alunos.create',
             [
@@ -114,19 +113,11 @@ class AlunosController extends Controller
      */
     public function store(AlunoRequest $request)
     {
-        $dataAtual = Carbon::now();
-        $dataNow = $dataAtual->toDateTimeString();
-
         $data = $request->all();
 
         $data['whatssap'] = str_replace(' ', '', $data['whatssap']);
 
-        // Define o valor default para a variável que contém o nome da imagem 
-        $nameFile = null;
-
-        // Verifica se informou o arquivo e se é válido
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-
 
             $name = uniqid(date('HisYmd'));
 
@@ -138,11 +129,11 @@ class AlunosController extends Controller
 
             $data['avatar'] = $upload;
 
-            $criarArtigo = $this->service->create($data);
+            $save = $this->service->create($data);
 
             return redirect()
-                ->route('alunos.index')
-                ->withSuccess("O Aluno {$data['nome']} foi Cadastrado com Successo");
+                ->route('alunos.search', ['nome' => $save->nome])
+                ->withSuccess("O Aluno {$save->nome} foi Cadastrado com Successo");
         }
     }
 

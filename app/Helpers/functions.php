@@ -7,7 +7,6 @@ function formatDateAndTime($value, $format = 'd/m/Y')
 
 function CelAjuste($cel)
 {
-
     $cel = trim($cel);
     $cel = str_replace("-", "", $cel);
     $cel = str_replace(")", "", $cel);

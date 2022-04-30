@@ -8,11 +8,13 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AlunosController;
 use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\ConfigController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Artisan;
+
 
 Route::prefix('painel')->group(function () {
 
-
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('login');
     Route::get('login', [LoginController::class, 'index'])->name('login');
     Route::post('login', [LoginController::class, 'authenticate']);
 
