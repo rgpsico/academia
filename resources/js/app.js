@@ -7,9 +7,9 @@ import Emdia from './components/Emdia.vue'
 import Devedores from './components/Devedores.vue'
 
 
-Vue.prototype.$url_api = 'http://127.0.0.1:8000/api/'
-Vue.prototype.$url_base = 'http://127.0.0.1:8000/painel/'
-Vue.prototype.$url_image = 'http://127.0.0.1:8000/painel/storage/'
+Vue.prototype.$url_api = 'https://sistem.academiaextremeapocalipse.com.br/api/'
+Vue.prototype.$url_base = 'https://sistem.academiaextremeapocalipse.com.br/painel/'
+Vue.prototype.$url_image = 'https://sistem.academiaextremeapocalipse.com.br/painel/storage/'
 
 
 const app = new Vue({
