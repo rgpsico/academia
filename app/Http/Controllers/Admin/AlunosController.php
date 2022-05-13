@@ -12,12 +12,14 @@ use App\Repositories\AlunosRepository;
 use App\Repositories\ConfigRepository;
 use App\Service\alunoservice;
 use App\Service\pagamentoService;
+use App\Traits\UploadTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AlunosController extends Controller
 {
+    use UploadTrait;
     private $service;
     private $pagamentoService;
     private $repository;
@@ -114,18 +116,10 @@ class AlunosController extends Controller
     public function store(AlunoRequest $request)
     {
         $data = $request->all();
-
         $data['whatssap'] = str_replace(' ', '', $data['whatssap']);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-
-            $name = uniqid(date('HisYmd'));
-
-            $extension = $request->image->extension();
-
-            $nameFile = "{$name}.{$extension}";
-
-            $upload = $request->file('image')->store('alunos');
+            $upload = $this->upload($request->image, 'alunos');
 
             $data['avatar'] = $upload;
 
@@ -136,6 +130,7 @@ class AlunosController extends Controller
                 ->withSuccess("O Aluno {$save->nome} foi Cadastrado com Successo");
         }
     }
+
 
 
     /**
