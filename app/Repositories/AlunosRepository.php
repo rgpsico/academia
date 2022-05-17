@@ -40,9 +40,12 @@ class AlunosRepository
             WHEN data_fim > CURDATE() THEN 'Em dia'
             ELSE 'Está devendo'
         END AS statusPG, 
-            p.aluno_id, p.data_pagamento , p.data_fim FROM alunos AS a
+            p.aluno_id, p.data_pagamento , p.data_fim 
+        FROM alunos AS a
         LEFT JOIN pagamento  AS p
-        ON a.id = p.aluno_id WHERE a.nome LIKE '%{$field}%' AND a.deleted_at is null AND p.deleted_at is NULL");
+        ON a.id = p.aluno_id WHERE a.nome LIKE '%{$field}%' 
+        AND a.deleted_at is null 
+        AND p.deleted_at is NULL   order by p.data_pagamento DESC  LIMIT 1");
         return $alunos;
     }
 

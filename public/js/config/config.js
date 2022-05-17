@@ -1,1 +1,1 @@
-const urlApi = 'https://sistem.academiaextremeapocalipse.com.br/api/'
+const urlApi = 'https://sistem.academiaextremeapocalipse.com.br/api'  
