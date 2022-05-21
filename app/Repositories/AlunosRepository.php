@@ -70,6 +70,11 @@ class AlunosRepository
         return $this->model::with('pagamento')->where('status', 'false')->paginate();
     }
 
+    public function orderBy()
+    {
+        return $this->model::orderBy('id', 'desc')->take(5)->get();
+    }
+
     public function delete($id)
     {
 

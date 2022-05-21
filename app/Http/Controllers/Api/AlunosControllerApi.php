@@ -39,6 +39,13 @@ class AlunosControllerApi extends Controller
         return AlunosResponse::collection($alunos);
     }
 
+    public function lastStudents()
+    {
+        $alunos = $this->AlunosRepository->orderBy();
+
+        return $alunos;
+    }
+
 
 
     public function show($id)
