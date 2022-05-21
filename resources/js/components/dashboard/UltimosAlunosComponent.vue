@@ -59,7 +59,7 @@ export default {
       return data.split(" ")[0];
     },
     ultimosAlunos() {
-      axios.get(this.$url_api + "alunos").then((response) => {
+      axios.get(this.$url_api + "alunos/laststudents").then((response) => {
         let alunos = response.data.data.filter(
           (item) => item.statusPG == "Em dia"
         );          
