@@ -47,8 +47,7 @@ export default {
   name: "UltimosAlunosComponent",
   computed: {},
   data() {
-    return {
-      message: "hello word",
+    return {    
       totalAlunos: this.ultimosAlunos(),
       numeroTotal: this.numeroTotal,
     };
