@@ -60,9 +60,7 @@ export default {
     },
     ultimosAlunos() {
       axios.get(this.$url_api + "alunos/laststudents").then((response) => {
-        let alunos = response.data.data.filter(
-          (item) => item.statusPG == "Em dia"
-        );          
+        let alunos = response.data.data;
 
         this.totalAlunos = this.limitarNumerosAlunos(0, 5, alunos).sort(
           (a, b) => {
