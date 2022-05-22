@@ -28,8 +28,7 @@
               height="128px"
             />
             <a class="users-list-name" href="#">{{ alunos.nome }}</a>
-            <span class="users-list-date">
-            </span>
+            <span class="users-list-date"> </span>
           </li>
         </ul>
       </div>
@@ -51,7 +50,7 @@ export default {
     return {
       message: "hello word",
       totalAlunos: this.ultimosAlunos(),
-      numeroTotal:this.numeroTotal ,
+      numeroTotal: this.numeroTotal,
     };
   },
   methods: {
@@ -60,33 +59,17 @@ export default {
     },
     ultimosAlunos() {
       axios.get(this.$url_api + "alunos/laststudents").then((response) => {
-        let alunos = response.data.data;
-
-        this.totalAlunos = this.limitarNumerosAlunos(0, 5, alunos).sort(
-          (a, b) => {
-            return a.id + b.id;
-          }
-        );
-        
-        this.numeroTotal =   this.totalAlunos.length;   
+        this.totalAlunos = response.data;    
       });
-
-     
     },
-
 
     limitarNumerosAlunos(de, ate, obj) {
       return obj.slice(de, ate);
     },
-  
-
   },
-
-
 
   mounted: function () {
     this.ultimosAlunos();
-    
   },
 };
 </script>

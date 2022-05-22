@@ -2706,7 +2706,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 var default_layout = "default";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2727,13 +2726,7 @@ var default_layout = "default";
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos/laststudents").then(function (response) {
-        var alunos = response.data.data.filter(function (item) {
-          return item.statusPG == "Em dia";
-        });
-        _this.totalAlunos = _this.limitarNumerosAlunos(0, 5, alunos).sort(function (a, b) {
-          return a.id + b.id;
-        });
-        _this.numeroTotal = _this.totalAlunos.length;
+        _this.totalAlunos = response.data;
       });
     },
     limitarNumerosAlunos: function limitarNumerosAlunos(de, ate, obj) {
