@@ -3830,7 +3830,7 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "info-box-number" }, [
-              _vm._v(_vm._s(this.novosAlunos)),
+              _vm._v(_vm._s(_vm.novosAlunos)),
             ]),
           ]),
         ]),

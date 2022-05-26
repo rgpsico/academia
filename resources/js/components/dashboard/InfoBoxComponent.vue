@@ -48,7 +48,7 @@
           ></span>
           <div class="info-box-content">
             <span class="info-box-text">Novos Alunos</span>
-            <span class="info-box-number">{{ this.novosAlunos }}</span>
+            <span class="info-box-number">{{ novosAlunos }}</span>
           </div>
         </div>
       </div>
@@ -66,7 +66,8 @@ export default {
       totalAlunos: this.getAlunosTotal(),
       AlunosEmDia: this.totalAlunosAtivos(),
       AlunosInativos: this.totalAlunosInativos(),
-      novosAlunos: this.getNovosAlunos(),
+      novosAlunos: this.getNovosAlunos()
+    
     };
   },
   methods: {
