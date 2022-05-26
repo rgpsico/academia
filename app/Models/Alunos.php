@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\DB;
 class Alunos extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['nome', 'whatssap', 'status', 'instagran', 'avatar', 'created_at'];
-    public $timestamps = false;
+    protected $fillable = ['nome', 'whatssap', 'status', 'instagran', 'avatar', 'created_at', 'updated_at'];
+    public $timestamps = true;
 
     protected $dates = ['deleted_at'];
 
