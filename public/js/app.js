@@ -2513,7 +2513,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos/laststudents").then(function (response) {
-        _this4.novosAlunos = response.data.data.length;
+        _this4.novosAlunos = response.data.length;
       });
     },
     imageUpload: function imageUpload(event) {

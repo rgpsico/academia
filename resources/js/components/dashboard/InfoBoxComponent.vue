@@ -96,8 +96,8 @@ export default {
       });
     },
     getNovosAlunos() {
-      axios.get(this.$url_api + "alunos/laststudents").then((response) => {
-        this.novosAlunos = response.data.data.length;
+      axios.get(this.$url_api + "alunos/laststudents").then((response) => {   
+        this.novosAlunos = response.data.length;       
       });
     },
 
