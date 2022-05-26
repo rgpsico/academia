@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class Pagamento extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['user_id', 'aluno_id', 'data_pagamento', 'data_inicio', 'data_fim'];
+    protected $fillable = ['user_id', 'aluno_id', 'data_pagamento', 'data_inicio', 'data_fim', 'created_at', 'updated_at'];
     protected $table = "pagamento";
 
 
