@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Alunos;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class AlunosRepository
@@ -72,7 +73,12 @@ class AlunosRepository
 
     public function orderBy()
     {
-        return $this->model::orderBy('id', 'desc')->take(5)->get();
+        $agora = Carbon::now();
+        $hoje = Carbon::today();
+        return  DB::table('alunos')
+            ->whereBetween('created_at', [$hoje, $agora->addDays(5)])
+            ->take(5)
+            ->get();
     }
 
     public function delete($id)

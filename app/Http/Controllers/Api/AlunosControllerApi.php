@@ -42,7 +42,6 @@ class AlunosControllerApi extends Controller
     public function lastStudents()
     {
         $alunos = $this->AlunosRepository->orderBy();
-
         return $alunos;
     }
 

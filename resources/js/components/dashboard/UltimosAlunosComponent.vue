@@ -34,7 +34,7 @@
       </div>
 
       <div class="card-footer text-center">
-        <a href="javascript:">Ver todos os Alunos</a>
+        <a href="/painel/alunos">Ver todos os Alunos</a>
       </div>
     </div>
   </div>
@@ -58,7 +58,8 @@ export default {
     },
     ultimosAlunos() {
       axios.get(this.$url_api + "alunos/laststudents").then((response) => {
-        this.totalAlunos = response.data;    
+        this.totalAlunos = response.data;  
+        this.numeroTotal = response.data.length  
       });
     },
 
