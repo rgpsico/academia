@@ -1,5 +1,5 @@
   <template>
-  <div class="col-md-6">
+  <div class="col-md-12 my-5">
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">UltimosAlunos</h3>
