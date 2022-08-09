@@ -2,9 +2,9 @@
         <div class="col-sm-3 col-6 bg-light">
             <div class="description-block border-right">
                 <span class="description-percentage text-success">
-                <i class="fas fa-caret-up"></i> 17%</span>
-                <h5 class="description-header">$35,210.43</h5>
-                <span class="description-text">TOTAL de Ativos</span>
+                <i class="fas fa-caret-up"></i>Alunos Ativos: {{ this.totalAlunos }}</span>
+                <h5 class="description-header"></h5>
+                <span class="description-text">Receita: R$ {{ this.totalMensalidade }}</span>
             </div>
 
         </div>
@@ -19,28 +19,27 @@ export default {
   computed: {},
   data() {
     return {    
-      totalAlunos: this.ultimosAlunos(),
-      numeroTotal: this.numeroTotal,
+      totalAlunos: '',
+      totalMensalidade: ''
+     
     };
   },
   methods: {
     convertDate(data) {
       return data.split(" ")[0];
     },
-    ultimosAlunos() {
-      axios.get(this.$url_api + "alunos/laststudents").then((response) => {
-        this.totalAlunos = response.data;  
-        this.numeroTotal = response.data.length  
+   totalAlunosAtivos() {
+      axios.get(this.$url_api + "alunos").then((response) => {
+        let Emdia = response.data.data.filter(
+          (item) => item.statusPG == "Em dia"
+        );
+        this.totalAlunos = Emdia.length  ;
+        this.totalMensalidade = Emdia.length * this.$valor_mensalidade ;
       });
     },
-
-    limitarNumerosAlunos(de, ate, obj) {
-      return obj.slice(de, ate);
-    },
   },
-
   mounted: function () {
-    this.ultimosAlunos();
+   this.totalAlunosAtivos() 
   },
 };
 </script>

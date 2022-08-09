@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard.vue'
 Vue.prototype.$url_api = 'https://sistem.academiaextremeapocalipse.com.br/api/'
 Vue.prototype.$url_base = 'https://sistem.academiaextremeapocalipse.com.br/painel/'
 Vue.prototype.$url_image = 'https://sistem.academiaextremeapocalipse.com.br/storage/'
-
+Vue.prototype.$valor_mensalidade =  70
 
 const app = new Vue({
     el: '#app',

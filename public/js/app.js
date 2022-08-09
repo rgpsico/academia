@@ -2667,28 +2667,28 @@ var default_layout = "default";
   computed: {},
   data: function data() {
     return {
-      totalAlunos: this.ultimosAlunos(),
-      numeroTotal: this.numeroTotal
+      totalAlunos: '',
+      totalMensalidade: ''
     };
   },
   methods: {
     convertDate: function convertDate(data) {
       return data.split(" ")[0];
     },
-    ultimosAlunos: function ultimosAlunos() {
+    totalAlunosAtivos: function totalAlunosAtivos() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos/laststudents").then(function (response) {
-        _this.totalAlunos = response.data;
-        _this.numeroTotal = response.data.length;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos").then(function (response) {
+        var Emdia = response.data.data.filter(function (item) {
+          return item.statusPG == "Em dia";
+        });
+        _this.totalAlunos = Emdia.length;
+        _this.totalMensalidade = Emdia.length * _this.$valor_mensalidade;
       });
-    },
-    limitarNumerosAlunos: function limitarNumerosAlunos(de, ate, obj) {
-      return obj.slice(de, ate);
     }
   },
   mounted: function mounted() {
-    this.ultimosAlunos();
+    this.totalAlunosAtivos();
   }
 });
 
@@ -2762,6 +2762,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$url_api = 'https://sistem.academiaextremeapocalipse.com.br/api/';
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$url_base = 'https://sistem.academiaextremeapocalipse.com.br/painel/';
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$url_image = 'https://sistem.academiaextremeapocalipse.com.br/storage/';
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$valor_mensalidade = 70;
 var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
   el: '#app',
   components: {
@@ -4283,29 +4284,22 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-3 col-6 bg-light" }, [
-      _c("div", { staticClass: "description-block border-right" }, [
-        _c("span", { staticClass: "description-percentage text-success" }, [
-          _c("i", { staticClass: "fas fa-caret-up" }),
-          _vm._v(" 17%"),
-        ]),
-        _vm._v(" "),
-        _c("h5", { staticClass: "description-header" }, [_vm._v("$35,210.43")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "description-text" }, [
-          _vm._v("TOTAL de Ativos"),
-        ]),
+  return _c("div", { staticClass: "col-sm-3 col-6 bg-light" }, [
+    _c("div", { staticClass: "description-block border-right" }, [
+      _c("span", { staticClass: "description-percentage text-success" }, [
+        _c("i", { staticClass: "fas fa-caret-up" }),
+        _vm._v("Alunos Ativos: " + _vm._s(this.totalAlunos)),
       ]),
-    ])
-  },
-]
+      _vm._v(" "),
+      _c("h5", { staticClass: "description-header" }),
+      _vm._v(" "),
+      _c("span", { staticClass: "description-text" }, [
+        _vm._v("Receita: R$ " + _vm._s(this.totalMensalidade)),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
