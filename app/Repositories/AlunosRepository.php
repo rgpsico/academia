@@ -65,7 +65,7 @@ class AlunosRepository
           WHEN data_pagamento = NULL THEN 'Nunca foi pago'
           WHEN data_pagamento < data_fim THEN 'Em dia'
           ELSE 'Está atrasado' 
-      END  AS statusPG     
+          END  AS statusPG     
           FROM alunos AS a 
           LEFT JOIN pagamento  AS p 
           ON a.id = p.aluno_id  WHERE a.deleted_at IS NULL AND data_fim IS NULL OR  data_fim < CURDATE()
@@ -80,7 +80,6 @@ class AlunosRepository
     public function orderBy()
     {
         $agora = $this->agora();
-
         $hoje = $this->hoje();
 
         return DB::table('alunos')
@@ -91,9 +90,7 @@ class AlunosRepository
 
     public function byDate($start, $end)
     {
-        return DB::table('alunos')
-            ->whereBetween('created_at', [$start, $end])
-            ->get();
+        return $this->model::with('pagamento')->orderBy('id', 'desc')->whereBetween('created_at', [$start, $end])->get();
     }
 
     public function delete($id)

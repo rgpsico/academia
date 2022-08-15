@@ -17,7 +17,7 @@ class AlunosFactory extends Factory
             'nome' => $this->faker->name(),
             'whatssap' => $this->faker->name(),
             'instagran' => $this->faker->name(), // password
-            'avatar' => $this->faker->name(),
+            'avatar' => $this->faker->imageUrl(200, 200, 'animals'),
         ];
     }
 }

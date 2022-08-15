@@ -54,15 +54,10 @@ export default {
        this.byData()
   
   },byData() {
-    //var filtrado = array.filter(function(obj) { return obj.marcar == 1; });
-      axios.get(this.$url_api+"alunos/byDate/"+this.data_start+"/"+this.data_end).then((response) => {     
-          this.numero_total_alunos = response.data.data.length;
-           this.numero_total_alunos_ativos = response.data.data.filter(function(obj) { return obj.statusPG == 'Em dia'; }).length;
-            this.numero_total_alunos_inativos = response.data.data.filter(function(obj) { return obj.statusPG == 'falso'; });
-          
-          document.querySelector(".numero-alunos").textContent= this.numero_total_alunos;
-           document.querySelector(".alunos-ativos").textContent=  this.numero_total_alunos_ativos ;
-           document.querySelector(".alunos-inativos").textContent= this.numero_total_alunos_inativos;
+         axios.get(this.$url_api+"alunos/byDate/"+this.data_start+"/"+this.data_end).then((response) => {  
+            console.log(response.data.data)   
+           this.numero_total_alunos = response.data.data.length;
+
       });
     },
   }

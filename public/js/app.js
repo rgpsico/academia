@@ -2753,18 +2753,9 @@ var default_layout = "FilterDatas";
     byData: function byData() {
       var _this = this;
 
-      //var filtrado = array.filter(function(obj) { return obj.marcar == 1; });
       axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.$url_api + "alunos/byDate/" + this.data_start + "/" + this.data_end).then(function (response) {
+        console.log(response.data.data);
         _this.numero_total_alunos = response.data.data.length;
-        _this.numero_total_alunos_ativos = response.data.data.filter(function (obj) {
-          return obj.statusPG == 'Em dia';
-        }).length;
-        _this.numero_total_alunos_inativos = response.data.data.filter(function (obj) {
-          return obj.statusPG == 'falso';
-        });
-        document.querySelector(".numero-alunos").textContent = _this.numero_total_alunos;
-        document.querySelector(".alunos-ativos").textContent = _this.numero_total_alunos_ativos;
-        document.querySelector(".alunos-inativos").textContent = _this.numero_total_alunos_inativos;
       });
     }
   }

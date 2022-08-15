@@ -7,13 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class AlunosResponse extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         $data_fim = Carbon::createFromFormat('Y-m-d', $this->pagamento[0]->data_fim ?? '2022-01-01');
