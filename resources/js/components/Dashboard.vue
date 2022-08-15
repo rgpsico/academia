@@ -1,21 +1,10 @@
 <template>
   <div>
-     <div class="row"> 
-        <selectMeses colmd='col-md-2' label='Data inicial'/> 
-        <selectMeses colmd='col-md-2' label='Data final'/> 
-        <selectMeses colmd='col-md-2' label='Ano'/> 
-        <InfoBoxComponent/> 
-    </div>
-
-    
-     
-    <div class="row"> 
-         <ValoresComponent/>   
-     </div>
-
-    <div class="row"> 
-        <UltimosAlunosComponent/>       
-     </div>
+         <FilterDatas/> 
+         <InfoBoxComponent/> 
+         <ValoresComponent/>     
+         <UltimosAlunosComponent/>       
+   
 
         
   </div>
@@ -29,6 +18,7 @@ import UltimosAlunosComponent from "./dashboard/UltimosAlunosComponent.vue";
 import InfoBoxComponent from "./dashboard/InfoBoxComponent.vue";
 import ValoresComponent from "./dashboard/ValoresComponent.vue";
 import selectMeses from "./formComponents/selectMeses.vue";
+import FilterDatas from "./formComponents/FilterDatas.vue";
 const default_layout = "default";
 
 export default {
@@ -37,7 +27,8 @@ export default {
     UltimosAlunosComponent,
     InfoBoxComponent,
     ValoresComponent,
-    selectMeses
+    selectMeses,
+    FilterDatas
 },
   computed: {},
  

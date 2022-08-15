@@ -1,11 +1,13 @@
-<template>   
-        <div class="col-sm-3 col-6 bg-light">
+<template>  
+        <div class="row">
+        <div class="col-sm-4 col-6 bg-light">
             <div class="description-block border-right">
                 <span class="description-percentage text-success">
                 <i class="fas fa-caret-up"></i>Alunos Ativos: {{ this.totalAlunos }}</span>
                 <h5 class="description-header"></h5>
                 <span class="description-text">Receita: R$ {{ this.totalMensalidade }}</span>
             </div>
+          </div>
 
         </div>
 </template>

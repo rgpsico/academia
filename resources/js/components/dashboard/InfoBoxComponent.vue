@@ -1,7 +1,7 @@
 <template>
-    <div>
+   
         <div class="row">
-      <div class="col-12 col-sm-6 col-md-3">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="info-box">
           <span class="info-box-icon bg-info elevation-1"
             ><i class="fas fa-users"></i></span>
@@ -16,32 +16,32 @@
 
 
       <div class="clearfix hidden-md-up"></div>
-      <div class="col-12 col-sm-6 col-md-3">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="info-box mb-3">
           <span class="info-box-icon bg-success elevation-1"
             ><i class="fas fa-users"></i
           ></span>
           <div class="info-box-content">
             <span class="info-box-text">Alunos Ativos</span>
-            <span class="info-box-number">{{ this.AlunosEmDia  }}</span>
+            <span class="info-box-number alunos-ativos">{{ this.AlunosEmDia  }}</span>
           </div>
         </div>
       </div>
 
       
-      <div class="col-12 col-sm-6 col-md-3">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="info-box mb-3">
           <span class="info-box-icon bg-danger elevation-1"
             ><i class="fas fa-users"></i
           ></span>
           <div class="info-box-content">
             <span class="info-box-text">Numero de alunos Inativos</span>
-            <span class="info-box-number"> {{ this.AlunosInativos }}</span>
+            <span class="info-box-number alunos-inativos"> {{ this.AlunosInativos }}</span>
           </div>
         </div>
       </div>
 
-      <div class="col-12 col-sm-6 col-md-3">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="info-box mb-3">
           <span class="info-box-icon bg-warning elevation-1"
             ><i class="fas fa-users"></i
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-    </div>
+  
 </template>
 <script>
 import axios from "axios";

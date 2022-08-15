@@ -7,6 +7,8 @@ import Emdia from './components/Emdia.vue'
 import Devedores from './components/Devedores.vue'
 import formsearch from './components/FormSearch.vue'
 import Dashboard from './components/Dashboard.vue'
+import FilterDatas from './components/formComponents/FilterDatas.vue'
+
 
 Vue.prototype.$url_api = 'https://sistem.academiaextremeapocalipse.com.br/api/'
 Vue.prototype.$url_base = 'https://sistem.academiaextremeapocalipse.com.br/painel/'
@@ -15,5 +17,5 @@ Vue.prototype.$valor_mensalidade =  70
 
 const app = new Vue({
     el: '#app',
-    components:{Emdia, Devedores, formsearch, Dashboard}
+    components:{Emdia, Devedores, formsearch, Dashboard, FilterDatas}
 });

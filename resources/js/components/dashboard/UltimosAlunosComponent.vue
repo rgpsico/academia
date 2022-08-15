@@ -2,7 +2,7 @@
   <div class="col-md-12 my-5">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">UltimosAlunos</h3>
+        <h3 class="card-title">ùltimos Alunos</h3>
         <div class="card-tools">
           <span class="badge badge-danger">{{ numeroTotal }} Alunos novos</span>
           <button

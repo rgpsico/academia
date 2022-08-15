@@ -3,18 +3,14 @@
 @section('title', 'Nova Pagina')
 
 @section('content_header')
-    <h1 class="color:#fff;">
-        Dash Board (BETA)
 
-    </h1>
     <br>
 @endsection
 
 @section('content')
 
  <div id="app">
-    <Dashboard>
-       
+    <Dashboard>       
     </Dashboard>
  </div>
 

@@ -2,42 +2,43 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\article;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     public function gmail(Request $request)
     {
         $maps = $this->DirectionApi('Barra da tijuca', 'copacabana');
+
         return view('admin.gmail', compact('maps'));
     }
 
     public function index(Request $request)
     {
+        return view('admin.teste');
     }
 
     public function home()
     {
         $alunos = article::paginate(10);
+
         return view('admin.home.index', ['home' => $alunos]);
     }
 
     public function create()
     {
         $categorias = article::all();
+
         return view('admin.home.create', ['categorias' => $categorias]);
     }
-
 
     public function store(Request $request)
     {
@@ -45,13 +46,13 @@ class HomeController extends Controller
             'title',
             'body',
             'image',
-            'categoria'
+            'categoria',
         ]);
 
         $validator = Validator::make($data, [
             'title' => ['required', 'string', 'max:100'],
             'body' => ['string'],
-            'categoria' => ['string', 'max:100']
+            'categoria' => ['string', 'max:100'],
         ]);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -66,21 +67,21 @@ class HomeController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $Page = new article;
-        $Page->title =  $data['title'];
+        $Page = new article();
+        $Page->title = $data['title'];
         $Page->body = $data['body'];
-        $Page->categoria  = $data['categoria'];
-        $Page->cover  = $nameFile;
+        $Page->categoria = $data['categoria'];
+        $Page->cover = $nameFile;
         $Page->save();
 
         return redirect()->route('alunos.index');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -88,23 +89,23 @@ class HomeController extends Controller
         $page = article::find($id);
         if ($page) {
             return view('admin.alunos.edit', [
-                'article' => $page
+                'article' => $page,
             ]);
         }
+
         return redirect()->route('alunos.index');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
     }
-
 
     public function destroy($id)
     {
@@ -114,17 +115,16 @@ class HomeController extends Controller
 
     public function DirectionApi(string $origins, string $destinations)
     {
-
         $tokenApi = 'AIzaSyA7qcQHcvwSSO496P_6cW0HNrnZut1Wu6Y';
         $url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
         $response = Http::get(
             $url,
             [
-                'origins'      => $origins,
+                'origins' => $origins,
                 'destinations' => $destinations,
-                'key'          => $tokenApi,
-                'random'       => random_int(1, 100),
+                'key' => $tokenApi,
+                'random' => random_int(1, 100),
             ],
         );
 

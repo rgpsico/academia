@@ -10,7 +10,6 @@ class AlunosRepository
 {
     private $model;
 
-
     public function __construct(Alunos $model)
     {
         $this->model = $model;
@@ -31,7 +30,6 @@ class AlunosRepository
         return $this->model::create($data);
     }
 
-
     public function paginate()
     {
         return $this->model::with('pagamento')->orderBy('nome', 'ASC')->get();
@@ -39,7 +37,6 @@ class AlunosRepository
 
     public function findByID($id)
     {
-
         return $this->model::with('pagamento')->find($id);
     }
 
@@ -57,9 +54,9 @@ class AlunosRepository
         ON a.id = p.aluno_id WHERE a.nome LIKE '%{$field}%' 
         AND a.deleted_at is null 
         AND p.deleted_at is NULL   order by p.data_pagamento DESC  LIMIT 1");
+
         return $alunos;
     }
-
 
     public function inadiplentes()
     {
@@ -75,13 +72,10 @@ class AlunosRepository
         ");
     }
 
-
     public function emdia()
     {
         return $this->model::with('pagamento')->where('status', 'false')->paginate();
     }
-
-
 
     public function orderBy()
     {
@@ -89,15 +83,21 @@ class AlunosRepository
 
         $hoje = $this->hoje();
 
-        return  DB::table('alunos')
+        return DB::table('alunos')
             ->whereBetween('created_at', [$hoje, $agora->addDays(5)])
             ->take(5)
             ->get();
     }
 
+    public function byDate($start, $end)
+    {
+        return DB::table('alunos')
+            ->whereBetween('created_at', [$start, $end])
+            ->get();
+    }
+
     public function delete($id)
     {
-
         return $this->model::delete($id);
     }
 
@@ -110,8 +110,6 @@ class AlunosRepository
     {
         return $update = $this->model::where('id', $aluno_id)->update(['id' => $aluno_id, 'status' => $status]);
     }
-
-
 
     public function search($request)
     {
