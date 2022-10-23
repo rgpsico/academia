@@ -17,7 +17,7 @@
 
 @section('content')
 
-
+<div id='draggable-el' data-event='{ "title": "my event", "duration": "02:00" }'>drag me</div>
 <div id="calendar">
 
 </div>
@@ -34,7 +34,12 @@
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
 
-        dateClick: function() {
+        dateClick: function(info) {
+            var date = calendar.getDate();
+           $('#data').val(info.dateStr)
+
+
+           info.dayEl.style.backgroundColor = 'red';
             $('.left').modal('show')
         }
       },
@@ -42,5 +47,8 @@
       );
       calendar.render();
     });
+
+
+
 
   </script>

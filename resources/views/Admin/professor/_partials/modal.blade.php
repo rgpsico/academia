@@ -19,26 +19,21 @@
 
 				<div class="modal-body">
 					<div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="">Dia</label>
-                                <input type="text" class='form-control'>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="">Dia</label>
-                                <input type="text" class='form-control'>
+                                <label for="">Titulo</label>
+                                <input type="text" class='form-control' id="title">
                             </div>
                         </div>
 
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="">Dia</label>
-                                <input type="text" class='form-control'>
+                                <label for="">Data</label>
+                                <input type="date" class='form-control' id="data">
                             </div>
                         </div>
+
+
                     </div>
 				</div>
 
