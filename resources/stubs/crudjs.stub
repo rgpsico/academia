@@ -1,0 +1,249 @@
+$(document).ready(()=>{
+    var btEvents = document.querySelector('#btEvents')
+    var companyTable = document.querySelector('#btEvents')
+    var fields  = document.querySelectorAll('#formularioId [name]');
+    var user = {};
+
+    const urlApi = '../api/{{modelName}}/'.toLowerCase();
+
+    $(document).on("click", '.Cadastrar{{modelName}}VerModal', function () {
+        $('.modal').modal('show')
+        $('.modal-title').text('Cadastrar {{modelName}}')
+        $('.botaoModal').removeClass('salvar{{modelName}}')
+        $('.botaoModal').addClass('Cadastrar{{modelName}}')
+        handleReset()
+    })
+
+
+    $(document).on("click", '#editar', function () {
+        $('#btEvents').addClass('salvar')
+        $('#btEvents').removeClass('cadastrar')
+        $('.modal').modal('show')
+        $('.modal-title').text('Editar {{modelName}}')
+        $('.botaoModal').addClass('salvar{{modelName}}')
+        $('.botaoModal').removeClass('Cadastrar{{modelName}}')
+
+        let data =  $(this).data('data')
+        let dataCount = Object.keys(data).length
+        const keys =  Object.keys(data)
+        const values = Object.values(data);
+
+       for(x = 0; x<=dataCount; x++) {
+            $('#'+keys[x]).val(values[x])
+       }
+
+    })
+
+
+document.querySelector('#formularioId').addEventListener('submit', function(e){
+    e.preventDefault()
+    formDate(fields)
+
+ })
+
+
+ function formDate(fields){
+
+    fields.forEach((field, i)=>{
+        if(field.name == 'gender'){
+            if(field.checked) {
+                user[field.name] = field.value;
+            }
+
+        } else {
+            user[field.name] = field.value;
+        }
+        cadastrar(user);
+    });
+
+
+}
+
+
+    $(document).on("click", '.salvar{{modelName}}', function () {
+        let params = new URLSearchParams();
+        params.append('store', true);
+        params.append('id',   $('#id').val());
+        params.append('name',   $('#name').val());
+        params.append('domain', $('#domain').val());
+
+
+        update{{modelName}}(params)
+    })
+
+    $(document).on("click", '#delete', function () {
+       let id =  $(this).data('id')
+       del{{modelName}}s(id)
+    })
+
+    $(document).on("click", '.modal-closer', function () {
+        $('.modal').modal('hide')
+    })
+    $(document).on("click", '.close', function () {
+        $('.modal').modal('hide')
+    });
+
+
+
+    function edit{{modelName}}(params){
+        Swal.fire({
+            title: 'Você deseja Excluir a {{modelName}} ?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Excluir'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire('Excluido com sucesso!', '', 'success')
+
+            } else if (result.isDenied) {
+              Swal.fire('Operação cancelado', '', 'info')
+            }
+          })
+    }
+
+
+    const cadastrar = (params) => {
+        axios({
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            url:urlApi+'store',
+            contentType: 'json',
+            data: params
+        }).then((response) => {
+
+            if(response.status === 200) {
+                Swal.fire('Cadastrado com sucesso!', '', 'success')
+                $('.modal').modal('hide')
+                getAll()
+                return;
+            } else{
+                Swal.fire('Não pode ser cadastrado!', '', 'info')
+            }
+        }).finally((response) => {
+
+        });
+
+    }
+
+
+    const update{{modelName}} = (params) => {
+        axios({
+            method: 'PUT',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            url: urlApi+'update',
+            contentType: 'json',
+            data: params
+        }).then((response) => {
+            if(response.status === 200) {
+                Swal.fire('Atualizado com sucesso!', '', 'success')
+                $('.modal').modal('hide')
+
+                return;
+            } else{
+                Swal.fire('Não pode ser Atualizado!', '', 'info')
+            }
+
+        }).finally((response) => {
+            getAll()
+        });
+
+    }
+
+    function del{{modelName}}s(id){
+        Swal.fire({
+            title: 'Você deseja Excluir a {{modelName}} ?',
+            showCancelButton: true,
+            confirmButtonText: 'Excluir'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire('Excluido com sucesso!', '', 'success')
+              fetch(urlApi+''+ id +'/destroy', { method: 'DELETE' })
+              .then(response => response.text())
+              .then(response => {
+                  getAll()
+              })
+
+            } else if (result.isDenied) {
+              Swal.fire('Operação cancelado', '', 'info')
+            }
+          })
+    }
+
+    var row{{modelName}}s = (data) => {
+        let dataCount = Object.keys(data).length
+        const keys =  Object.keys(data)
+        const values = Object.values(data);
+        var rowCount = $("#Table_id th").length;
+        var acaoField = $("#Table_id th").length - 1;
+
+        row = `<tr>`
+        for(a=1; a <= rowCount; a++){
+            row += `<td>${values[a] == undefined  ? '' : values[a]}</td>`
+
+            if(a == acaoField){
+                row += `<td><td class="table-action">
+                <a href="#" id="editar" data-data='${JSON.stringify(data)}'>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-edit-2 align-middle">
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
+
+                    <a href="#" id="delete" data-id='${data.id}'>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-trash align-middle">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                </path>
+                </svg>
+                </a></td>`
+            }
+
+
+        }
+        row += `</tr>`
+        $('.{{modelName}}Table').append(row)
+    }
+
+    const getAll = () => {
+        $('.{{modelName}}Table').empty()
+        fetch(urlApi)
+            .then(response => response.text())
+            .then(res => {
+                let data = JSON.parse(res)
+                for(x=0; x < data.length; x++){
+                    console.log(data)
+                    row{{modelName}}s(data[x])
+                }
+
+            })
+    }
+
+    handleReset = () => {
+        Array.from(document.querySelectorAll("input")).forEach(
+          input => (input.value = "")
+        );
+
+        }
+
+
+
+    getAll()
+})

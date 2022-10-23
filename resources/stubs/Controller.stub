@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Requests\{{modelName}}FormRequest;
+use App\Repositories\Contracts\{{modelName}}RepositoryInterface;
+use App\Http\Controllers\Controller;
+
+class {{modelName}}Controller extends Controller
+{
+
+    protected $repository;
+
+    public function __construct({{modelName}}RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function all()
+    {
+        ${{modelNameSingularLowerCase}} =  $this->repository->all();
+        return response()->json(${{modelNameSingularLowerCase}});
+    }
+
+    public function store({{modelName}}FormRequest $request)
+    {
+        ${{modelNameSingularLowerCase}} = $this->repository->store($request->all());
+
+        return response()->json(${{modelNameSingularLowerCase}}, 201);
+    }
+
+     public function show($id)
+    {
+        ${{modelNameSingularLowerCase}} = $this->repository->findById($id);
+
+        return response()->json(${{modelNameSingularLowerCase}});
+    }
+
+    public function update({{modelName}}FormRequest $request, $id)
+    {
+        ${{modelNameSingularLowerCase}} = $this->repository->findById($id);
+         $result = $this->repository->update($request->all(), $id);
+
+        return response()->json($result, 200);
+    }
+
+    public function destroy($id)
+    {
+        $this->repository->destroy($id);
+
+        return response()->json(null, 204);
+    }
+
+
+}

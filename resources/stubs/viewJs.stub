@@ -1,0 +1,75 @@
+@extends('layouts.admin.master')
+
+@section('in_tag_head')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+@endsection
+
+@section('content')
+
+        @include('layouts.admin.includes.alert')
+        @include('admin.pages.{{modelName}}._partials.modal')
+
+        <div class="col-12 col-xl-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Clientes</h5>
+                </div>
+                <table class="table" id="Table_id">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">id</th>
+                            <th style="width:20%;">Matrícula</th>
+                            <th style="width:20%;">Nome Fantasia</th>
+                            <th>Endereço</th>
+                            <th>Servidor</th>
+                            <th>Vencimento</th>
+                            <th>Status</th>
+                            <th>Usuário</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody class="{{modelName}}Table">
+
+                    </tbody>
+
+                </table>
+            </div>
+            <button class='btn btn-success Cadastrar{{modelName}}VerModal' id="btEvents">Cadastrar Nova Empresa</button>
+        </div>
+
+
+
+
+
+
+@endsection
+
+@push('scripts')
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"  crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/pages/{{modelName}}.js') }}" ></script>
+    <script>
+        // $(document).ready( function () {
+        //     $('.table').DataTable({
+        //         processing: true,
+        //         serveSide: true,
+        //         ajax: "table",
+        //         columns: [
+        //             {data:'id', name:'id'},
+        //             {data:'name', name:'name'},
+        //             {data:'domain', name:'domain'},
+        //         ]
+        //     });
+        // } );
+        // </script>
+
+    @endpush

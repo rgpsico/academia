@@ -1,0 +1,44 @@
+<?php 
+
+namespace App\Repositories\Core\Eloquent;
+use App\Repositories\Contracts\{{modelName}}RepositoryInterface;
+use App\Models\{{modelName}}; 
+
+class {{modelName}}Repository implements {{modelName}}RepositoryInterface 
+{ 
+
+    
+    public function all() 
+    { 
+          return ${{modelName}} = {{modelName}}::all();
+    } 
+
+    public function store($request) 
+    { 
+        ${{modelNameSingularLowerCase}} = {{modelName}}::create($request); 
+        return response()->json(${{modelNameSingularLowerCase}}, 201); 
+    } 
+
+    public function findById(${{modelName}}Id) 
+    {
+         return ${{modelName}} =  {{modelName}}::where('id', ${{modelName}}Id)->get(); 
+    }           
+         
+
+    public function  update($request, $id)
+    { 
+         if (!${{modelName}} = {{modelName}}::find($id)) {
+            return redirect()->back();
+        }
+
+        ${{modelName}}->update($request);
+        return response()->json(${{modelName}}, 200); 
+    } 
+
+    public function destroy(${{modelName}}Id) 
+    { 
+        ${{modelNameSingularLowerCase}} = {{modelName}}::where('id', ${{modelName}}Id)->delete();
+    }
+
+    
+}
