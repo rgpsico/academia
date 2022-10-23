@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\ProfessorController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,13 @@ Route::prefix('painel')->group(function () {
 
     Route::get('alunos/search', [AlunosController::class, 'search'])->name('alunos.search');
     Route::resource('alunos', AlunosController::class);
+
+    Route::get('agenda', [ProfessorController::class, 'agenda']);
+
+    Route::resource('professor', ProfessorController::class);
+
+
+
 });
 
 Route::get('/clear-cache', function () {

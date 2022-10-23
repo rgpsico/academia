@@ -21,9 +21,9 @@
     <div class="col-12 col-lg-1 col-sm-1 col-sm-12">
         <div class="form-group pb-2">
             <button class='btn btn-info my-4' @click="filter()" style="margin-top:10px;">Buscar</button>
-        </div>   
+        </div>
     </div>
-   
+
 </div>
 </template>
 
@@ -32,13 +32,13 @@ const default_layout = "FilterDatas";
 import axios from "axios";
 export default {
   name:'FilterDatas',
- 
+
   components:{
-   
+
 },
   computed: {
-    
-  },  
+
+  },
   data() {
     return {
       message: "hello word",
@@ -50,17 +50,17 @@ export default {
     };
   },
   methods:{
-    filter() {   
+    filter() {
        this.byData()
-  
+
   },byData() {
-         axios.get(this.$url_api+"alunos/byDate/"+this.data_start+"/"+this.data_end).then((response) => {  
-            console.log(response.data.data)   
+         axios.get(this.$url_api+"alunos/byDate/"+this.data_start+"/"+this.data_end).then((response) => {
+            console.log(response.data.data)
            this.numero_total_alunos = response.data.data.length;
 
       });
     },
   }
- 
+
 };
 </script>

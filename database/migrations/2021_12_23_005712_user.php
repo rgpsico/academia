@@ -21,13 +21,9 @@ class User extends Migration
             $table->string('password');
             $table->text('description')->nullable();
             $table->string('cel')->nullable();
-
             $table->string('estate')->nullable();
-
             $table->string('bairro')->nullable();
-
             $table->string('curriculum')->nullable();
-
             $table->integer('numeroProjetos')->nullable();
 
             $table->integer('anosExperiencia')->nullable();

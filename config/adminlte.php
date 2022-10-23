@@ -266,6 +266,22 @@ return [
 
         ],
 
+        [
+            'text'        => 'Professores',
+            'icon'        => 'fa-solid fa-person-running',
+            'submenu' => [
+                [
+                    'text'        => 'Todos os Professores',
+                    'url'         => 'painel/professor',
+                    'icon'        => 'far fa-fw fa-file'
+
+                ],
+
+            ]
+
+        ],
+
+
 
 
 
