@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class agenda extends Model
+class Agenda extends Model
 {
-    use HasFactory;
 
-    protected $fillable = ['user_id', 'aluno_id', 'data_inicio', 'data_fim', 'descricao'];
+    protected $table ='Agenda';
+    protected $fillable = ['user_id',
+    'aluno_id', 'data_inicio', 'data_fim','title', 'descricao'];
+    protected $guarded = ['id'];
+
 }

@@ -14,7 +14,7 @@ class AddFieldTitleEventoAgenda extends Migration
     public function up()
     {
         Schema::table('agenda', function (Blueprint $table) {
-            $table->integer('title')->nullable();
+            $table->string('title')->nullable();
         });
     }
 

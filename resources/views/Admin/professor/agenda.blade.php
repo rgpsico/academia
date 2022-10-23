@@ -50,13 +50,7 @@
 
         initialView: 'dayGridMonth',
         timeZone: 'UTC',
-        events: [
-            {
-                id: 'a',
-                title: 'my event',
-                start: '2022-10-01'
-            }
-        ],
+        events:'http://127.0.0.1:8000/api/agenda',
 
         dateClick: function(info) {
             var date = calendar.getDate();
