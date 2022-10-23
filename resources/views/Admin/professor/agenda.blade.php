@@ -32,12 +32,35 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+        left: 'prev, next today',
+        center: 'title',
+        right: 'dayGridMonth, timeGridWeek, timeGridDay'
+        },
+
+        buttonText: {
+                // next: '>',
+                // nextYear: '>>',
+                // prev: '<',
+                // prevYear: '<<',
+                today:'hoje',
+                timeGridWeek:'semana',
+                timeGridDay:'Dia'
+        },
+
         initialView: 'dayGridMonth',
+        timeZone: 'UTC',
+        events: [
+            {
+                id: 'a',
+                title: 'my event',
+                start: '2022-10-01'
+            }
+        ],
 
         dateClick: function(info) {
             var date = calendar.getDate();
            $('#data').val(info.dateStr)
-
 
            info.dayEl.style.backgroundColor = 'red';
             $('.left').modal('show')
