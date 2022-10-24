@@ -29,7 +29,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="">Data</label>
-                                <input type="date" class='form-control' id="data">
+                                <input type="date" class='form-control' id="data_inicio">
                             </div>
                         </div>
 
@@ -39,7 +39,7 @@
 
                 <div class="modal-footer ">
                     <button class='btn btn-success' class="close" data-dismiss="modal">Fechar</button>
-                    <button class='btn btn-success'>Cadastrar</button>
+                    <button class='btn btn-success' id="AgendarCadastro">Cadastrar</button>
                 </div>
 
 			</div><!-- modal-content -->

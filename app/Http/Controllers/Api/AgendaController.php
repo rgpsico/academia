@@ -20,7 +20,7 @@ class AgendaController extends Controller
     public function all()
     {
         $agenda =  $this->repository->all();
-        return AgendaResponse::collection($agenda);
+        return AgendaResponse::collection($agenda)->all();
     }
 
     public function store(AgendaFormRequest $request)
