@@ -52,8 +52,47 @@
            $('#data_inicio').val(info.dateStr)
         //info.dayEl.style.backgroundColor = 'red';
             $('.left').modal('show')
-        }
+        },
+        eventMouseover: function(event, jsEvent, view) {
+            if (view.name !== 'agendaDay') {
+                $(jsEvent.target).attr('title', event.title);
+            }
+        },
+        eventDestroy: function(event, element, view)
+        {
+            alert("removing stuff");
+        },
+        eventClick: function(calEvent, jsEvent, view)
+        {
+            var id = calEvent.event._def.publicId
+
+            swal({
+                title: "Voce deseja excluir",
+                text: "Voce deseja Excluir o evento ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                    url: '/api/agenda/'+id+'/delete',
+                    type: 'DELETE',
+                    success: function(result) {
+                        swal("Eita! Seu Evento foi deletado com sucesso", {
+                    icon: "success",
+                    });
+                    calendar.refetchEvents()
+                    }
+                });
+                } else {
+                    swal("Evento não foi excluido");
+                }
+                });
+
+        },
       },
+
 
       );
       calendar.render();
@@ -73,11 +112,7 @@
             swal("Agendado com sucesso");
             $('.modal').modal('hide')
 
-            calendar.addEvent({
-                title: $('#title').val(),
-                start: $('#data_inicio').val(),
-                end: $('#data_fim').val(),
-              });
+            calendar.refetchEvents()
 
         })
 

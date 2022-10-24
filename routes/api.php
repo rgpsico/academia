@@ -22,6 +22,8 @@ Route::get('/alunos/laststudents', [AlunosControllerApi::class, 'lastStudents'])
 
  Route::post('/agenda/store', [AgendaController::class, 'store']);
 
+ Route::delete('/agenda/{id}/delete', [AgendaController::class, 'destroy']);
+
 Route::get('/alunos/byDate/{start}/{end}', [AlunosControllerApi::class, 'byDate']);
 
 Route::post('/auth', [AuthController::class, 'auth']);

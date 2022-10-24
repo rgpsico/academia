@@ -47,7 +47,9 @@ class AgendaController extends Controller
 
     public function destroy($id)
     {
-        $this->repository->destroy($id);
+        if($this->repository->destroy($id)){
+            return response()->json(['content' => 'A '.$id.' foi excluida com sucesso', 'status' => 'success'], 200);
+        }
 
         return response()->json(null, 204);
     }
