@@ -41,6 +41,8 @@ Route::prefix('painel')->group(function () {
 
 
 
+
+
 });
 
 Route::get('/clear-cache', function () {

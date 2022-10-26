@@ -18,6 +18,39 @@
 @section('content')
 
 
+<div class="row">
+    <div class="search-professor col-3">
+        <div class="form-group">
+            <label for="professor">Professor</label>
+            <select name="" id="professor" class="form-control">
+                <option value="" selected>Selecione</option>
+                <option value="">Fabiane</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="search-professor col-3">
+        <div class="form-group">
+            <label for="professor">Atividade</label>
+            <select name="" id="atividade" class="form-control">
+                <option value="" selected>Selecione</option>
+                <option value="">Futebol</option>
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="search-professor col-3">
+        <div class="form-group">
+            <label for="professor">Local</label>
+            <select name="" id="atividade" class="form-control">
+                <option value="" selected>Selecione</option>
+                <option value="">Futebol</option>
+            </select>
+        </div>
+    </div>
+</div>
 <div id="calendar">
 
 </div>
@@ -125,3 +158,4 @@
 
 
   </script>
+

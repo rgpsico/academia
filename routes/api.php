@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\AlunosController;
 use App\Http\Controllers\Api\AgendaController;
 use App\Http\Controllers\Api\AlunosControllerApi;
+use App\Http\Controllers\Api\AtividadesControllerApi;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\LocalControllerApi;
 use App\Http\Controllers\Api\UserControllerApi;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +15,10 @@ Route::get('/alunos/laststudents', [AlunosControllerApi::class, 'lastStudents'])
 
 
  Route::resource('/alunos', AlunosControllerApi::class);
+
+ Route::resource('/atividades', AtividadesControllerApi::class);
+
+ Route::resource('/local', LocalControllerApi::class);
 
  Route::post('/alunoapi/store', [AlunosController::class, 'store']);
 
