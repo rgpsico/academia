@@ -12,7 +12,7 @@
 @endsection
 
 <!-- Modal -->
-@include('admin.professor._partials.modal')
+@include('Admin.professor._partials.modal')
 <!-- modal -->
 
 @section('content')
@@ -56,11 +56,13 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'pt-br',
         headerToolbar: {
             left: 'prev, next today',
             center: 'title',
             right: 'dayGridMonth, timeGridWeek, timeGridDay'
         },
+
         buttonText: {
                 today:'hoje',
                 month:'Mês',
