@@ -41,15 +41,6 @@
 
 
 
-    <div class="search-professor col-3">
-        <div class="form-group">
-            <label for="professor">Local</label>
-            <select name="" id="atividade" class="form-control">
-                <option value="" selected>Selecione</option>
-                <option value="">Futebol</option>
-            </select>
-        </div>
-    </div>
 </div>
 <div id="calendar">
 
@@ -78,7 +69,7 @@
         },
         initialView: 'dayGridMonth',
         timeZone: 'UTC',
-        events:'http://127.0.0.1:8000/api/agenda',
+        events:'/api/agenda',
 
         dateClick: function(info) {
         var date = calendar.getDate();
