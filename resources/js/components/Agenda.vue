@@ -2,8 +2,12 @@
 import '@fullcalendar/core/vdom' // solves problem with Vite
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import pt from "@fullcalendar/core/locales/pt-br";
 import axios from 'axios'
+
+
 
 export default {
   components: {
@@ -14,13 +18,21 @@ export default {
     data_agendamento: '',
     title: '',
     appointments: '',
-      calendarOptions: {
-        plugins: [ dayGridPlugin, interactionPlugin ],
-        initialView: 'dayGridMonth',
-          weekends: false, // initial value,
-          dateClick: this.handleDateClick,
 
+      calendarOptions: {
+        plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
+        headerToolbar: {
+        left: "title",
+        right: "today dayGridWeek dayGridMonth prev next",
+      },
+        initialView: 'dayGridMonth',
+          weekends: true, // initial value,
+          dateClick: this.handleDateClick,
+          calendarWeekends: true,
+          selectable:true,
+          locale: pt,
           events:'/api/agenda'
+
       }
     }
   }, methods: {
@@ -30,6 +42,9 @@ export default {
     handleDateClick: function(arg) {
         this.showModal()
         this.data_agendamento = arg.dateStr
+    },
+    eventClick: function (calEvent, jsEvent, view) {
+
     },
     showModal() {
         this.$refs['agendaModal'].show()
@@ -41,9 +56,6 @@ export default {
         // We pass the ID of the button that we want to return focus to
         // when the modal has hidden
         this.$refs['agendaModal'].toggle('#toggle-btn')
-      },
-      saveAppointment(){
-        alert('aquuu')
       },
       async getAppointment() {
       try {
@@ -83,14 +95,10 @@ export default {
 </script>
 <template>
 <div>
-    <b-button v-b-modal.modal-1>Agendar</b-button>
-
-
 
     <template>
   <div>
-    <b-button id="show-btn" @click="showModal">Open Modal</b-button>
-    <b-button id="toggle-btn" @click="toggleModal">Toggle Modal</b-button>
+
 
     <b-modal ref="agendaModal" hide-footer title="Using Component Methods">
       <div class="d-block text-left">
@@ -121,8 +129,7 @@ export default {
     </b-modal>
   </div>
 </template>
-  <FullCalendar :options="calendarOptions" />
-  <button @click="toggleWeekends">toggle weekends</button>
+<FullCalendar :options="calendarOptions" />
 
 </div>
 
