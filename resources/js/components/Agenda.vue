@@ -3,6 +3,7 @@ import '@fullcalendar/core/vdom' // solves problem with Vite
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import axios from 'axios'
 
 export default {
   components: {
@@ -10,33 +11,119 @@ export default {
   },
   data() {
     return {
+    data_agendamento: '',
+    title: '',
+    appointments: '',
       calendarOptions: {
         plugins: [ dayGridPlugin, interactionPlugin ],
         initialView: 'dayGridMonth',
-          weekends: false // initial value
+          weekends: false, // initial value,
+          dateClick: this.handleDateClick,
+
+          events:'/api/agenda'
       }
     }
   }, methods: {
     toggleWeekends: function() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // toggle the boolean!
     },
-    show: function(){
-        alert('aqui')
+    handleDateClick: function(arg) {
+        this.showModal()
+        this.data_agendamento = arg.dateStr
+    },
+    showModal() {
+        this.$refs['agendaModal'].show()
+      },
+      hideModal() {
+        this.$refs['agendaModal'].hide()
+      },
+      toggleModal() {
+        // We pass the ID of the button that we want to return focus to
+        // when the modal has hidden
+        this.$refs['agendaModal'].toggle('#toggle-btn')
+      },
+      saveAppointment(){
+        alert('aquuu')
+      },
+      async getAppointment() {
+      try {
+        const appointments = await axios.get(
+          "/api/agenda"
+        );
+
+        this.appointments = appointments.data;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+
+    async storeUser() {
+  try {
+    const apoointment = await axios.post(
+      "/api/agenda/store",
+      {
+        title: this.title,
+        data_inicio : this.data_agendamento,
+        user_id: 1,
+        aluno_id:1,
+        data_fim:this.data_agendamento
+      }
+    );
+
+    if(apoointment.status == 201){
+        this.getAppointment()
     }
+  } catch(e) {
+    console.log(e);
+  }
+},
   }
 
 }
 </script>
 <template>
 <div>
-    <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+    <b-button v-b-modal.modal-1>Agendar</b-button>
 
-  <b-modal id="modal-1" title="BootstrapVue">
-    <p class="my-4">Hello from modal!</p>
-  </b-modal>
+
+
+    <template>
+  <div>
+    <b-button id="show-btn" @click="showModal">Open Modal</b-button>
+    <b-button id="toggle-btn" @click="toggleModal">Toggle Modal</b-button>
+
+    <b-modal ref="agendaModal" hide-footer title="Using Component Methods">
+      <div class="d-block text-left">
+        <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="title" class="text-left" style="text-align: left;">Titulo</label>
+                                <input type="text" class='form-control' id="title" v-model="title">
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">Data</label>
+                                <input type="date" class='form-control' id="data_inicio" v-model="this.data_agendamento" >
+                            </div>
+                        </div>
+
+                    </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+            <b-button class="mt-2" variant="outline-danger" block @click="hideModal">Fechar</b-button>
+            <b-button class="mt-2" variant="outline-warning" block @click="storeUser">Salvar</b-button>
+        </div>
+
+     </div>
+    </b-modal>
+  </div>
+</template>
   <FullCalendar :options="calendarOptions" />
   <button @click="toggleWeekends">toggle weekends</button>
-  <button @click="show">TESTE</button>
+
 </div>
 
 </template>
