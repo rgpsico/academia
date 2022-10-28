@@ -10,7 +10,7 @@
 @section('content')
 
  <div id="app">
-    <Dashboard>       
+    <Dashboard>
     </Dashboard>
  </div>
 
