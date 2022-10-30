@@ -9,6 +9,7 @@ import axios from 'axios'
 
 
 
+
 export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
@@ -68,6 +69,9 @@ export default {
         console.log(e);
       }
     },
+    eventRender(info) {
+        alert('aaaa')
+        },
 
     async storeUser() {
   try {
@@ -129,7 +133,7 @@ export default {
     </b-modal>
   </div>
 </template>
-<FullCalendar :options="calendarOptions" />
+<FullCalendar :options="calendarOptions"   @eventRender="eventRender" />
 
 </div>
 
