@@ -12,7 +12,7 @@ use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/teste', [DashboardController::class, 'teste']);
+Route::get('/teste', [HomeController::class, 'index']);
 
 Route::prefix('painel')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('login');

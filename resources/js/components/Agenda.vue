@@ -69,9 +69,27 @@ export default {
         console.log(e);
       }
     },
+    eventDestroy(info){
+
+//get uuid
+let id = parseInt(info.el.getAttribute('data-vue-id'));
+
+if(this.eventsObj[id]){
+
+    //if exist destroy
+    this.eventsObj[id].$destroy(true);
+
+}
+},
+
     eventRender(info) {
         alert('aaaa')
         },
+        delete(event){
+
+console.log("delete Click")
+
+},
 
     async storeUser() {
   try {
@@ -133,7 +151,7 @@ export default {
     </b-modal>
   </div>
 </template>
-<FullCalendar :options="calendarOptions"   @eventRender="eventRender" />
+<FullCalendar :options="calendarOptions"   @eventRender="eventRender" @eventDestroy="eventDestroy" />
 
 </div>
 
