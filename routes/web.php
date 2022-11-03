@@ -16,7 +16,8 @@ Route::get('/teste', [HomeController::class, 'index']);
 
 Route::get('profile/{id}', [AlunosController::class, 'profile']);
 
-
+Route::get('login', [AlunosController::class, 'login']);
+Route::post('auth', [AlunosController::class, 'auth'])->name('alunos.auth');
 Route::prefix('painel')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('login');
     Route::get('login', [LoginController::class, 'index'])->name('login');

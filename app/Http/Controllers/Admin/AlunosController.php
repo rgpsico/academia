@@ -55,6 +55,23 @@ class AlunosController extends Controller
         ]);
     }
 
+    public function login()
+    {
+        return view('admin.alunos.login');
+    }
+
+    public function auth(Request $request)
+    {
+
+        $data = $request->only([
+            'email',
+            'password'
+
+        ]);
+
+        return view('admin.alunos.login');
+    }
+
     public function emdia()
     {
         $alunos =  $this->pagamentoService->emdia();
