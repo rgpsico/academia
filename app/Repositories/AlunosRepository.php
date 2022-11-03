@@ -35,6 +35,11 @@ class AlunosRepository
         return $this->model::with('pagamento')->orderBy('nome', 'ASC')->get();
     }
 
+    public function alunoId($id)
+    {
+        return $this->model::find($id);
+    }
+
     public function findByID($id)
     {
         return $this->model::with('pagamento')->find($id);
@@ -42,17 +47,17 @@ class AlunosRepository
 
     public function byField($field)
     {
-        $alunos = DB::select("SELECT DISTINCT a.* , 
+        $alunos = DB::select("SELECT DISTINCT a.* ,
         CASE
             WHEN data_pagamento = NULL THEN 'Nunca foi pago'
             WHEN data_fim > CURDATE() THEN 'Em dia'
             ELSE 'Está devendo'
-        END AS statusPG, 
-            p.aluno_id, p.data_pagamento , p.data_fim 
+        END AS statusPG,
+            p.aluno_id, p.data_pagamento , p.data_fim
         FROM alunos AS a
         LEFT JOIN pagamento  AS p
-        ON a.id = p.aluno_id WHERE a.nome LIKE '%{$field}%' 
-        AND a.deleted_at is null 
+        ON a.id = p.aluno_id WHERE a.nome LIKE '%{$field}%'
+        AND a.deleted_at is null
         AND p.deleted_at is NULL   order by p.data_pagamento DESC  LIMIT 1");
 
         return $alunos;
@@ -64,10 +69,10 @@ class AlunosRepository
         CASE
           WHEN data_pagamento = NULL THEN 'Nunca foi pago'
           WHEN data_pagamento < data_fim THEN 'Em dia'
-          ELSE 'Está atrasado' 
-          END  AS statusPG     
-          FROM alunos AS a 
-          LEFT JOIN pagamento  AS p 
+          ELSE 'Está atrasado'
+          END  AS statusPG
+          FROM alunos AS a
+          LEFT JOIN pagamento  AS p
           ON a.id = p.aluno_id  WHERE a.deleted_at IS NULL AND data_fim IS NULL OR  data_fim < CURDATE()
         ");
     }

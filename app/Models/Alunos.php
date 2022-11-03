@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Alunos extends Model
 {
 
-        use HasFactory, SoftDeletes;
+        use HasFactory;
+
+       protected $table = 'alunos';
         protected $fillable = ['nome', 'whatssap', 'status', 'instagran', 'avatar'];
         public $timestamps = false;
 

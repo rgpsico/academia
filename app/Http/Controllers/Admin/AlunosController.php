@@ -24,11 +24,12 @@ class AlunosController extends Controller
     private $pagamentoService;
     private $repository;
 
-    public function __construct(AlunosRepository $AlunosRepository, pagamentoService $pagamento)
+    public function __construct(AlunosRepository $AlunosRepository,
+    pagamentoService $pagamento)
     {
         $this->pagamentoService = $pagamento;
         $this->service = $AlunosRepository;
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -43,6 +44,14 @@ class AlunosController extends Controller
         return view('admin.alunos.index', [
             'alunos' => $alunos,
             'mensagem_whatssap' => $whatssapMessage
+        ]);
+    }
+
+    public function profile($id)
+    {
+        $alunos = $this->service->alunoId($id);
+        return view('admin.alunos.profile',[
+            'alunos' => $alunos
         ]);
     }
 
