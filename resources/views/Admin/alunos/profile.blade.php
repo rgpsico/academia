@@ -7,6 +7,8 @@
     @include('Admin.includes.alert')
 @endsection
 
+@include('Admin.alunos._partials.modal')
+
 @section('content')
     <div class="row mb-2">
         <div class="col-sm-6">
@@ -14,7 +16,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li><button class='btn btn-success'>Enviar Pagamento</button></li>
+                <li><button class='btn btn-success btPagamento'>Enviar Pagamento</button></li>
             </ol>
         </div>
     </div>
@@ -246,8 +248,45 @@
                             </form>
                         </div>
 
+
+
                     </div>
 
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Pagamentos</h1>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>cod</th>
+                                    <th>Status</th>
+                                    <th>Data de pagamento</th>
+                                    <th>mês de uso</th>
+                                    <th>Comprovante</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               @foreach($alunos->alunoPagamento as $aluno)
+                                <tr>
+                                    <td>{{$aluno->id}}</td>
+                                    <td>{{$aluno->id}}</td>
+                                    <td>{{$aluno->data_pagamento}}</td>
+                                    <td>{{$aluno->data_fim}}</td>
+
+                                    <td><img src="{{Storage::url('app/public/'.$aluno->image_pagamento) ?? 'imagem'}}" alt="" height="80" width="80"></td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -257,5 +296,16 @@
 
 
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $('.btPagamento').click(function(){
+            $('.modal').modal('show')
+        })
+
+        $('#aluno_id').val({{$alunos->id}})
+
+
+
+    </script>
 
 @endsection

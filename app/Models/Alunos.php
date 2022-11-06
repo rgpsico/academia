@@ -20,6 +20,11 @@ class Alunos extends Model
         {
             return $this->hasMany(Pagamento::class, 'aluno_id');
         }
+
+        public function alunoPagamento()
+        {
+            return $this->hasMany(AlunoPagamento::class, 'aluno_id');
+        }
 }
 
 

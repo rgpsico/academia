@@ -9,6 +9,7 @@ use DateInterval;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PagamentoController extends Controller
 {
@@ -52,11 +53,22 @@ class PagamentoController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->only('user_id', 'aluno_id');
         $alunoId = $data['aluno_id'];
         $data['data_pagamento'] =  date('Y-m-d');
         $data['data_inicio'] =   date('Y-m-d', strtotime($request->data_inicio . ' + 1 days '));
         $data['data_fim']  = date('Y-m-d', strtotime($request->data_inicio . '+ 30 days'));
+
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $name = uniqid(date('HisYmd'));
+            $extension = $request->image->extension();
+            $nameFile = "{$name}.{$extension}";
+            Storage::disk('public')->put($nameFile, fopen($request->file('image'), 'r+'));
+            $data['image_pagamento'] = $nameFile;
+        }
+
 
         $result = $this->pagamentoService->create($data);
 

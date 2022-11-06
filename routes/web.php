@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AlunoPagamentoController;
 use App\Http\Controllers\Admin\AlunosController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/teste', [HomeController::class, 'index']);
 
-Route::get('profile/{id}', [AlunosController::class, 'profile']);
+Route::get('profile/{id}', [AlunosController::class, 'profile'])->name('profile');
 
 Route::get('login', [AlunosController::class, 'login']);
 Route::post('auth', [AlunosController::class, 'auth'])->name('alunos.auth');
@@ -33,6 +34,8 @@ Route::prefix('painel')->group(function () {
     Route::get('config/', [ConfigController::class, 'show'])->name('config.edit');
     Route::put('config/update', [ConfigController::class, 'update'])->name('config.update');
     Route::resource('pagamento', PagamentoController::class);
+
+    Route::resource('alunopagamento', AlunoPagamentoController::class);
     Route::get('inadiplentes', [AlunosController::class, 'inadiplentes']);
     Route::get('emdia', [AlunosController::class, 'emdia']);
 

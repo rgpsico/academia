@@ -39,7 +39,7 @@ class AlunosController extends Controller
 
     public function update(AlunosFormRequest $request, $id)
     {
-        $alunos = $this->repository->findById($id);
+         $alunos = $this->repository->findById($id);
          $result = $this->repository->update($request->all(), $id);
 
         return response()->json($result, 200);
