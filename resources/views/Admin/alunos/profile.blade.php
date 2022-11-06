@@ -280,7 +280,7 @@
                                     <td>{{$aluno->data_pagamento}}</td>
                                     <td>{{$aluno->data_fim}}</td>
 
-                                    <td><img src="{{Storage::url('app/public/'.$aluno->image_pagamento) ?? 'imagem'}}" alt="" height="80" width="80"></td>
+                                    <td><img src="{{ asset('/storage/'.$aluno->image_pagamento) }}" alt="" height="80" width="80"></td>
                                 </tr>
                                 @endforeach
                             </tbody>
