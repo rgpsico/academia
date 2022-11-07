@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlunoRequest;
 use App\Http\Resources\AlunosResponse;
+use App\Models\Alunos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\categoria;
@@ -62,14 +63,29 @@ class AlunosController extends Controller
 
     public function auth(Request $request)
     {
-
-        $data = $request->only([
-            'email',
-            'password'
-
+        $request->validate([
+            'nome' => 'required',
+            'password' => 'required'
         ]);
 
-        return view('admin.alunos.login');
+        $credencias = [
+            'nome' => $request->nome,
+            'password' => $request->password
+        ];
+
+
+        $lembrar = empty($request->lembrar) ? false : true;
+
+
+       if(Auth::guard('alunos')->attempt($credencias)) {
+            $request->session()->regenerate();
+
+            $alunos = Alunos::where('nome', $request->nome)->first();
+
+            return redirect()->route('profile',['id' => $alunos->id]);
+       }
+
+
     }
 
     public function emdia()

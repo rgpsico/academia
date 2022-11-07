@@ -14,8 +14,8 @@
         <div class="modal-body">
         <form action="{{route('alunopagamento.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="text" id="user_id" name="user_id" value="777">
-            <input type="text" id="aluno_id" name="aluno_id">
+            <input type="hidden" id="user_id" name="user_id" value="777">
+            <input type="hidden" id="aluno_id" name="aluno_id">
             <p>Enviar foto do seu comprovante </p>
             <p><input type="file" name="image" id="image"></p>
 
@@ -28,8 +28,9 @@
             </div>
 
         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Enviar</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
         </div>
     </form>
       </div>

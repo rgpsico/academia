@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'alunos' => [
+            'driver' => 'session',
+            'provider' => 'alunos',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -71,10 +76,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'alunos' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Alunos::class,
+        ],
     ],
 
     /*
