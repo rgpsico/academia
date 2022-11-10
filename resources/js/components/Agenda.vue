@@ -4,6 +4,7 @@ import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+
 import pt from "@fullcalendar/core/locales/pt-br";
 import axios from 'axios'
 
@@ -19,6 +20,12 @@ export default {
     data_agendamento: '',
     title: '',
     appointments: '',
+    selectMirror: true,
+        dayMaxEvents: true,
+        weekends: true,
+        select: this.handleDateSelect,
+        eventClick: this.handleEventClick,
+        eventsSet: this.handleEvents,
 
       calendarOptions: {
         plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
@@ -44,8 +51,19 @@ export default {
         this.showModal()
         this.data_agendamento = arg.dateStr
     },
-    eventClick: function (calEvent, jsEvent, view) {
+    eventRender(info) {
+         alert('aqui')
+    },
+    dateClick(){
+alert('aaa')
+    },
+    gotoPast() {
+      let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
+      calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
+    },
 
+    handleEventClick: function(clickInfo) {
+     alert('aqui')
     },
     showModal() {
         this.$refs['agendaModal'].show()
@@ -70,6 +88,7 @@ export default {
       }
     },
     eventDestroy(info){
+        alert('aqui')
 
 //get uuid
 let id = parseInt(info.el.getAttribute('data-vue-id'));
@@ -142,16 +161,16 @@ console.log("delete Click")
                     </div>
       </div>
       <div class="row">
-        <div class="col-3">
-            <b-button class="mt-2" variant="outline-danger" block @click="hideModal">Fechar</b-button>
-            <b-button class="mt-2" variant="outline-warning" block @click="storeUser">Salvar</b-button>
+        <div class="d-flex">
+            <b-button class="mt-2 m-2" variant="outline-danger" block @click="hideModal">Fechar</b-button>
+            <b-button class="mt-2 m-2" variant="outline-warning" block @click="storeUser">Salvar</b-button>
         </div>
 
      </div>
     </b-modal>
   </div>
 </template>
-<FullCalendar :options="calendarOptions"   @eventRender="eventRender" @eventDestroy="eventDestroy" />
+<FullCalendar :options="calendarOptions"   @eventRender="eventRender" @handleEventClick="handleEventClick" />
 
 </div>
 
