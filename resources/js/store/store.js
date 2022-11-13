@@ -5,14 +5,17 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state:{
-        events:[]
+        events:'/api/agenda'
     },
     getters:{
         EVENTS: state => state.events
     },
     mutations:{
         ADD_EVENT: (state, event) => {
-            state.events.push(event)
+            this.state.events.push(event)
+        },
+        DEL_EVENT: (state, event) => {
+            alert('store')
         }
 
     },

@@ -22,6 +22,8 @@ export default {
     return {
     data_agendamento: '',
     title: '',
+    start: '',
+    end: '',
     appointments: '',
     selectMirror: true,
         dayMaxEvents: true,
@@ -41,44 +43,53 @@ export default {
           calendarWeekends: true,
           selectable:true,
           locale: pt,
-          events:'/api/agenda'
+          events:this.$store.state.events
 
       }
     }
   },
    computed:{
-    ...mapGetters(['EVENTS'])
+    ...mapGetters(['EVENTS']),
   },
   methods: {
     toggleWeekends: function() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // toggle the boolean!
     },
-    handleSelect(arg) {
-        this.showModal()
-
+    handleSelect(arg) {       
+     
+      this.$refs['agendaModalShow'].show()
+      this.title = arg.event._def.title
+      this.start = arg.event._instance.range.start.toLocaleDateString()
+      this.end = arg.event._instance.range.end.toLocaleDateString()
+      
     },
     handleDateClick: function(arg) {
+      
         this.$store.commit("ADD_EVENT",{
             title: 'teste',
             start: arg.start,
             end:arg.end,
             allDay: arg.allDay
         })
-        this.showModal()
+      
         this.data_agendamento = arg.dateStr
     },
     eventRender(info) {
          alert('aqui')
     },
-    dateClick(){
+    dateClick(info){
+      console.log(info)
         this.$refs['agendaModal'].show()
+    },
+    DelEvent(){
+      this.$store.commit("DEL_EVENT")
     },
     gotoPast() {
       let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
       calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
     },
     handleClick: function(clickInfo) {
-     alert('aqui')
+      
     },
     showModal() {
         this.$refs['agendaModal'].show()
@@ -179,6 +190,31 @@ console.log("delete Click")
         <div class="d-flex">
             <b-button class="mt-2 m-2" variant="outline-danger" block @click="hideModal">Fechar</b-button>
             <b-button class="mt-2 m-2" variant="outline-warning" block @click="storeUser">Salvar</b-button>
+        </div>
+
+     </div>
+    </b-modal>
+
+
+
+
+
+    <b-modal ref="agendaModalShow" hide-footer title="Components">
+      <div class="d-block text-left">
+        <div class="row p-4">
+          <ul>
+            <li>Titulo: {{this.title}}</li>
+            <li>Inicio: {{this.start}}</li>
+            <li>End: {{this.end}}</li>
+          </ul>
+          
+                    
+      </div>
+    </div>
+      <div class="row">
+        <div class="d-flex">
+            <b-button class="mt-2 m-2" variant="btn btn-dark" block @click="hideModal">Fechar</b-button>
+            <b-button class="mt-2 m-2" variant="btn btn-danger" block @click="DelEvent">excluir</b-button>
         </div>
 
      </div>
