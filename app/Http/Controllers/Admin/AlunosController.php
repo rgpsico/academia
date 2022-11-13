@@ -109,8 +109,6 @@ class AlunosController extends Controller
         return view('admin.alunos.inadiplentes', [
             'alunos' => $alunos,
             'mensagem_whatssap' => $whatssapMessage
-
-
         ]);
     }
 

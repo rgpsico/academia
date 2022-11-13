@@ -2,11 +2,13 @@
 import '@fullcalendar/core/vdom' // solves problem with Vite
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
+import timeGridPlugin, { buildDayRanges } from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import {mapGetters} from 'vuex'
 
 import pt from "@fullcalendar/core/locales/pt-br";
 import axios from 'axios'
+
 
 
 
@@ -15,6 +17,7 @@ export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
   },
+
   data() {
     return {
     data_agendamento: '',
@@ -23,9 +26,6 @@ export default {
     selectMirror: true,
         dayMaxEvents: true,
         weekends: true,
-        select: this.handleDateSelect,
-        eventClick: this.handleEventClick,
-        eventsSet: this.handleEvents,
 
       calendarOptions: {
         plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
@@ -36,6 +36,8 @@ export default {
         initialView: 'dayGridMonth',
           weekends: true, // initial value,
           dateClick: this.handleDateClick,
+          eventClick: this.handleSelect,
+
           calendarWeekends: true,
           selectable:true,
           locale: pt,
@@ -43,11 +45,25 @@ export default {
 
       }
     }
-  }, methods: {
+  },
+   computed:{
+    ...mapGetters(['EVENTS'])
+  },
+  methods: {
     toggleWeekends: function() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // toggle the boolean!
     },
+    handleSelect(arg) {
+        this.showModal()
+
+    },
     handleDateClick: function(arg) {
+        this.$store.commit("ADD_EVENT",{
+            title: 'teste',
+            start: arg.start,
+            end:arg.end,
+            allDay: arg.allDay
+        })
         this.showModal()
         this.data_agendamento = arg.dateStr
     },
@@ -55,28 +71,27 @@ export default {
          alert('aqui')
     },
     dateClick(){
-alert('aaa')
+        this.$refs['agendaModal'].show()
     },
     gotoPast() {
       let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
       calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
     },
-
-    handleEventClick: function(clickInfo) {
+    handleClick: function(clickInfo) {
      alert('aqui')
     },
     showModal() {
         this.$refs['agendaModal'].show()
-      },
-      hideModal() {
+    },
+    hideModal() {
         this.$refs['agendaModal'].hide()
-      },
-      toggleModal() {
-        // We pass the ID of the button that we want to return focus to
+    },
+    toggleModal() {
+      // We pass the ID of the button that we want to return focus to
         // when the modal has hidden
         this.$refs['agendaModal'].toggle('#toggle-btn')
-      },
-      async getAppointment() {
+    },
+    async getAppointment() {
       try {
         const appointments = await axios.get(
           "/api/agenda"
@@ -170,7 +185,13 @@ console.log("delete Click")
     </b-modal>
   </div>
 </template>
-<FullCalendar :options="calendarOptions"   @eventRender="eventRender" @handleEventClick="handleEventClick" />
+<FullCalendar
+    :options="calendarOptions"
+    @eventClick="handleClick"
+
+
+
+    />
 
 </div>
 
