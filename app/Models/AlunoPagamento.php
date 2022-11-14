@@ -13,7 +13,7 @@ class AlunoPagamento extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['aluno_id', 'data_pagamento', 'data_fim','image_pagamento', 'created_at', 'updated_at'];
-    protected $table = "Aluno_Pagamento";
+    protected $table = "aluno_Pagamento";
 
 
 
