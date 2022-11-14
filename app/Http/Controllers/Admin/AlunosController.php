@@ -233,7 +233,7 @@ class AlunosController extends Controller
 
     public function formAvatar()
     {        
-        return view('admin.alunos._partials.uploadAvatar');
+        return view('Admin.alunos._partials.uploadAvatar');
     }
 
     public function search(Request $request)
