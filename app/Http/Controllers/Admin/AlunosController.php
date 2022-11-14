@@ -51,7 +51,7 @@ class AlunosController extends Controller
     public function profile($id)
     {
         $alunos = $this->service->alunoId($id);
-        return view('admin.alunos.profile',[
+        return view('Admin.alunos.profile',[
             'alunos' => $alunos
         ]);
     }
