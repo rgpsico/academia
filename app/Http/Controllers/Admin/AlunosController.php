@@ -100,7 +100,7 @@ class AlunosController extends Controller
     }
 
     public function inadiplentes()
-    {
+    { 
         $alunos = $this->pagamentoService->inadiplentes();
 
         $loggedId = intval(Auth::id());
