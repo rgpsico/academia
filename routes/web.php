@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\ProfessorController;
+use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/teste', [HomeController::class, 'index']);
 
 Route::get('profile/{id}', [AlunosController::class, 'profile'])->name('profile');
+
+Route::post('imageUpload', [UploadController::class, 'imageupload'])->name('imageUpload');
+
+Route::get('formAvatar', [AlunosController::class, 'formAvatar']);
 
 Route::get('login', [AlunosController::class, 'login']);
 Route::post('auth', [AlunosController::class, 'auth'])->name('alunos.auth');

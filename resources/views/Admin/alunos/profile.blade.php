@@ -16,7 +16,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li><button class='btn btn-success btPagamento'>Enviar Pagamento</button></li>
+                <li><button class='btn btn-success btPagamento'>Enviar Pagamento {{$alunos->avatar}}</button></li>
             </ol>
         </div>
     </div>
@@ -25,8 +25,9 @@
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle"
-                            src="https://adminlte.io/themes/v3/dist/img/user4-128x128.jpg" alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-circle btAvatar"
+                            @php $img = $alunos->avatar == '' ?  asset('media/images/abn.png') : asset('media/avatar/'.$alunos->avatar)   @endphp
+                            src="{{$img}}" alt="User profile picture">
                     </div>
                     <h3 class="profile-username text-center">{{$alunos->nome}}</h3>
                     <p class="text-muted text-center">{{$alunos->whatssap}}</p>
@@ -297,11 +298,48 @@
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         $('.btPagamento').click(function(){
             $('.modal').modal('show')
         })
 
+
+      function getForm(){
+        $('.modal').modal('show')
+        $.get('/formAvatar',function(data){
+            $('.modal-body').html(data)
+            $('#idAluno').val({{$alunos->id}})
+            
+        })
+      }
+
+
+        $('.btAvatar').click(function(){
+            getForm()
+    
+            $('.btmodal').addClass('EnviarAvatar')
+        
+        })
+
+
+        $(document).on("click",".EnviarAvatar",function() {
+            const input = document.querySelector('#avatarFile');
+                const formData = new FormData();
+                formData.append('avatarFile', input.files[0]);
+                formData.append('alunoId',   $('#idAluno').val());
+                axios.post('/imageUpload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function (response) {
+                if(response.status == 200){
+                    window.location.reload();
+                } else {
+                    alert(response.message)
+                }
+            });
+        });
         $('#aluno_id').val({{$alunos->id}})
 
 

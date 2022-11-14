@@ -5,32 +5,52 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadRequest;
+use App\Models\Alunos;
 use App\Models\article;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
-    private $article;
+    private $alunos;
 
-    public function __construct(article $article )
+    public function __construct(Alunos $alunos)
     {
-        $this->article = $article;
+        $this->alunos  = $alunos;        
     }
+
+
+   
  
     public function imageupload(Request $request)
     {
-        $request->validate([
-            'file' => 'required|image|mimes:jpeg,jpg,png'
-        ]);
-        
-        $ext = $request->file->extension();
-        $imageName = time().'.'.$ext;
 
-        $request->file->move(\public_path('media/images'),$imageName);
+        $alunoId = $request->alunoId;
+
+    
+        $request->validate([
+            'avatarFile' => 'required|image|mimes:jpeg,jpg,png'
+        ]);
+    
+            $ext = $request->avatarFile->extension();
+            $imageName = time().'.'.$ext;
+    
+            if($aluno = $this->alunos::find($alunoId)){
+
+                if($aluno->avatar){
+                    unlink(\public_path('media/avatar/'.$aluno->avatar));
+                }
+              
+                $request->avatarFile->move(\public_path('media/avatar'), $imageName);
+                
+                $aluno->avatar = $imageName;
+                $aluno->save();
+            }
+        
         return [
-            'location' => asset('media/images/'.$imageName)
+            'location' => asset('media/avatar/'.$imageName)
         ];
 
     }

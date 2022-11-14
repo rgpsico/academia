@@ -12,10 +12,10 @@ const store = new Vuex.Store({
     },
     mutations:{
         ADD_EVENT: (state, event) => {
-            this.state.events.push(event)
+            state.events.push(event)
         },
         DEL_EVENT: (state, event) => {
-            alert('store')
+            this.$swal("Alerta padrão!!!");
         }
 
     },

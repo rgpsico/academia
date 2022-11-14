@@ -231,6 +231,11 @@ class AlunosController extends Controller
         return redirect()->route('alunos.index')->withSuccess("Excluido Com Successo");
     }
 
+    public function formAvatar()
+    {        
+        return view('admin.alunos._partials.uploadAvatar');
+    }
+
     public function search(Request $request)
     {
 

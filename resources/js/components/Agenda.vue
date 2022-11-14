@@ -56,7 +56,7 @@ export default {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // toggle the boolean!
     },
     handleSelect(arg) {       
-     
+      this.$swal("Alerta padrão!!!");
       this.$refs['agendaModalShow'].show()
       this.title = arg.event._def.title
       this.start = arg.event._instance.range.start.toLocaleDateString()
