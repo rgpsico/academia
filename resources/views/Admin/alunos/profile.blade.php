@@ -27,9 +27,9 @@
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle btAvatar"
                             @php $img = $alunos->avatar == '' ?  asset('media/images/abn.png') : asset('media/avatar/'.$alunos->avatar)   @endphp
-                            src="{{Storage::url($aluno->avatar) ?? 'imagem'}}" alt="User profile picture">
+                            src="{{$img}}" alt="User profile picture">
                     </div>
-                    <h3 class="profile-username text-center">{{$alunos->nome}}</h3>
+                    <h3 class="profile-username text-center">{{$alunos->nome ?? ''}}</h3>
                     <p class="text-muted text-center">{{$alunos->whatssap}}</p>
                     <a href="#" class="btn btn-primary btn-block"><b>{{$alunos->instagran}}</b></a>
                 </div>
