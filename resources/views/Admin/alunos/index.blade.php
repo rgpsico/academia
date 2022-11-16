@@ -58,7 +58,7 @@
                     </div>
                     
                     <div class="col-5 text-center">
-                        <img src="{{Storage::url($aluno->avatar) ?? 'imagem'}}" alt="user-avatar" class="img-circle img-fluid">
+                        <img src="{{Storage::url($aluno->avatar) ?? 'imagem'}}" onerror="imgError(this);" alt="user-avatar" class="img-circle img-fluid">
                     </div>
                 </div>
             </div>
@@ -83,6 +83,12 @@
 @endforeach
 
 </div>
-
+<script>
+function imgError(image) {
+    image.onerror = "";
+    image.src = "/media/user.png";
+    return true;
+}
+</script>
 
 @endsection
