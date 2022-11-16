@@ -26,6 +26,9 @@ Route::get('login', [AlunosController::class, 'login']);
 Route::post('auth', [AlunosController::class, 'auth'])->name('alunos.auth');
 Route::prefix('painel')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('login');
+
+    Route::get('graficos', [DashboardController::class, 'graficosView'])->name('graficos');
+
     Route::get('login', [LoginController::class, 'index'])->name('login');
     Route::post('login', [LoginController::class, 'authenticate']);
 

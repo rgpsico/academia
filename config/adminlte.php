@@ -233,6 +233,12 @@ return [
                     'url'         => 'painel/dashboard',
                     'icon'        => 'fa-solid fa-chart-line'
 
+                ],
+                [
+                    'text'        => 'Graficos',
+                    'url'         => 'painel/graficos',
+                    'icon'        => 'fa-solid fa-chart-line'
+
                 ]
 
             ]

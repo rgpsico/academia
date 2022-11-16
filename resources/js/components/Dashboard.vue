@@ -3,10 +3,7 @@
          <FilterDatas/> 
          <InfoBoxComponent/> 
          <ValoresComponent/>     
-         <UltimosAlunosComponent/>       
-   
-
-        
+         <UltimosAlunosComponent/>             
   </div>
 </template>
 
