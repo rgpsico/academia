@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\ProfessorController;
+use App\Http\Controllers\Admin\SeriesController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Artisan;
@@ -53,7 +54,8 @@ Route::prefix('painel')->group(function () {
     Route::get('agenda', [ProfessorController::class, 'agenda']);
 
     Route::resource('professor', ProfessorController::class);
-
+    
+    Route::resource('series', SeriesController::class);
 
 
 

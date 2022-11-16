@@ -282,6 +282,12 @@ return [
                     'icon'        => 'far fa-fw fa-file'
 
                 ],
+                [
+                    'text'        => 'Series',
+                    'url'         => 'painel/series',
+                    'icon'        => 'far fa-fw fa-file'
+
+                ],
 
             ]
 
