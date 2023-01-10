@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1>
-        Novo Aluno
+        Novo Aluno aaa
 
     </h1>
     <br>
