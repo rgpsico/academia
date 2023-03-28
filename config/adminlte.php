@@ -294,6 +294,21 @@ return [
         ],
 
 
+        [
+            'text'        => 'Armario',
+            'icon'        => 'fas fa-closet-robe',
+            'submenu' => [
+                [
+                    'text'        => 'Armários',
+                    'url'         => 'painel/armario',
+                    'icon'        => 'fas fa-closet-robe'
+
+                ],
+
+
+            ]
+
+        ],
 
 
 
